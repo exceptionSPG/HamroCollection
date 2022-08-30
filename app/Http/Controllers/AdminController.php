@@ -40,7 +40,7 @@ class AdminController extends Controller
     //my custom funcitons
     public function loginForm()
     {
-        return view('auth.login', ['guard' => 'admin']);
+        return view('auth.admin_login', ['guard' => 'admin']);
     } //end method
 
     /**
