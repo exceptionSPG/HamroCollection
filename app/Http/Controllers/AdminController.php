@@ -35,12 +35,13 @@ class AdminController extends Controller
     public function __construct(StatefulGuard $guard)
     {
         $this->guard = $guard;
-         
     }
 
-    public function loginForm(){
-    	return view('auth.login', ['guard' => 'admin']);
-    }
+    //my custom funcitons
+    public function loginForm()
+    {
+        return view('auth.login', ['guard' => 'admin']);
+    } //end method
 
     /**
      * Show the login view.
@@ -111,4 +112,3 @@ class AdminController extends Controller
         return app(LogoutResponse::class);
     }
 }
-
