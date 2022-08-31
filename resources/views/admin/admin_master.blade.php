@@ -59,6 +59,10 @@
     <script src="{{ asset('../assets/vendor_components/apexcharts-bundle/irregular-data-series.js') }}"></script>
     <script src="{{ asset('../assets/vendor_components/apexcharts-bundle/dist/apexcharts.js') }}"></script>
 
+    <script src="{{ asset('../assets/vendor_components/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
+
+
     <!-- Sunny Admin App -->
     <script src="{{ asset('backend/js/template.js') }}"></script>
     <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
@@ -89,6 +93,12 @@
         }
         @endif
     </script>
+
+    <!-- Sweetalert script-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+    <script src="{{ asset('backend/js/code.js') }}"></script>
 
 
 

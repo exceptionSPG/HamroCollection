@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ Route::middleware([
 
 // Admin All routes
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
-// Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
+// Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile'); all.brand
 
 Route::controller(AdminProfileController::class)->group(function () {
     Route::get('/admin/profile', 'AdminProfile')->name('admin.profile');
@@ -45,6 +46,16 @@ Route::controller(AdminProfileController::class)->group(function () {
     Route::get('/admin/change/password', 'AdminChangePassword')->name('admin.change.password');
     Route::post('/update/change/password', 'UpdateChangePassword')->name('update.change.password');
 });
+
+//Brands all route
+Route::prefix('brand')->controller(BrandController::class)->group(function () { //brand.delete
+    Route::get('/view', 'BrandView')->name('all.brand');
+    Route::post('/store', 'BrandStore')->name('brand.store');
+    Route::get('/edit/{id}', 'BrandEditHai')->name('brand.edit');
+    Route::post('/update', 'BrandUpdate')->name('brand.update');
+    Route::get('/delete/{id}', 'BrandDelete')->name('brand.delete');
+});
+
 
 
 
