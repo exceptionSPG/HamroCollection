@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,11 +58,18 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        return view('dashboard', compact('user'));
     })->name('dashboard');
 });
 
-//Route::get('/admin/logout', [IndexController::class, 'index'])->name('admin.logout');
+//Route::get('/admin/logout', [IndexController::class, 'index'])->name('admin.logout'); 
 Route::controller(IndexController::class)->group(function () {
     Route::get('/', 'index');
+    Route::get('/user/logout', 'UserLogout')->name('user.logout');
+    Route::get('/user/profile', 'UserProfile')->name('user.profile');
+    Route::post('/user/profile/store', 'UserProfileStore')->name('user.profile.store');
+    Route::get('/user/change/password', 'UserChangePassword')->name('user.change.password');
+    Route::post('/user/password/update', 'UserPasswordUpdate')->name('user.password.update');
 });
