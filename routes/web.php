@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
     Route::get('/login', [AdminController::class, 'loginForm']);
@@ -49,6 +47,8 @@ Route::controller(AdminProfileController::class)->group(function () {
 
 
 
+//user all route
+
 
 Route::middleware([
     'auth:sanctum,web',
@@ -58,4 +58,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+//Route::get('/admin/logout', [IndexController::class, 'index'])->name('admin.logout');
+Route::controller(IndexController::class)->group(function () {
+    Route::get('/', 'index');
 });
