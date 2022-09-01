@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\SliderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Auth;
@@ -35,80 +36,93 @@ Route::middleware([
 ])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.index');
-    })->name('dashboard');
+    })->name('dashboard')->middleware('auth:admin');
 });
 
 // Admin All routes
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 // Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile'); all.brand
-
-Route::controller(AdminProfileController::class)->group(function () {
-    Route::get('/admin/profile', 'AdminProfile')->name('admin.profile');
-    Route::get('/admin/profile/edit', 'AdminProfileEdit')->name('admin.profile.edit');
-    Route::post('/admin/profile/store', 'AdminProfileStore')->name('admin.profile.store');
-    Route::get('/admin/change/password', 'AdminChangePassword')->name('admin.change.password');
-    Route::post('/update/change/password', 'UpdateChangePassword')->name('update.change.password');
-});
-
-//Brands all route
-Route::prefix('brand')->controller(BrandController::class)->group(function () { //brand.delete
-    Route::get('/view', 'BrandView')->name('all.brand');
-    Route::post('/store', 'BrandStore')->name('brand.store');
-    Route::get('/edit/{id}', 'BrandEditHai')->name('brand.edit');
-    Route::post('/update', 'BrandUpdate')->name('brand.update');
-    Route::get('/delete/{id}', 'BrandDelete')->name('brand.delete');
-});
-
-//Admin Category All routes
-Route::prefix('category')->controller(CategoryController::class)->group(function () { //all.subcategory
-    Route::get('/view', 'CategoryView')->name('all.category');
-    Route::post('/store', 'CategoryStore')->name('category.store');
-    Route::get('/edit/{id}', 'CategoryEdit')->name('category.edit');
-    Route::post('/update', 'CategoryUpdate')->name('category.update');
-    Route::get('/delete/{id}', 'CategoryDelete')->name('category.delete');
-});
-
-//Admin Subcategory All routes
-Route::prefix('category')->controller(SubCategoryController::class)->group(function () { //
-    Route::get('/sub/view', 'SubCategoryView')->name('all.subcategory');
-    Route::post('/sub/store', 'SubCategoryStore')->name('subcategory.store');
-    Route::get('/sub/edit/{id}', 'SubCategoryEdit')->name('subcategory.edit');
-    Route::post('/sub/update', 'SubCategoryUpdate')->name('subcategory.update');
-    Route::get('/sub/delete/{id}', 'SubCategoryDelete')->name('subcategory.delete');
-
-    //Sub Subcategory All routes
-    Route::get('/sub/sub/view', 'SubSubCategoryView')->name('all.subsubcategory');
-    //category select huda subcategory xannako lagi
-    Route::get('/subcategory/ajax/{category_id}', 'GetSubCategory');
-    //subcategory select huda sub_subcategory xanne wala ajax ko lagi
-    Route::get('/sub_subcategory/ajax/{subcategory_id}', 'GetSubSubCategory');
-
-    Route::post('/sub/sub/store', 'SubSubCategoryStore')->name('subsubcategory.store');
-    Route::get('/sub/sub/edit/{id}', 'SubSubCategoryEdit')->name('subsubcategory.edit');
-    Route::post('/sub/sub/update', 'SubSubCategoryUpdate')->name('subsubcategory.update');
-    Route::get('/sub/sub/delete/{id}', 'SubSubCategoryDelete')->name('subsubcategory.delete');
-});
-
-
-
-//Admin Product All routes
-Route::prefix('product')->controller(ProductController::class)->group(function () { //product.delete
-    Route::get('/add', 'AddProduct')->name('add.product');
-    Route::post('/store', 'ProductStore')->name('product.store');
-    Route::get('/manage', 'ManageProduct')->name('manage.product');
-    Route::get('/edit/{id}', 'EditProduct')->name('product.edit');
-    Route::post('/data/update', 'ProductDataUpdate')->name('product.update');
-    Route::post('/image/update', 'ProductMultiImageUpdate')->name('update.product.image');
-    Route::post('/thumbnail/update', 'ProductThumbnailUpdate')->name('update.product.thumbnail');
-    Route::get('/multiple/delete/{id}', 'MultiImageDelete')->name('product.multiimg.delete');
-    Route::get('/active/{id}', 'ProductActive')->name('product.active');
-    Route::get('/inactive/{id}', 'ProductInactive')->name('product.inactive');
-    Route::get('/delete/{id}', 'ProductDelete')->name('product.delete');
-});
+Route::middleware(['auth:admin'])->group(function () {
 
 
 
 
+    Route::controller(AdminProfileController::class)->group(function () {
+        Route::get('/admin/profile', 'AdminProfile')->name('admin.profile');
+        Route::get('/admin/profile/edit', 'AdminProfileEdit')->name('admin.profile.edit');
+        Route::post('/admin/profile/store', 'AdminProfileStore')->name('admin.profile.store');
+        Route::get('/admin/change/password', 'AdminChangePassword')->name('admin.change.password');
+        Route::post('/update/change/password', 'UpdateChangePassword')->name('update.change.password');
+    });
+
+    //Brands all route
+    Route::prefix('brand')->controller(BrandController::class)->group(function () { //brand.delete
+        Route::get('/view', 'BrandView')->name('all.brand');
+        Route::post('/store', 'BrandStore')->name('brand.store');
+        Route::get('/edit/{id}', 'BrandEditHai')->name('brand.edit');
+        Route::post('/update', 'BrandUpdate')->name('brand.update');
+        Route::get('/delete/{id}', 'BrandDelete')->name('brand.delete');
+    });
+
+    //Admin Category All routes
+    Route::prefix('category')->controller(CategoryController::class)->group(function () { //all.subcategory
+        Route::get('/view', 'CategoryView')->name('all.category');
+        Route::post('/store', 'CategoryStore')->name('category.store');
+        Route::get('/edit/{id}', 'CategoryEdit')->name('category.edit');
+        Route::post('/update', 'CategoryUpdate')->name('category.update');
+        Route::get('/delete/{id}', 'CategoryDelete')->name('category.delete');
+    });
+
+    //Admin Subcategory All routes
+    Route::prefix('category')->controller(SubCategoryController::class)->group(function () { //
+        Route::get('/sub/view', 'SubCategoryView')->name('all.subcategory');
+        Route::post('/sub/store', 'SubCategoryStore')->name('subcategory.store');
+        Route::get('/sub/edit/{id}', 'SubCategoryEdit')->name('subcategory.edit');
+        Route::post('/sub/update', 'SubCategoryUpdate')->name('subcategory.update');
+        Route::get('/sub/delete/{id}', 'SubCategoryDelete')->name('subcategory.delete');
+
+        //Sub Subcategory All routes
+        Route::get('/sub/sub/view', 'SubSubCategoryView')->name('all.subsubcategory');
+        //category select huda subcategory xannako lagi
+        Route::get('/subcategory/ajax/{category_id}', 'GetSubCategory');
+        //subcategory select huda sub_subcategory xanne wala ajax ko lagi
+        Route::get('/sub_subcategory/ajax/{subcategory_id}', 'GetSubSubCategory');
+
+        Route::post('/sub/sub/store', 'SubSubCategoryStore')->name('subsubcategory.store');
+        Route::get('/sub/sub/edit/{id}', 'SubSubCategoryEdit')->name('subsubcategory.edit');
+        Route::post('/sub/sub/update', 'SubSubCategoryUpdate')->name('subsubcategory.update');
+        Route::get('/sub/sub/delete/{id}', 'SubSubCategoryDelete')->name('subsubcategory.delete');
+    });
+
+
+
+    //Admin Product All routes
+    Route::prefix('product')->controller(ProductController::class)->group(function () { //product.delete 
+        Route::get('/add', 'AddProduct')->name('add.product');
+        Route::post('/store', 'ProductStore')->name('product.store');
+        Route::get('/manage', 'ManageProduct')->name('manage.product');
+        Route::get('/edit/{id}', 'EditProduct')->name('product.edit');
+        Route::post('/data/update', 'ProductDataUpdate')->name('product.update');
+        Route::post('/image/update', 'ProductMultiImageUpdate')->name('update.product.image');
+        Route::post('/thumbnail/update', 'ProductThumbnailUpdate')->name('update.product.thumbnail');
+        Route::get('/multiple/delete/{id}', 'MultiImageDelete')->name('product.multiimg.delete');
+        Route::get('/active/{id}', 'ProductActive')->name('product.active');
+        Route::get('/inactive/{id}', 'ProductInactive')->name('product.inactive');
+        Route::get('/delete/{id}', 'ProductDelete')->name('product.delete');
+    });
+
+
+    // Admin Slider all route
+    Route::prefix('slider')->controller(SliderController::class)->group(function () { //slider.inactive
+        Route::get('/view', 'SliderView')->name('manage.slider');
+        Route::post('/store', 'SliderStore')->name('slider.store');
+        Route::get('/edit/{id}', 'SliderEdit')->name('slider.edit');
+        Route::post('/update', 'SliderUpdate')->name('slider.update');
+        Route::get('/delete/{id}', 'SliderDelete')->name('slider.delete');
+        Route::get('/active/{id}', 'SliderActive')->name('slider.active');
+        Route::get('/inactive/{id}', 'SliderInactive')->name('slider.inactive');
+    });
+}); //middleware end
 
 
 

@@ -48,6 +48,7 @@ class BrandController extends Controller
 
         return redirect()->back()->with($notification);
     } //end method
+
     public function BrandEditHai($id)
     {
         $brand = Brand::findOrFail($id);
@@ -107,7 +108,7 @@ class BrandController extends Controller
 
         Brand::findOrFail($id)->delete();
         $notification = array(
-            'message' => 'Blog Deleted Successfully.',
+            'message' => 'Brand Deleted Successfully.',
             'alert-type' => 'success',
 
         );

@@ -243,7 +243,7 @@ class ProductController extends Controller
         );
 
         return redirect()->back()->with($notification);
-    } //end method ProductDelete
+    } //end method 
 
     public function ProductDelete($id)
     {
