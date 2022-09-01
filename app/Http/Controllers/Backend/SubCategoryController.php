@@ -110,6 +110,15 @@ class SubCategoryController extends Controller
         return json_encode($subcat);
     } //end method 
 
+    //method for product page ma sub subcategory dekhaune ajax ko lagi
+
+    public function GetSubSubCategory($subcategory_id)
+    {
+        $subcat = SubSubCategory::where('subcategory_id', $subcategory_id)->orderBy('sub_subcategory_name_en', 'ASC')->get();
+        return json_encode($subcat);
+    } //end method 
+
+
     public function SubSubCategoryStore(Request $request)
     {
         $validateData = $request->validate([

@@ -1,0 +1,67 @@
+Brands
+1. Brocade Official (ब्रोकेड आधिकारिक)
+2. Kasa (कासा )
+3. Lakhey (लाखे)
+4. Nike
+5. Louis Vuitton ( लुइस भुइशन)
+6. GUCCI (गुच्ची)
+7. Chanel (च्यानल)
+8. KTM City
+
+
+Categories
+1. Tshirts
+	1. Men's Tshirt
+		a. Men's Scoop Neck T-Shirts
+		b. Men's Printed T-shirts
+		c. Men's Striped T-shirts
+	2. Women's Tshirt
+		a. Women's Long Sleeve Tshirt
+		b. Women's Round Neck Tshirt
+
+2. Jeans
+	1. Men's Jeans
+		a.SKINNY JEANs
+		b. Slim Jeans
+		c. Straight Jeans
+		d. Tapered Jeans
+		e. Wide Jeans
+		f. Ripped Jeans
+	2. Women's Jeans
+		a. SKINNY JEANS
+		b. Slim Jeans
+		c. Straight Jeans
+		d. HIGH WAISTED JEANS
+		e. BOYFRIEND JEANS
+		f. Ripped Jeans
+	3. Kid's Jeans
+		c. Straight Jeans
+		d. HIGH WAISTED JEANS
+		d. Tapered Jeans
+		e. Wide Jeans
+4. Innerwear
+	1. Men's Underwear
+		1. Bikinis
+		2. Boxer Briefs
+		3. Boxers
+		4. Trunks
+		5. Shapewear
+	2. Women's underwear
+		1. Bikinis
+		2. Tankinis
+		3. One-Pieces
+		4. Cover-Ups
+		5. Swim Pants
+5. Coats
+	1. Trench Coats
+	2. Leather and Faux Leather
+	
+7. Jackets
+	1. Men's Fleece Jacket
+		
+	2. PUFFER JACKETS
+	3. Gilets
+	4. Leather Jackets
+	5. Denim Jackets
+	6. Parkas
+	7. Bombar Jackets

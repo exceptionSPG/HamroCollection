@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -77,12 +78,32 @@ Route::prefix('category')->controller(SubCategoryController::class)->group(funct
 
     //Sub Subcategory All routes
     Route::get('/sub/sub/view', 'SubSubCategoryView')->name('all.subsubcategory');
+    //category select huda subcategory xannako lagi
     Route::get('/subcategory/ajax/{category_id}', 'GetSubCategory');
+    //subcategory select huda sub_subcategory xanne wala ajax ko lagi
+    Route::get('/sub_subcategory/ajax/{subcategory_id}', 'GetSubSubCategory');
 
     Route::post('/sub/sub/store', 'SubSubCategoryStore')->name('subsubcategory.store');
     Route::get('/sub/sub/edit/{id}', 'SubSubCategoryEdit')->name('subsubcategory.edit');
     Route::post('/sub/sub/update', 'SubSubCategoryUpdate')->name('subsubcategory.update');
     Route::get('/sub/sub/delete/{id}', 'SubSubCategoryDelete')->name('subsubcategory.delete');
+});
+
+
+
+//Admin Product All routes
+Route::prefix('product')->controller(ProductController::class)->group(function () { //product.delete
+    Route::get('/add', 'AddProduct')->name('add.product');
+    Route::post('/store', 'ProductStore')->name('product.store');
+    Route::get('/manage', 'ManageProduct')->name('manage.product');
+    Route::get('/edit/{id}', 'EditProduct')->name('product.edit');
+    Route::post('/data/update', 'ProductDataUpdate')->name('product.update');
+    Route::post('/image/update', 'ProductMultiImageUpdate')->name('update.product.image');
+    Route::post('/thumbnail/update', 'ProductThumbnailUpdate')->name('update.product.thumbnail');
+    Route::get('/multiple/delete/{id}', 'MultiImageDelete')->name('product.multiimg.delete');
+    Route::get('/active/{id}', 'ProductActive')->name('product.active');
+    Route::get('/inactive/{id}', 'ProductInactive')->name('product.inactive');
+    Route::get('/delete/{id}', 'ProductDelete')->name('product.delete');
 });
 
 
