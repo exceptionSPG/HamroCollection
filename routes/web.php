@@ -143,7 +143,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-//Route::get('/admin/logout', [IndexController::class, 'index'])->name('admin.logout'); 
+// index all routes
 Route::controller(IndexController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/user/logout', 'UserLogout')->name('user.logout');
@@ -152,8 +152,9 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/user/change/password', 'UserChangePassword')->name('user.change.password');
     Route::post('/user/password/update', 'UserPasswordUpdate')->name('user.password.update');
 
-    //product related
+    //product related product/tag/'.$tag->product_tags_nep
     Route::get('product/details/{id}/{product_slug_en}', 'ProductDetails');
+    Route::get('product/tag/{tags}', 'TagWiseProduct');
 });
 
 /************ Multi Language All route**************/
