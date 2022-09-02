@@ -152,9 +152,11 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/user/change/password', 'UserChangePassword')->name('user.change.password');
     Route::post('/user/password/update', 'UserPasswordUpdate')->name('user.password.update');
 
-    //product related product/tag/'.$tag->product_tags_nep
+    //product related product/tag/'.$tag->product_tags_nep  subsubcategory/product/'.$subsubcat->id.'/'.$subsubcat->sub_subcategory_slug_en
     Route::get('product/details/{id}/{product_slug_en}', 'ProductDetails');
     Route::get('product/tag/{tags}', 'TagWiseProduct');
+    Route::get('subcategory/product/{subcat_id}/{subcategory_slug}', 'SubCatWiseProduct');
+    Route::get('subsubcategory/product/{subsubcat_id}/{sub_subcategory_slug}', 'SubSubCatWiseProduct');
 });
 
 /************ Multi Language All route**************/

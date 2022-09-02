@@ -184,7 +184,9 @@
                                                     @foreach($subcategories as $subcat)
 
                                                     <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                        <h2 class="title">@if(session()->get('language') == 'nepali'){{ $subcat->subcategory_name_nep }} @else {{ $subcat->subcategory_name_en }} @endif</h2>
+                                                        <a href="{{url('subcategory/product/'.$subcat->id.'/'.$subcat->subcategory_slug_en)  }}">
+                                                            <h2 class="title">@if(session()->get('language') == 'nepali'){{ $subcat->subcategory_name_nep }} @else {{ $subcat->subcategory_name_en }} @endif</h2>
+                                                        </a>
                                                         <ul class="links">
                                                             <!-- GET Sub SubCategory Data -->
                                                             @php
@@ -194,7 +196,7 @@
                                                             @endphp
 
                                                             @foreach($subsubcategories as $subsubcat)
-                                                            <li><a href="#">@if(session()->get('language') == 'nepali'){{ $subsubcat->sub_subcategory_name_nep }} @else {{ $subsubcat->sub_subcategory_name_en }} @endif </a></li>
+                                                            <li><a href="{{url('subsubcategory/product/'.$subsubcat->id.'/'.$subsubcat->sub_subcategory_slug_en)  }}">@if(session()->get('language') == 'nepali'){{ $subsubcat->sub_subcategory_name_nep }} @else {{ $subsubcat->sub_subcategory_name_en }} @endif </a></li>
                                                             @endforeach
 
 
