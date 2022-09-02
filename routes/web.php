@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SliderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -150,4 +151,15 @@ Route::controller(IndexController::class)->group(function () {
     Route::post('/user/profile/store', 'UserProfileStore')->name('user.profile.store');
     Route::get('/user/change/password', 'UserChangePassword')->name('user.change.password');
     Route::post('/user/password/update', 'UserPasswordUpdate')->name('user.password.update');
+
+    //product related
+    Route::get('product/details/{id}/{product_slug_en}', 'ProductDetails');
 });
+
+/************ Multi Language All route**************/
+Route::controller(LanguageController::class)->group(function () {
+    Route::get('/language/nepali', 'Nepali')->name('nepali.language');
+    Route::get('/language/english', 'English')->name('english.language');
+});
+
+///product/details/{id}

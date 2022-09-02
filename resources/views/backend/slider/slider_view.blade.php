@@ -75,7 +75,7 @@
                                         </td>
 
 
-                                        <td><a href="{{ route('slider.edit',$item->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                        <td width=30%><a href="{{ route('slider.edit',$item->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-pencil"></i></a>
                                             <a href="{{ route('slider.delete',$item->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
 
 

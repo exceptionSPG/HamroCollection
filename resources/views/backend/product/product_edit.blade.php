@@ -293,6 +293,21 @@
 
                                     <!-- start of 6th row -->
                                     <div class="row">
+
+
+                                        <div class="col-md-6">
+                                            <!-- start of col md 6 -->
+                                            <div class="form-group">
+                                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <input type="text" name="selling_price" class="form-control" required="" value="{{ $product->selling_price }}">
+                                                    @error('selling_price')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div><!-- end of col-md-6 -->
                                         <div class="col-md-6">
                                             <!-- start of col md 4 -->
                                             <div class="form-group">
@@ -306,20 +321,6 @@
                                             </div>
 
 
-
-                                        </div><!-- end of col-md-6 -->
-
-                                        <div class="col-md-6">
-                                            <!-- start of col md 6 -->
-                                            <div class="form-group">
-                                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="text" name="selling_price" class="form-control" required="" value="{{ $product->selling_price }}">
-                                                    @error('selling_price')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
 
                                         </div><!-- end of col-md-6 -->
 
@@ -478,7 +479,7 @@
 
                                         <div class="form-group">
                                             <label class="form-control-label">Change Image <span class="tx-danger">*</span></label>
-                                            <input type="file" class="form-control" name="multi_image[{{ $img->id }}]" id="multiImg">
+                                            <input type="file" class="form-control" name="multi_image[{{ $img->id }}]" id="multiImg" required="">
                                             <div class="row" id="preview_img">
 
                                             </div>
@@ -528,7 +529,7 @@
 
                                         <div class="form-group">
                                             <label class="form-control-label">Change Image <span class="tx-danger">*</span></label>
-                                            <input type="file" name="product_thumbnail" class="form-control" onchange="mainThamUrl(this)">
+                                            <input type="file" name="product_thumbnail" class="form-control" onchange="mainThamUrl(this)" required="">
                                             <img src="" id="mainThmb">
                                         </div>
 

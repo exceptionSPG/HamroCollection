@@ -65,3 +65,18 @@ Categories
 	5. Denim Jackets
 	6. Parkas
 	7. Bombar Jackets
+
+
+
+Palpa, Mathagadhi Ward no. 8
+
+icon fa fa-heartbeat
+icon fa fa-diamond
+icon fa fa-clock-o
+icon fa fa-paw
+fa fa-laptop
+icon fa fa-paper-plane
+fa fa-futbol-o
+
+fa fa-envira
+fa fa-envira
