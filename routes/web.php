@@ -157,6 +157,9 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('product/tag/{tags}', 'TagWiseProduct');
     Route::get('subcategory/product/{subcat_id}/{subcategory_slug}', 'SubCatWiseProduct');
     Route::get('subsubcategory/product/{subsubcat_id}/{sub_subcategory_slug}', 'SubSubCatWiseProduct');
+
+    //Product view modal with ajax /product/view/modal/'+id
+    Route::get('product/view/modal/{id}', 'ProductViewAjax');
 });
 
 /************ Multi Language All route**************/
