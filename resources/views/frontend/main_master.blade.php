@@ -66,6 +66,9 @@
     <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
 
+    <!-- Sweetalert script-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
@@ -101,7 +104,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><strong><span id="pname"></span> </strong></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -145,16 +148,16 @@
                         <div class="col-md-4">
 
                             <div class="form-group" id="colorArea">
-                                <label for="exampleFormControlSelect1">Choose Color:</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="color">
+                                <label for="color">Choose Color:</label>
+                                <select class="form-control" id="color" name="color">
 
 
                                 </select>
                             </div>
 
                             <div class="form-group" id="sizeArea">
-                                <label for="exampleFormControlSelect1">Choose Size:</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="size">
+                                <label for="size">Choose Size:</label>
+                                <select class="form-control" id="size" name="size">
 
 
                                 </select>
@@ -162,11 +165,12 @@
 
 
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Quantity:</label>
-                                <input type="number" class="form-control" id="exampleFormControlSelect1" value="1" min="1">
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" class="form-control" id="quantity" value="1" min="1">
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            <input type="hidden" id="product_id">
+                            <button type="submit" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
 
                         </div>
                         <!-- End col-md-4 -->
@@ -181,7 +185,7 @@
         </div>
     </div>
 
-    <!-- Add to cart product Modal -->
+    <!-- END to cart product Modal -->
 
     <script type="text/javascript">
         $.ajaxSetup({
@@ -189,7 +193,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
 
             }
-        })
+        });
 
         //start productView with modal
         function productView(id) {
@@ -197,6 +201,7 @@
                 type: 'GET',
                 url: '/product/view/modal/' + id,
                 dataType: 'json',
+
                 success: function(data) {
                     $('#pname').text(data.product.product_name_en);
                     $('#pcode').text(data.product.product_code);
@@ -207,6 +212,9 @@
                     $('#category').text(data.product.category['category_name_en']);
 
 
+                    //pass id to button add to card ko hidden input field quantity
+                    $('#product_id').val(id);
+                    $('#quantity').val(1);
 
                     //product price
                     if (data.product.discount_price == null) {
@@ -256,7 +264,150 @@
 
                 }
             })
+        } //end productView with modal
+
+        /* ************add to cart with modal start****************/
+        function addToCart() {
+            var product_name = $('#pname').text();;
+            var product_id = $('#product_id').val();
+            var color = $('#color option:selected').text();
+            var size = $('#size option:selected').text();
+            var quantity = $('#quantity').val();
+
+            //var name = 'next';
+            var dataObject = {};
+            dataObject['product_name'] = product_name;
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "color": color,
+                    "size": size,
+                    "quantity": quantity,
+                    "product_name": product_name,
+                },
+                url: "/cart/data/store/" + product_id,
+                success: function(data) {
+                    miniCart();
+                    $('#closeModal').click();
+                    //console.log(data);
+
+                    //Start of Message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        // title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success,
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error,
+                        })
+
+                    }
+
+
+
+                    //End of Message
+
+
+
+
+
+
+
+                },
+            })
+
+
+        } //end method addToCart
+    </script>
+    <!-- END  to cart product Modal Script -->
+
+    <script type="text/javascript">
+        function miniCart() {
+            $.ajax({
+                type: 'GET',
+                url: '/product/mini/cart',
+                dataType: 'json',
+                success: function(response) {
+                    $('span[id="cartSubTotal"]').text(response.cartTotal)
+                    $('span[id="cartQty"]').text(response.cartQty)
+                    var miniCart = ""
+                    //console.log(response);
+                    $.each(response.carts, function(key, value) {
+                        miniCart += `<div class="cart-item product-summary">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <div class="image"> <a href="detail.html"><img src="/${value.options.image}" alt=""></a> </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
+                                            <div class="price">Rs. ${value.price}* ${value.qty}</div>
+                                        </div>
+                                        <div class="col-xs-1 action">
+                                         <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> 
+                                         </div>
+                                    </div>
+                                </div>
+                                <!-- /.cart-item -->
+                                
+                                <div class="clearfix"></div>
+                                <hr>`
+
+                    });
+                    $('#miniCart').html(miniCart);
+                }
+            })
         }
+
+        miniCart();
+
+        //miniCartRemove START
+
+        function miniCartRemove(rowId) {
+            $.ajax({
+                type: 'GET',
+                url: '/minicart/product-remove/' + rowId,
+                dataType: 'json',
+                success: function(data) {
+                    miniCart();
+
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message
+                }
+            })
+        }
+
+
+        //miniCartRemove END
     </script>
 
 </body>

@@ -49,7 +49,6 @@ Home - HamroCollection
                                                         <div class="product-price">@if($product->discount_price == NULL)
                                                             <span class="price">Rs. {{ $product->selling_price }}</span>
                                                             @else
-
                                                             <span class="price">
 
                                                                 Rs. {{ $product->discount_price }}

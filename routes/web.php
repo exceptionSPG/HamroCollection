@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\Frontend\CartController;
+
 use App\Models\User;
 
 /*
@@ -153,13 +156,13 @@ Route::controller(IndexController::class)->group(function () {
     Route::post('/user/password/update', 'UserPasswordUpdate')->name('user.password.update');
 
     //product related product/tag/'.$tag->product_tags_nep  subsubcategory/product/'.$subsubcat->id.'/'.$subsubcat->sub_subcategory_slug_en
-    Route::get('product/details/{id}/{product_slug_en}', 'ProductDetails');
-    Route::get('product/tag/{tags}', 'TagWiseProduct');
-    Route::get('subcategory/product/{subcat_id}/{subcategory_slug}', 'SubCatWiseProduct');
-    Route::get('subsubcategory/product/{subsubcat_id}/{sub_subcategory_slug}', 'SubSubCatWiseProduct');
+    Route::get('/product/details/{id}/{product_slug_en}', 'ProductDetails');
+    Route::get('/product/tag/{tags}', 'TagWiseProduct');
+    Route::get('/subcategory/product/{subcat_id}/{subcategory_slug}', 'SubCatWiseProduct');
+    Route::get('/subsubcategory/product/{subsubcat_id}/{sub_subcategory_slug}', 'SubSubCatWiseProduct');
 
     //Product view modal with ajax /product/view/modal/'+id
-    Route::get('product/view/modal/{id}', 'ProductViewAjax');
+    Route::get('/product/view/modal/{id}', 'ProductViewAjax');
 });
 
 /************ Multi Language All route**************/
@@ -169,3 +172,12 @@ Route::controller(LanguageController::class)->group(function () {
 });
 
 ///product/details/{id}
+
+//Add to cart routes /cart/data/store/" + id, /minicart/product-remove/' + rowId
+
+Route::controller(CartController::class)->group(function () {
+
+    Route::post('/cart/data/store/{product_id}', 'AddToCart');
+    Route::get('/product/mini/cart', 'AddMiniCart');
+    Route::get('/minicart/product-remove/{rowId}', 'RemoveMiniCartItem');
+});
