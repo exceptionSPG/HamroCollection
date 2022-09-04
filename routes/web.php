@@ -13,7 +13,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Frontend\CartController;
-
+use App\Http\Controllers\User\WishlistController;
 use App\Models\User;
 
 /*
@@ -173,11 +173,25 @@ Route::controller(LanguageController::class)->group(function () {
 
 ///product/details/{id}
 
-//Add to cart routes /cart/data/store/" + id, /minicart/product-remove/' + rowId
+//Add to cart routes /cart/data/store/" + id, /minicart/product-remove/' + rowId 
 
 Route::controller(CartController::class)->group(function () {
 
     Route::post('/cart/data/store/{product_id}', 'AddToCart');
     Route::get('/product/mini/cart', 'AddMiniCart');
     Route::get('/minicart/product-remove/{rowId}', 'RemoveMiniCartItem');
+    Route::get('/add-to-wishlist/{product_id}', 'AddToWishlist');
+    Route::get('/wishlist', 'Wishlist')->name('wishlist');
+});
+
+
+Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'App\Http\Controllers\User'], function () {
+    //Wishlist all routes  /wishlist/product-remove/' + id,
+
+    Route::controller(WishlistController::class)->group(function () {
+
+        Route::get('/wishlist', 'Wishlist')->name('wishlist');
+        Route::get('/get-wishlist-product', 'GetWishlistProducts');
+        Route::get('/wishlist/product-remove/{id}', 'RemoveProducts');
+    });
 });
