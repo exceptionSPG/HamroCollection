@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\WishlistController;
 use App\Models\User;
 
@@ -181,12 +182,11 @@ Route::controller(CartController::class)->group(function () {
     Route::get('/product/mini/cart', 'AddMiniCart');
     Route::get('/minicart/product-remove/{rowId}', 'RemoveMiniCartItem');
     Route::get('/add-to-wishlist/{product_id}', 'AddToWishlist');
-    Route::get('/wishlist', 'Wishlist')->name('wishlist');
 });
 
 
 Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'App\Http\Controllers\User'], function () {
-    //Wishlist all routes  /wishlist/product-remove/' + id,
+    //Wishlist all routes  /wishlist/product-remove/' + id,  
 
     Route::controller(WishlistController::class)->group(function () {
 
@@ -194,4 +194,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
         Route::get('/get-wishlist-product', 'GetWishlistProducts');
         Route::get('/wishlist/product-remove/{id}', 'RemoveProducts');
     });
+});
+
+//guest le cart page herna milna ko lagi middleware group bata bahira rakheko
+//All Mycart page routes cart/product-remove/  + id, 
+Route::controller(CartPageController::class)->group(function () {
+    Route::get('/mycart', 'MyCart')->name('mycart');
+    Route::get('/get-mycart-product', 'GetCartProducts');
+    Route::get('/cart/product-remove/{id}', 'CartProductRemove');
+    Route::get('/cart-increment/{id}', 'CartIncrement');
+    Route::get('/cart-decrement/{id}', 'CartDecrement');
 });

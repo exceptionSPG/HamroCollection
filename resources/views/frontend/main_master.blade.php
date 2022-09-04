@@ -381,6 +381,7 @@
                 dataType: 'json',
                 success: function(data) {
                     miniCart();
+                    Cart();
 
                     // Start Message 
                     const Toast = Swal.mixin({
@@ -541,6 +542,142 @@
     <!-- END Wishlist Data -->
 
 
+
+    <!--START Load mycart cartpage -->
+
+    <script type="text/javascript">
+        function Cart() {
+            $.ajax({
+                type: 'GET',
+                url: '/get-mycart-product',
+                dataType: 'json',
+                success: function(response) {
+
+                    var rows = ""
+                    //console.log(response);
+                    $.each(response.carts, function(key, value) {
+                        rows += ` <tr>
+                <td class="col-md-2"><img src="/${value.options.image}" alt="${value.name}" style="width:60px; height:60px;"></td>
+
+               
+                <td class="col-md-2">
+            <div class="product-name"><a href="#">${value.name}</a></div>
+             
+            <div class="price"> 
+                            ${value.price}
+                        </div>
+                    </td>
+
+                <td class="col-md-2">
+            <strong>${value.options.color} </strong> 
+            </td>
+         <td class="col-md-2">
+          ${value.options.size == null
+            ? `<span> ... </span>`
+            :
+          `<strong>${value.options.size} </strong>` 
+          }           
+            </td>
+
+
+           <td class="col-md-2">
+           ${value.qty > 1
+            ? `<button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)" >-</button> `
+            : `<button type="submit" class="btn btn-danger btn-sm" disabled >-</button> `
+            }
+        <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px;" > 
+
+        <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" onclick="CartIncrement(this.id)">+</button>  
+            
+        </td>
+             <td class="col-md-2">
+            <strong>Rs. ${value.subtotal} </strong> 
+            </td>
+                
+                <td class="col-md-1 close-btn">
+                    <button type="submit" class="" id="${value.rowId}" onclick="CartRemove(this.id)"> <i class="fa fa-times"></i> </button>
+                </td>
+            </tr>`
+
+                    });
+                    $('#cartpage').html(rows);
+                }
+            })
+        }
+
+        Cart();
+
+
+
+        //Cart Remove START
+
+        function CartRemove(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/cart/product-remove/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    Cart(); //call this to refresh without refreshing page.. boom
+                    miniCart(); //mini cart ko section ma pani aafai update garnako lagi call garne
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message
+                }
+            })
+        }
+
+        //Cart item Remove END
+
+        //Start: Cart Increment 
+
+        function CartIncrement(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/cart-increment/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    Cart(); //call this to refresh without refreshing page.. boom
+                    miniCart(); //mini cart ko section ma pani aafai update garnako lagi call garne
+                }
+            })
+        }
+        //END: Cart Increment
+
+        //Start: Cart Decrement  
+
+        function cartDecrement(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/cart-decrement/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    Cart(); //call this to refresh without refreshing page.. boom
+                    miniCart(); //mini cart ko section ma pani aafai update garnako lagi call garne
+                }
+            })
+        }
+
+        //END: Cart Decrement
+    </script>
+
+    <!-- END mycart -->
 
 </body>
 
