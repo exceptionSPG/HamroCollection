@@ -90,6 +90,22 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+
+            <li class="treeview {{ ($prefix == '/coupon' ) ? 'active':'' }}">
+                <a href="#">
+                    <i data-feather="box"></i>
+                    <span>Coupon</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'manage.coupon' ) ? 'active':'' }}"><a href="{{ route('manage.coupon') }}"><i class="ti-more"></i>Manage Coupon</a></li>
+
+
+                </ul>
+            </li>
+
             <li class="header nav-small-cap">User Interface</li>
 
             <li class="treeview">
