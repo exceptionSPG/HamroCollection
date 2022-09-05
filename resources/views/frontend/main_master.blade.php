@@ -387,17 +387,19 @@
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
-                        icon: 'success',
+
                         showConfirmButton: false,
                         timer: 3000
                     })
                     if ($.isEmptyObject(data.error)) {
                         Toast.fire({
+                            icon: 'success',
                             type: 'success',
                             title: data.success
                         })
                     } else {
                         Toast.fire({
+                            icon: 'error',
                             type: 'error',
                             title: data.error
                         })
@@ -678,6 +680,63 @@
     </script>
 
     <!-- END mycart -->
+
+
+    <!-- START: Coupon Apply -->
+
+    <script type="text/javascript">
+        function applyCoupon() {
+            var coupon_name = $('#coupon_name').val();
+            $.ajax({
+                type: 'POST',
+                url: '/apply-coupon',
+                dataType: 'json',
+                data: {
+                    coupon_name: coupon_name
+                },
+                success: function(data) {
+
+                    console.log(data);
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            icon: 'success',
+                            type: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message
+                }
+            });
+        }
+
+        function couponCalculation() {
+            $.ajax({
+                type: 'GET',
+                url: '/coupon-calculation',
+                dataType: 'json',
+                success: function(data) {
+
+                },
+            })
+        }
+    </script>
+
+
+    <!-- END: Coupon Apply -->
 
 </body>
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -104,6 +106,35 @@ class CartController extends Controller
         } else {
             return response()->json(['error' => 'At First, Login to your Account.']);
         }
+    } //end method CouponApply
+
+    public function CouponApply(Request $request)
+    {
+        $coupon = Coupon::where('coupon_name', $request->coupon_name)->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->where('status', 1)->first();
+
+        if ($coupon) {
+
+            $request->session()->put('coupon', 'success');
+
+            // [
+            //     'coupon_name' => $coupon->coupon_name,
+            //     'coupon_discount' => $coupon->coupon_discount,
+            //     'discount_amount' => round(Cart::total() * $coupon->discount_amount / 100),
+            //     'total_amount' => round(Cart::total() - Cart::total() * $coupon->discount_amount / 100),
+
+            // ]
+
+            return response()->json([
+
+                'success' => 'Coupon Applied Successfully',
+            ]);
+        } else {
+            return response()->json(['error' => 'Invalid Coupon']);
+        }
+    } //end method CouponCalculation
+
+    public function CouponCalculation()
+    {
     } //end method
 
 

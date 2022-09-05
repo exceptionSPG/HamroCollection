@@ -223,6 +223,10 @@ Route::controller(CartController::class)->group(function () {
     Route::get('/product/mini/cart', 'AddMiniCart');
     Route::get('/minicart/product-remove/{rowId}', 'RemoveMiniCartItem');
     Route::get('/add-to-wishlist/{product_id}', 'AddToWishlist');
+
+    //Coupon apply routes /apply-coupon 
+    Route::post('/apply-coupon', 'CouponApply');
+    Route::get('/coupon-calculation', 'CouponCalculation');
 });
 
 
