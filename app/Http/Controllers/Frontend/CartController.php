@@ -18,6 +18,11 @@ class CartController extends Controller
 
     public function AddToCart(Request $request, $product_id)
     {
+
+        if (session()->has('coupon')) {
+
+            session()->forget(['coupon', 'coupon_discount', 'coupon_name', 'discount_amount', 'total_amount']);
+        }
         //header("Content-Type: application/json", true);
         $product = Product::findOrFail($product_id);
 
@@ -116,20 +121,6 @@ class CartController extends Controller
         if ($coupon) {
 
 
-            // if (session()->exists(['coupon', 'coupon_discount', 'coupon_name', 'discount_amount', 'total_amount'])) {
-            //     $request->session()->forget(['coupon', 'coupon_discount', 'coupon_name', 'discount_amount', 'total_amount']);
-            //     $msg += ' in if.';
-            // }
-            // $request->session()->put('coupon', 'coupon xa hai');
-            // $da = round(Cart::total() * ($coupon->coupon_discount / 100));
-            // $ta = round(Cart::total() - $da);
-            // $msg += ' in bahira.';
-            // $request->session()->put('coupon_discount', $coupon->coupon_discount);
-            // $request->session()->put('coupon_name', $coupon->coupon_name);
-            // $request->session()->put('discount_amount', $da);
-            // $request->session()->put('total_amount', $ta);
-
-
             session([
                 'coupon' => 'coupon xa hai',
                 'coupon_name' => $coupon->coupon_name,
@@ -149,7 +140,7 @@ class CartController extends Controller
 
             ]);
         }
-    } //end method CouponCalculation
+    } //end method 
 
     public function CouponCalculation()
     {
@@ -167,6 +158,12 @@ class CartController extends Controller
 
             ));
         }
+    } //end method CouponCalculation
+
+    public function CouponRemove()
+    {
+        session()->forget(['coupon', 'coupon_discount', 'coupon_name', 'discount_amount', 'total_amount']);
+        return response()->json(['success' => 'Coupon Removed Successfully.']);
     } //end method
 
 

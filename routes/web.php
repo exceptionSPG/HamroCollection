@@ -227,6 +227,7 @@ Route::controller(CartController::class)->group(function () {
     //Coupon apply routes /apply-coupon 
     Route::post('/apply-coupon', 'CouponApply');
     Route::get('/coupon-calculation', 'CouponCalculation');
+    Route::get('/coupon-remove', 'CouponRemove');
 });
 
 

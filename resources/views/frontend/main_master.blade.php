@@ -289,7 +289,10 @@
                 },
                 url: "/cart/data/store/" + product_id,
                 success: function(data) {
+                    couponCalculation();
                     miniCart();
+                    Cart();
+
                     $('#closeModal').click();
                     //console.log(data);
 
@@ -380,6 +383,7 @@
                 url: '/minicart/product-remove/' + rowId,
                 dataType: 'json',
                 success: function(data) {
+                    couponCalculation();
                     miniCart();
                     Cart();
 
@@ -619,6 +623,7 @@
                 url: '/cart/product-remove/' + id,
                 dataType: 'json',
                 success: function(data) {
+                    couponCalculation();
                     Cart(); //call this to refresh without refreshing page.. boom
                     miniCart(); //mini cart ko section ma pani aafai update garnako lagi call garne
                     // Start Message 
@@ -655,6 +660,7 @@
                 url: '/cart-increment/' + id,
                 dataType: 'json',
                 success: function(data) {
+                    couponCalculation();
                     Cart(); //call this to refresh without refreshing page.. boom
                     miniCart(); //mini cart ko section ma pani aafai update garnako lagi call garne
                 }
@@ -670,6 +676,7 @@
                 url: '/cart-decrement/' + id,
                 dataType: 'json',
                 success: function(data) {
+                    couponCalculation();
                     Cart(); //call this to refresh without refreshing page.. boom
                     miniCart(); //mini cart ko section ma pani aafai update garnako lagi call garne
                 }
@@ -722,7 +729,7 @@
                                 icon: 'error',
                                 type: 'error',
                                 title: data.error
-                            })
+                            });
                         }
                         // End Message
                     }
@@ -765,7 +772,7 @@
                                     </div>
                                     <div class="cart-sub-total">
                                         Coupon<span class="inner-left-md">${data.coupon_name}</span>
-                                        <button type="submit" ><i class="fa fa-times"></i></button>
+                                        <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i></button>
                                     </div>
                                     <div class="cart-sub-total">
                                         Discount Amt.<span class="inner-left-md">Rs.${data.discount_amount}</span>
@@ -786,8 +793,53 @@
         couponCalculation();
     </script>
 
-
     <!-- END: Coupon Apply -->
+
+
+
+    <!-- START Coupon remove -->
+
+    <script type="text/javascript">
+        function couponRemove() {
+            $.ajax({
+                type: 'GET',
+                url: '/coupon-remove',
+                dataType: 'json',
+                success: function(data) {
+                    couponCalculation();
+                    $('#coupon_name').val(' ');
+
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        $('#couponTable').show();
+
+                        Toast.fire({
+                            icon: 'success',
+                            type: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            type: 'error',
+                            title: data.error
+                        });
+                    }
+                    // End Message
+
+
+                }
+            })
+        }
+    </script>
+    <!-- END Coupon Removal -->
 
 </body>
 
