@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\ShipDistrict;
+use App\Models\ShipMunicipality;
 use App\Models\ShippingProvince;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -163,9 +164,112 @@ class ShippingController extends Controller
         );
         return redirect()->back()->with($notification);
     } //end method
-
-
     //END District 
 
 
+    /******** START: Gaupalika ra Nagarpalika haru **********/
+    public function MunicipalityView()
+    {
+        $provinces = ShippingProvince::orderBy('province_name', 'ASC')->get();
+        $districts = ShipDistrict::with('province')->orderBy('district_name', 'ASC')->get();
+        $munis = ShipMunicipality::with('province', 'district')->orderBy('id', 'DESC')->get();
+        return view('backend.ship.munis.view_munis', compact('provinces', 'districts', 'munis'));
+    } //end method  
+
+
+
+    public function MunicipalStore(Request $request)
+    {
+        $validateData = $request->validate([
+            'province_id' => 'required',
+            'district_id' => 'required',
+            'municipal_name' => 'required',
+
+
+        ], [
+            'province_id.required' => 'Province Name is required.',
+            'district_id.required' => 'District is required.',
+            'municipal_name.required' => 'Local State Name is required.',
+
+        ]);
+
+
+        ShipMunicipality::insert([
+            'province_id' => $request->province_id,
+            'district_id' => $request->district_id,
+            'municipal_name' => $request->municipal_name,
+
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => 'Municipality Added Successfully.',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
+    } //end method  
+
+
+
+
+    public function MunicipalEdit($id)
+    {
+        $provinces = ShippingProvince::orderBy('province_name', 'ASC')->get();
+        $districts = ShipDistrict::orderBy('district_name', 'ASC')->get();
+        $muni = ShipMunicipality::findOrFail($id);
+        return view('backend.ship.munis.munis_edit', compact('districts', 'provinces', 'muni'));
+    } //end method   
+
+
+    public function MunicipalUpdate(Request $request)
+    {
+
+
+        ShipMunicipality::findOrFail($request->id)->update([
+            'province_id' => $request->province_id,
+            'district_id' => $request->district_id,
+            'municipal_name' => $request->municipal_name,
+
+            'updated_at' =>  Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => 'Local State updated Successfully.',
+            'alert-type' => 'info',
+
+        );
+        return redirect()->route('manage.municipality')->with($notification);
+    } //end method  
+
+
+
+    public function MunicipalDelete($id)
+    {
+
+        ShipMunicipality::findOrFail($id)->delete();
+        $notification = array(
+            'message' => 'Local State Deleted Successfully.',
+            'alert-type' => 'success',
+
+        );
+        return redirect()->back()->with($notification);
+    } //end method
+
+
+
+
+
+
+
+    public function GetDistrict($province_id)
+    {
+        $dists = ShipDistrict::where('province_id', $province_id)->orderBy('district_name', 'ASC')->get();
+        return json_encode($dists);
+    } //end method  
+
+
+
+
+    /******** END: Gaupalika ra Nagarpalika haru **********/
 }

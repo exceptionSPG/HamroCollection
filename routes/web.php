@@ -156,6 +156,17 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/district/edit/{id}', 'DistrictEdit')->name('district.edit');
         Route::post('/district/update', 'DistrictUpdate')->name('district.update');
         Route::get('/district/delete/{id}', 'DistrictDelete')->name('district.delete');
+
+        //Admin shipping gaupalika ra nagarpalika all routes 
+        Route::get('/municipality/view', 'MunicipalityView')->name('manage.municipality');
+        Route::post('/municipal/store', 'MunicipalStore')->name('municipal.store'); ///province/district/ajax
+        Route::get('/municipal/edit/{id}', 'MunicipalEdit')->name('municipal.edit');
+        Route::post('/municipal/update', 'MunicipalUpdate')->name('municipal.update');
+        Route::get('/municipal/delete/{id}', 'MunicipalDelete')->name('municipal.delete');
+
+
+        //province select huda district xannako lagi
+        Route::get('/district/ajax/{province_id}', 'GetDistrict');
     });
 }); //middleware end
 
