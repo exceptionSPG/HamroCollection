@@ -687,40 +687,51 @@
     <script type="text/javascript">
         function applyCoupon() {
             var coupon_name = $('#coupon_name').val();
-            $.ajax({
-                type: 'POST',
-                url: '/apply-coupon',
-                dataType: 'json',
-                data: {
-                    coupon_name: coupon_name
-                },
-                success: function(data) {
+            if (coupon_name != '') {
+                $.ajax({
+                    type: 'POST',
+                    url: '/apply-coupon',
+                    dataType: 'json',
+                    data: {
+                        coupon_name: coupon_name
+                    },
+                    success: function(data) {
 
-                    console.log(data);
-                    // Start Message 
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
+                        if (data.success) {
+                            console.log(data.success);
+                            $('#couponTable').hide();
+                        }
 
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                    if ($.isEmptyObject(data.error)) {
-                        Toast.fire({
-                            icon: 'success',
-                            type: 'success',
-                            title: data.success
+                        console.log(data);
+                        // Start Message 
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+
+                            showConfirmButton: false,
+                            timer: 3000
                         })
-                    } else {
-                        Toast.fire({
-                            icon: 'error',
-                            type: 'error',
-                            title: data.error
-                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                icon: 'success',
+                                type: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                icon: 'error',
+                                type: 'error',
+                                title: data.error
+                            })
+                        }
+                        // End Message
                     }
-                    // End Message
-                }
-            });
+                });
+            } else {
+                alert("Promocode can not be blank .Enter a Valid Promocode !");
+
+            }
+            couponCalculation();
         }
 
         function couponCalculation() {
@@ -729,10 +740,50 @@
                 url: '/coupon-calculation',
                 dataType: 'json',
                 success: function(data) {
+                    if (data.total) {
+
+                        $('#couponCallField').html(
+                            ` <tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        Subtotal<span class="inner-left-md">Rs.${data.total}</span>
+                                    </div>
+                                    <div class="cart-grand-total">
+                                        Grand Total<span class="inner-left-md">Rs.${data.total}</span>
+                                    </div>
+                                </th>
+                            </tr>`
+                        );
+
+                    } else {
+
+                        $('#couponCallField').html(
+                            ` <tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        Subtotal<span class="inner-left-md">Rs.${data.subtotal}</span>
+                                    </div>
+                                    <div class="cart-sub-total">
+                                        Coupon<span class="inner-left-md">${data.coupon_name}</span>
+                                        <button type="submit" ><i class="fa fa-times"></i></button>
+                                    </div>
+                                    <div class="cart-sub-total">
+                                        Discount Amt.<span class="inner-left-md">Rs.${data.discount_amount}</span>
+                                    </div>
+                                    <div class="cart-grand-total">
+                                        Grand Total<span class="inner-left-md">Rs.${data.total_amount}</span>
+                                    </div>
+                                </th>
+                            </tr>`
+                        );
+
+                    }
 
                 },
             })
         }
+
+        couponCalculation();
     </script>
 
 

@@ -58,7 +58,7 @@ MyCart Page - HamroCollection
                     @if(session()->has('coupon'))
 
                     @else
-                    <table class="table">
+                    <table class="table" id="couponTable">
                         <thead>
                             <tr>
                                 <th>
@@ -89,16 +89,7 @@ MyCart Page - HamroCollection
                     <table class="table">
                         <thead id="couponCallField">
 
-                            <tr>
-                                <th>
-                                    <div class="cart-sub-total">
-                                        Subtotal<span class="inner-left-md">$600.00</span>
-                                    </div>
-                                    <div class="cart-grand-total">
-                                        Grand Total<span class="inner-left-md">$600.00</span>
-                                    </div>
-                                </th>
-                            </tr>
+
                         </thead><!-- /thead -->
                         <tbody>
                             <tr>
