@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ShippingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -129,7 +130,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/inactive/{id}', 'SliderInactive')->name('slider.inactive');
     });
 
-    //Admin Coupon all routes...
+    //Admin Coupon all routes... manage.province
     Route::prefix('coupon')->controller(CouponController::class)->group(function () { //slider.inactive
         Route::get('/view', 'CouponView')->name('manage.coupon');
         Route::post('/store', 'CouponStore')->name('coupon.store');
@@ -138,6 +139,23 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/delete/{id}', 'CouponDelete')->name('coupon.delete');
         Route::get('/active/{id}', 'CouponActive')->name('coupon.active');
         Route::get('/inactive/{id}', 'CouponInactive')->name('coupon.inactive');
+    });
+
+
+    //Admin Shipping all routes... 
+    Route::prefix('shipping')->controller(ShippingController::class)->group(function () { //manage.district
+        Route::get('/province/view', 'ProvinceView')->name('manage.province');
+        Route::post('/province/store', 'ProvinceStore')->name('province.store');
+        Route::get('/province/edit/{id}', 'ProvinceEdit')->name('province.edit');
+        Route::post('/province/update', 'ProvinceUpdate')->name('province.update');
+        Route::get('/province/delete/{id}', 'ProvinceDelete')->name('province.delete');
+
+        //Admin shipping District all routes 
+        Route::get('/district/view', 'DistrictView')->name('manage.district');
+        Route::post('/district/store', 'DistrictStore')->name('district.store');
+        Route::get('/district/edit/{id}', 'DistrictEdit')->name('district.edit');
+        Route::post('/district/update', 'DistrictUpdate')->name('district.update');
+        Route::get('/district/delete/{id}', 'DistrictDelete')->name('district.delete');
     });
 }); //middleware end
 
