@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\WishlistController;
 use App\Models\User;
 
@@ -228,7 +229,34 @@ Route::controller(CartController::class)->group(function () {
     Route::post('/apply-coupon', 'CouponApply');
     Route::get('/coupon-calculation', 'CouponCalculation');
     Route::get('/coupon-remove', 'CouponRemove');
+
+    //checkout
+    /************START: Checkout All routes*****************/
+    ///checkout/district-get/ajax
+
+    Route::get('/checkout', 'CheckoutCreate')->name('checkout');
+
+    /************END: Checkout All routes*****************/
 });
+
+Route::controller(CheckoutController::class)->group(function () {
+
+
+
+    /************START: Checkout All routes however, CheckoutCreate chai CartController ma xa hai*****************/
+    ///checkout/district-get/ajax  
+
+    Route::get('/checkout/district-get/ajax/{province_id}', 'DistrictGetAjax');
+    Route::get('/checkout/municipals-get/ajax/{district_id}', 'MunicipalsGetAjax');
+
+    Route::post('/checkouts/store', 'CheckoutStore')->name('checkout.store');
+
+
+    /************END: Checkout All routes*****************/
+});
+
+
+
 
 
 Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'App\Http\Controllers\User'], function () {

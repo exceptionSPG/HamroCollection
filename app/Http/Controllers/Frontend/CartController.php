@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\ShippingProvince;
 use App\Models\Wishlist;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -164,10 +165,43 @@ class CartController extends Controller
     {
         session()->forget(['coupon', 'coupon_discount', 'coupon_name', 'discount_amount', 'total_amount']);
         return response()->json(['success' => 'Coupon Removed Successfully.']);
-    } //end method
+    } //end method 
 
 
+    /* ***********START: CheckoutCreate****************/
+    public function CheckoutCreate()
+    {
+        if (Auth::check()) {
+
+            if (Cart::total() > 0) {
+                $carts = Cart::content();
+                $cartQty = Cart::count();
+                $cartTotal = Cart::totalFloat();
+
+                $provinces = ShippingProvince::orderBy('province_name', 'ASC')->get();
+                // $districts = ShippingProvince::orderBy('district_name', 'ASC')->get();
+                // $districts = ShippingProvince::orderBy('district_name', 'ASC')->get();
 
 
+                return view('frontend.checkout.checkout_view', compact('carts', 'cartQty', 'cartTotal', 'provinces'));
+            } else {
+                $notification = array(
+                    'message' => 'Your Cart is empty, Shop some item first.',
+                    'alert-type' => 'error',
 
+                );
+                return redirect()->to('/')->with($notification);
+            }
+        } else {
+            $notification = array(
+                'message' => 'You need to login first.',
+                'alert-type' => 'error',
+
+            );
+            return redirect()->route('login')->with($notification);
+        }
+    }
+
+
+    /* ***********END: CheckoutCreate****************/
 }
