@@ -41,7 +41,7 @@ MyCart Page - HamroCollection
                                         <div class="col-md-6 col-sm-6 already-registered-login">
                                             <h4 class="checkout-subtitle"><b>Shipping Address</b></h4>
 
-                                            <form class="register-form" action="checkout.store" method="POST" role="form">
+                                            <form class="register-form" action="{{route('checkout.store') }}" method="POST" role="form">
                                                 @csrf
 
 
@@ -127,7 +127,12 @@ MyCart Page - HamroCollection
 
                                             <div class="form-group">
                                                 <h5><b> Ward No. and Chowk Name: <span class="text-danger">*</span></b></h5>
-                                                <textarea name="notes" id="" cols="40" rows="5" required="" placeholder="Ward No. 2, Chadani Chowk "></textarea>
+                                                <textarea name="notes" id="" cols="40" rows="5" placeholder="Ward No. 2, Chadani Chowk "></textarea>
+
+                                                @error('notes')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+
 
                                             </div>
 
@@ -243,6 +248,10 @@ MyCart Page - HamroCollection
 
 
                                 </div>
+
+                                @error('payment_method')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                 <!-- End row -->
                                 <hr>
                                 <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Payment Step</button>

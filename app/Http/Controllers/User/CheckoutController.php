@@ -24,7 +24,42 @@ class CheckoutController extends Controller
 
     public function CheckoutStore(Request $request)
     {
-        
 
-    }//end method CheckoutStore
+        $validateData = $request->validate([
+            'province_id' => 'required',
+            'district_id' => 'required',
+            'municipal_id' => 'required',
+            'notes' => 'required',
+            'payment_method' => 'required',
+
+        ], [
+            'province_id.required' => 'Please select Province.',
+            'district_id.required' => 'Please select District.',
+            'municipal_id.required' => 'Please select Municipality.',
+            'notes.required' => 'Please write precise location.',
+            'payment_method.required' => 'Please Select a Payment Method.',
+        ]);
+
+        //id	order_id	province_id	district_id	municipal_id	shipping_name	shipping_email	shipping_phone	post_code	notes
+
+        $data = array();
+        $data['shipping_name'] = $request->shipping_name;
+        $data['shipping_email'] = $request->shipping_email;
+        $data['shipping_phone'] = $request->shipping_phone;
+        $data['post_code'] = $request->post_code;
+        $data['notes'] = $request->notes;
+        $data['province_id'] = $request->shipping_name;
+        $data['district_id'] = $request->district_id;
+        $data['municipal_id'] = $request->municipal_id;
+
+        if ($request->payment_method == 'khalti') {
+            return view('frontend.payment.khalti', compact('data'));
+        } elseif ($request->payment_method == 'card') {
+            return view('frontend.payment.card', compact('data'));
+        } else {
+
+
+            return 'cash';
+        }
+    } //end method CheckoutStore
 }
