@@ -1,6 +1,6 @@
 @extends('frontend.main_master')
 @section('title')
-MyCart Page - HamroCollection
+Checkout Page - HamroCollection
 @endsection
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -127,7 +127,7 @@ MyCart Page - HamroCollection
 
                                             <div class="form-group">
                                                 <h5><b> Ward No. and Chowk Name: <span class="text-danger">*</span></b></h5>
-                                                <textarea name="notes" id="" cols="40" rows="5" placeholder="Ward No. 2, Chadani Chowk "></textarea>
+                                                <textarea name="notes" id="" cols="40" rows="10" placeholder="Ward No. 2, Chadani Chowk "></textarea>
 
                                                 @error('notes')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -202,7 +202,6 @@ MyCart Page - HamroCollection
 
                                             @endif
                                         </li>
-                                        <li><a href="#">Payment Method</a></li>
 
 
                                     </ul>
@@ -234,9 +233,9 @@ MyCart Page - HamroCollection
                                     </div>
 
                                     <div class="col-md-4">
-                                        <label for="stripe">Card</label>
-                                        <input type="radio" name="payment_method" value="card">
-                                        <img src="{{asset('frontend/assets/images/payments/3.png') }}" alt="">
+                                        <label for="stripe">Stripe</label>
+                                        <input type="radio" name="payment_method" value="stripe">
+                                        <img src="{{asset('frontend/assets/images/payments/4.png') }}" alt="">
 
                                     </div>
                                     <div class="col-md-4">

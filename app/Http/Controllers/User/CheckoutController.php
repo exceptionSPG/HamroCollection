@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\ShipDistrict;
 use App\Models\ShipMunicipality;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -51,11 +52,13 @@ class CheckoutController extends Controller
         $data['province_id'] = $request->shipping_name;
         $data['district_id'] = $request->district_id;
         $data['municipal_id'] = $request->municipal_id;
+        $cartTotal = Cart::total();
 
         if ($request->payment_method == 'khalti') {
             return view('frontend.payment.khalti', compact('data'));
-        } elseif ($request->payment_method == 'card') {
-            return view('frontend.payment.card', compact('data'));
+        } elseif ($request->payment_method == 'stripe') {
+
+            return view('frontend.payment.stripe', compact('data', 'cartTotal'));
         } else {
 
 

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripController;
 use App\Http\Controllers\User\WishlistController;
 use App\Models\User;
 
@@ -268,10 +269,18 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
         Route::get('/get-wishlist-product', 'GetWishlistProducts');
         Route::get('/wishlist/product-remove/{id}', 'RemoveProducts');
     });
+
+    //Strip Payment related routes....strip.order
+
+
+    Route::controller(StripController::class)->group(function () {
+        Route::post('/strip/order', 'StripOrder')->name('strip.order');
+    });
 });
 
 //guest le cart page herna milna ko lagi middleware group bata bahira rakheko
 //All Mycart page routes cart/product-remove/  + id, 
+
 Route::controller(CartPageController::class)->group(function () {
     Route::get('/mycart', 'MyCart')->name('mycart');
     Route::get('/get-mycart-product', 'GetCartProducts');
