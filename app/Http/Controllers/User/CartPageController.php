@@ -53,6 +53,7 @@ class CartPageController extends Controller
         if (session()->has('coupon')) {
             $coupon_name = session()->get('coupon_name');
             $coupon = Coupon::where('coupon_name', $coupon_name)->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->where('status', 1)->first();
+            // coupon coupon_name coupon_discount discount_amount total_amount
             session([
                 'coupon' => 'coupon xa hai',
                 'coupon_name' => $coupon->coupon_name,

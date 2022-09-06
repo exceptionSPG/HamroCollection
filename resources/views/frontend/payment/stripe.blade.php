@@ -111,12 +111,22 @@ Strip Payment - HamroCollection
                                     <h4 class="unicase-checkout-title">Select Payment Method:</h4>
                                 </div>
 
+                                <!-- province_id	district_id	municipal_id	shipping_name	shipping_email	shipping_phone	post_code	notes -->
 
+                                <!--ORDER DB: user_id	province_id	district_id	municipal_id	name	email	phone	post_code	ward_no	payment_type	payment_method	transaction_id	currency	amount	order_number	invoice_number	order_date	order_month	order_year	confirmed_date	processing_date	picked_date	shipped_date	delivery_date	cancel_date	return_date	return_reason	status -->
                                 <form action="{{ route('strip.order') }}" method="post" id="payment-form">
                                     @csrf
                                     <div class="form-row">
                                         <label for="card-element">
                                             Credit or debit card
+                                            <input type="hidden" name="name" value="{{ $data['shipping_name'] }}">
+                                            <input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
+                                            <input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
+                                            <input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
+                                            <input type="hidden" name="ward_no" value="{{ $data['notes'] }}">
+                                            <input type="hidden" name="province_id" value="{{ $data['province_id'] }}">
+                                            <input type="hidden" name="district_id" value="{{ $data['district_id'] }}">
+                                            <input type="hidden" name="municipal_id" value="{{ $data['municipal_id'] }}">
                                         </label>
 
                                         <div id="card-element">

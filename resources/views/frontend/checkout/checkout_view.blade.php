@@ -59,12 +59,12 @@ Checkout Page - HamroCollection
 
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Shipping Phone: <span>*</span></b></label>
-                                                    <input type="number" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="shipping_email" value="{{ Auth::user()->phone }}" required="" placeholder="Phone">
+                                                    <input type="number" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="shipping_phone" value="{{ Auth::user()->phone }}" required="" placeholder="Phone">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Post Code: <span>*</span></b></label>
-                                                    <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="shipping_email" required="" placeholder="Postal Code">
+                                                    <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="post_code" required="" placeholder="Postal Code">
                                                 </div>
 
 

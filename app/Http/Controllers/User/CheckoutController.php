@@ -49,7 +49,7 @@ class CheckoutController extends Controller
         $data['shipping_phone'] = $request->shipping_phone;
         $data['post_code'] = $request->post_code;
         $data['notes'] = $request->notes;
-        $data['province_id'] = $request->shipping_name;
+        $data['province_id'] = $request->province_id;
         $data['district_id'] = $request->district_id;
         $data['municipal_id'] = $request->municipal_id;
         $cartTotal = Cart::total();
