@@ -219,25 +219,33 @@ $route = Route::current()->getName();
 
                 </ul>
 
-
-
-
             </li>
-            <li class="treeview">
+
+
+
+
+
+
+
+            <li class="treeview {{ ($prefix == '/blog' ) ? 'active':'' }}">
                 <a href="#">
                     <i data-feather="hard-drive"></i>
-                    <span>Content</span>
+                    <span>Manage Blogs</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="content_typography.html"><i class="ti-more"></i>Typography</a></li>
-                    <li><a href="content_media.html"><i class="ti-more"></i>Media</a></li>
-                    <li><a href="content_grid.html"><i class="ti-more"></i>Grid</a></li>
-                </ul>
-            </li>
+                    <li class="{{ ($route == 'blog.category' ) ? 'active':'' }}"><a href="{{ route('blog.category') }}"><i class="ti-more"></i>Blog Category</a></li>
 
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'view.post' ) ? 'active':'' }}"><a href="{{ route('view.post') }}"><i class="ti-more"></i>View Blog Post</a></li>
+
+                </ul>
+
+            </li>
 
 
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -203,10 +204,24 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/search/by/year', 'ReportByYear')->name('report-by-year'); //
     });
 
-    // Admin Reports All routes 
+    // Admin user All routes 
     Route::prefix('alluser')->controller(AdminProfileController::class)->group(function () {
         Route::get('/view', 'AllUsers')->name('all.users'); //search-by-date
 
+    });
+
+    // Admin Blog All routes 
+    Route::prefix('blog')->controller(BlogController::class)->group(function () {
+        Route::get('/category', 'BlogCategory')->name('blog.category');
+        Route::post('/category/store', 'BlogCategoryStore')->name('blogcategory.store');
+        Route::get('/category/edit/{id}', 'BlogCategoryEdit')->name('blogcategory.edit');
+        Route::post('/category/update', 'BlogCategoryUpdate')->name('blogcategory.update');
+        Route::get('/category/delete/{id}', 'BlogCategoryDelete')->name('blogcategory.delete');
+
+
+
+        //view.post Blog Post All Routes
+        Route::get('/view/post', 'ViewBlogPost')->name('view.post');
     });
 }); //middleware end
 
