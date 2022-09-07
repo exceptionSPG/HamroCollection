@@ -94,10 +94,7 @@ Order Details - HamroCollection
                                 <th>Order Total</th>
                                 <th>Rs.{{ $order->amount }}</th>
                             </tr>
-                            <tr>
-                                <th>Municipality</th>
-                                <th>{{ $order->municipal->municipal_name }}</th>
-                            </tr>
+
                             <tr>
                                 <th>Order Status</th>
                                 <th><span class="badge badge-pill badge-warning" style="background: #418DB9;">{{$order->status }}</span></th>
@@ -189,9 +186,17 @@ Order Details - HamroCollection
             </div>
             <!-- end col md 8 -->
 
-            <!-- <div class="col-md-2">
+            <!-- <div class="col-md-2">-->
+            @if($order->status != 'Delivered')
 
-            </div> -->
+            @else
+
+            <div class="form-group">
+                <label for="label">Order Return Reason:</label><br>
+                <textarea name="return_reason" id="" cols="30" rows="10">Return Rason</textarea>
+            </div>
+            @endif
+            <!-- </div> -->
         </div>
     </div>
 </div>

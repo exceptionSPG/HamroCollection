@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ShippingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SliderController;
@@ -171,6 +172,25 @@ Route::middleware(['auth:admin'])->group(function () {
 
         //province select huda district xannako lagi
         Route::get('/district/ajax/{province_id}', 'GetDistrict');
+    });
+
+    // Admin Orders All routes confirmed
+    Route::prefix('orders')->controller(OrderController::class)->group(function () {
+        Route::get('/pending', 'PendingOrders')->name('pending.orders');
+        Route::get('/pending/order/details/{order_id}', 'PendingOrderDetails')->name('pending.order.details');
+        Route::get('/confirmed', 'ConfirmedOrders')->name('confirmed.orders');
+        Route::get('/processing', 'ProcessingOrders')->name('processing.orders');
+        Route::get('/picked', 'PickedOrders')->name('picked.orders'); //delivered
+        Route::get('/shipped', 'ShippedOrders')->name('shipped.orders'); //
+        Route::get('/delivered', 'DeliveredOrders')->name('delivered.orders'); //
+        Route::get('/canceled', 'CanceledOrders')->name('canceled.orders'); //pending-confirm
+
+        Route::get('/pending-confirm/{order_id}', 'PendingToConfirmed')->name('pending-confirm'); //processing-order
+        Route::get('/processing-order/{order_id}', 'ConfirmedToProcessing')->name('processing-order'); //
+        Route::get('/processing-picked/{order_id}', 'ProcessingToPicked')->name('processing.picked'); //
+        Route::get('/picked-shipped/{order_id}', 'PickedToShipped')->name('picked.shipped'); //
+        Route::get('/shipped-delivered/{order_id}', 'ShippedToDelivered')->name('shipped.delivered'); //
+        Route::get('/admin-invoice-download/{order_id}', 'AdminInvoiceDownload')->name('invoice.download');
     });
 }); //middleware end
 
