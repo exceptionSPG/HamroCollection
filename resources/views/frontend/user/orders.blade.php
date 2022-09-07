@@ -60,7 +60,7 @@
 
 
                                     <a href="{{ url('/user/order_details/'.$order->id) }}" class="btn btn-primary sm" title="View Order"><i class="fa fa-eye"></i>View</a>
-                                    <a href="" class="btn btn-danger sm" title="Invoice" id="delete"><i class="fa fa-download"></i>Invoice</a>
+                                    <a href="{{ url('/user/invoice-download/'.$order->id) }}" class="btn btn-danger sm" title="Invoice" id="delete"><i class="fa fa-download"></i>Invoice</a>
                                 </td>
                             </tr>
                             @endforeach

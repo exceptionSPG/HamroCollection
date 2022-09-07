@@ -290,7 +290,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
 
     Route::controller(AllUserController::class)->group(function () {
         Route::get('/my/orders', 'MyOrders')->name('my.orders'); ///user/order_details'.$order->id
-        Route::get('/order_details/{order_id}', 'OrderDetails'); ///user/order_details'.$order->id
+        Route::get('/order_details/{order_id}', 'OrderDetails'); ///user/order_details'.$order->id /user/
+        Route::get('/invoice-download/{order_id}', 'InvoiceDownload');
     });
 });
 
