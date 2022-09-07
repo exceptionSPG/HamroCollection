@@ -241,7 +241,7 @@ Checkout Page - HamroCollection
                                     <div class="col-md-4">
                                         <label for="stripe">Cash:</label>
                                         <input type="radio" name="payment_method" value="cash">
-                                        <img src="{{asset('frontend/assets/images/payments/5.png') }}" alt="">
+                                        <img src="{{asset('frontend/assets/images/payments/6.png') }}" alt="" style="height: 30px; width: 50px;">
 
                                     </div>
 

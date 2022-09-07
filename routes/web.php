@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripController;
 use App\Http\Controllers\User\WishlistController;
@@ -277,6 +278,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::controller(StripController::class)->group(function () {
         Route::post('/strip/order', 'StripOrder')->name('strip.order');
     });
+
+    //Cash on Delivery routes
+    Route::controller(CashController::class)->group(function () {
+        Route::post('/cash/order', 'CashOrder')->name('cash.order');
+    });
+
 
     //my.orders
 

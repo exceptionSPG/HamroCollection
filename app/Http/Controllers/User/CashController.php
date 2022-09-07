@@ -11,12 +11,12 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Stripe\Issuing\Card;
 
-class StripController extends Controller
+class CashController extends Controller
 {
-    //StripOrder
-    public function StripOrder(Request $request)
+    //CashOrder
+
+    public function CashOrder(Request $request)
     {
         // coupon coupon_name coupon_discount discount_amount total_amount
         if (session()->has('coupon')) {
@@ -25,26 +25,6 @@ class StripController extends Controller
             $total_amount = Cart::totalFloat();
         }
 
-        // Set your secret key. Remember to switch to your live secret key in production.
-        // See your keys here: https://dashboard.stripe.com/apikeys
-        \Stripe\Stripe::setApiKey('sk_test_51LeubbKClkSrZJTRYgjNGAyXlsGckeJfJ48t724RGI30NbGqys0dSEC29B4fxfOVxvoaeiFNvzxl7ItRFujwPlrF00PbcBJ4Wx');
-
-        // Token is created using Checkout or Elements!
-        // Get the payment token ID submitted by the form:
-        $token = $_POST['stripeToken'];
-
-        $charge = \Stripe\Charge::create([
-            'amount' => $total_amount * 100,
-            'currency' => 'npr',
-            'description' => 'HamroCollection ',
-            'source' => $token,
-            'metadata' => ['order_id' => uniqid()],
-        ]);
-        //dd($charge);
-
-        //storing on Order table
-        /*  ORDER DB: user_id	province_id	district_id	municipal_id	name	email	phone	post_code	ward_no	payment_type
-        payment_method	transaction_id	currency	amount	order_number	invoice_number	order_date	order_month	order_year	confirmed_date	processing_date	picked_date	shipped_date	delivery_date	cancel_date	return_date	return_reason	status */
 
         $order_id = Order::insertGetId([
             'user_id' => Auth::id(),
@@ -57,12 +37,12 @@ class StripController extends Controller
             'post_code' => $request->post_code,
             'ward_no' => $request->ward_no,
 
-            'payment_type' => $charge->payment_method,
-            'payment_method' => 'stripe',
-            'transaction_id' => $charge->balance_transaction,
-            'currency' => $charge->currency,
+
+            'payment_method' => 'cash',
+
+            'currency' => 'npr',
             'amount' => $total_amount,
-            'order_number' => $charge->metadata->order_id,
+
             'invoice_number' => 'HC' . mt_rand(10000000, 99999999),
             'order_date' => Carbon::now()->format('d F Y'),
             'order_month' => Carbon::now()->format('F'),
@@ -104,7 +84,7 @@ class StripController extends Controller
             'amount' => $total_amount,
             'name' => $request->name,
             'email' => $request->email,
-            'payment_method' => 'Stripe',
+            'payment_method' => 'Cash On Delivery',
 
         ];
         Mail::to($request->email)->send(new OrderMail($data));

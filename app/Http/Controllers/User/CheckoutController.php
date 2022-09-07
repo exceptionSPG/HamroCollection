@@ -60,9 +60,7 @@ class CheckoutController extends Controller
 
             return view('frontend.payment.stripe', compact('data', 'cartTotal'));
         } else {
-
-
-            return 'cash';
+            return view('frontend.payment.cash', compact('data', 'cartTotal'));
         }
     } //end method CheckoutStore
 }
