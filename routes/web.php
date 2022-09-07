@@ -311,7 +311,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::controller(AllUserController::class)->group(function () {
         Route::get('/my/orders', 'MyOrders')->name('my.orders'); ///user/order_details'.$order->id
         Route::get('/order_details/{order_id}', 'OrderDetails'); ///user/order_details'.$order->id /user/
-        Route::get('/invoice-download/{order_id}', 'InvoiceDownload');
+        Route::get('/invoice-download/{order_id}', 'InvoiceDownload'); //return.order
+        Route::post('/return/order/{order_id}', 'ReturnOrder')->name('return.order'); //
+        Route::get('/return/orders-list', 'ReturnOrdersList')->name('return.orders.list'); //cancel.orders.list
+        Route::get('/cancel/orders-list', 'CancelOrdersList')->name('cancel.orders.list'); //
+
     });
 });
 

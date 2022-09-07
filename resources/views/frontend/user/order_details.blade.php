@@ -191,12 +191,32 @@ Order Details - HamroCollection
 
             @else
 
-            <div class="form-group">
-                <label for="label">Order Return Reason:</label><br>
-                <textarea name="return_reason" id="" cols="30" rows="10">Return Rason</textarea>
-            </div>
+            @php
+            $ret_order = App\Models\Order::where('id',$order->id)->where('return_reason','=',Null)->first();
+            @endphp
+            @if($ret_order)
+
+
+
+            <form action="{{ route('return.order',$order->id) }}" method="POST">
+                @csrf
+
+
+                <div class="form-group">
+                    <label for="label">Order Return Reason:</label><br>
+                    <textarea name="return_reason" id="" cols="30" rows="5">Return Rason</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-danger">Submit</button>
+
+            </form>
+            @else
+            <span class="badge badge-pill badge-warning" style="background: red;">You have sent return request for this product.</span>
+
+            @endif
             @endif
             <!-- </div> -->
+            <br><br>
         </div>
     </div>
 </div>

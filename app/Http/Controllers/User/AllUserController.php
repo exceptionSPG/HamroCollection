@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
-
-
+use Carbon\Carbon;
 
 class AllUserController extends Controller
 {
@@ -46,5 +45,37 @@ class AllUserController extends Controller
         // return view('frontend.user.order_invoice', compact('order', 'orderItem'));
     } //end method 
 
+
+    //ReturnOrder
+
+    public function ReturnOrder(Request $request, $order_id)
+    {
+        Order::findOrFail($order_id)->update([
+            'return_date' => Carbon::now()->format('d F Y'),
+            'return_reason' => $request->return_reason,
+        ]);
+        $notification = array(
+            'message' => 'Return Request Sent Successfully.',
+            'alert-type' => 'success',
+
+        );
+
+        return redirect()->route('my.orders')->with($notification);
+    } //end method
+
+
+    public function ReturnOrdersList()
+    {
+        $orders = Order::where('user_id', Auth::id())->where('return_reason', '!=', NULL)->orderBy('id', 'DESC')->get();
+
+        return view('frontend.user.return_order_view', compact('orders'));
+    } //end method 
+
+    public function CancelOrdersList()
+    {
+        $orders = Order::where('user_id', Auth::id())->where('status', '=', 'Canceled')->orderBy('id', 'DESC')->get();
+
+        return view('frontend.user.cancel_orders_view', compact('orders'));
+    } //end method CancelOrdersList
 
 }
