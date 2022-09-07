@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripController;
@@ -275,6 +276,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
 
     Route::controller(StripController::class)->group(function () {
         Route::post('/strip/order', 'StripOrder')->name('strip.order');
+    });
+
+    //my.orders
+
+
+    Route::controller(AllUserController::class)->group(function () {
+        Route::get('/my/orders', 'MyOrders')->name('my.orders'); ///user/order_details'.$order->id
+        Route::get('/order_details/{order_id}', 'OrderDetails'); ///user/order_details'.$order->id
     });
 });
 
