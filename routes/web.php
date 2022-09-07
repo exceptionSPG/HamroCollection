@@ -220,8 +220,13 @@ Route::middleware(['auth:admin'])->group(function () {
 
 
 
-        //view.post Blog Post All Routes
-        Route::get('/view/post', 'ViewBlogPost')->name('view.post');
+        //view.post Blog Post All Routes blogpost
+        Route::get('/list/post', 'ViewBlogPost')->name('list.post');
+        Route::get('/add/post', 'AddBlogPost')->name('add.post');
+        Route::post('/store/post', 'StoreBlogPost')->name('blogpost.store');
+        Route::get('/post/edit/{id}', 'BlogPostEdit')->name('blogpost.edit');
+        Route::post('/post/update', 'BlogPostUpdate')->name('blogpost.update');
+        Route::get('/post/delete/{id}', 'BlogPostDelete')->name('blogpost.delete');
     });
 }); //middleware end
 
