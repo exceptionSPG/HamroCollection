@@ -202,6 +202,12 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/search/by/month', 'ReportByMonth')->name('search-by-month'); //report-by-year
         Route::post('/search/by/year', 'ReportByYear')->name('report-by-year'); //
     });
+
+    // Admin Reports All routes 
+    Route::prefix('alluser')->controller(AdminProfileController::class)->group(function () {
+        Route::get('/view', 'AllUsers')->name('all.users'); //search-by-date
+
+    });
 }); //middleware end
 
 

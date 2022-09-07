@@ -206,21 +206,23 @@ $route = Route::current()->getName();
 
 
 
-            <li class="treeview">
+            <li class="treeview {{ ($prefix == '/alluser' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="credit-card"></i>
-                    <span>Cards</span>
+                    <i data-feather="grid"></i>
+                    <span>All Users</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="card_advanced.html"><i class="ti-more"></i>Advanced Cards</a></li>
-                    <li><a href="card_basic.html"><i class="ti-more"></i>Basic Cards</a></li>
-                    <li><a href="card_color.html"><i class="ti-more"></i>Cards Color</a></li>
-                </ul>
-            </li>
+                    <li class="{{ ($route == 'all.users' ) ? 'active':'' }}"><a href="{{ route('all.users') }}"><i class="ti-more"></i>All Users</a></li>
 
+                </ul>
+
+
+
+
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i data-feather="hard-drive"></i>
