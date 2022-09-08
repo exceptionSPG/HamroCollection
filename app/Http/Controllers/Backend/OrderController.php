@@ -7,10 +7,12 @@ use App\Mail\ConfirmedMail;
 use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
@@ -207,35 +209,43 @@ class OrderController extends Controller
 
     public function ShippedToDelivered($order_id)
     {
-        Order::findOrFail($order_id)->update([
+
+        $update = Order::findOrFail($order_id)->update([
             'status' => 'Delivered',
         ]);
 
-        /*****************************START: SEND mail */
-        //Data to mail
-        // coupon coupon_name coupon_discount discount_amount total_amount
-        if (session()->has('coupon')) {
-            $total_amount = session()->get('total_amount');
+        if ($update) {
+            $products = OrderItem::where('order_id', $order_id)->get();
+            foreach ($products as $item) {
+                Product::where('id', $item->product_id)->update([
+                    'product_qty' => DB::raw('product_qty-' . $item->qty),
+                ]);
+            }
+
+            /*****************************START: SEND mail */
+            //Data to mail
+
+            $invoice = Order::findOrFail($order_id);
+            $data = [
+                'invoice' => $invoice,
+                'message' => '. Your order is Delivered. Let we serve you again. ',
+            ];
+            Mail::to($invoice->email)->send(new ConfirmedMail($data));
+            /*****************************END: SEND mail *****/
+            $notification = array(
+                'message' => 'Order updated to Delivered Successfully.',
+                'alert-type' => 'success',
+
+            );
+            return redirect()->route('shipped.orders')->with($notification);
         } else {
-            $total_amount = Cart::totalFloat();
+            $notification = array(
+                'message' => 'Error on updating to Delivered.',
+                'alert-type' => 'error',
+
+            );
+            return redirect()->route('shipped.orders')->with($notification);
         }
-        $invoice = Order::findOrFail($order_id);
-        $data = [
-            'invoice' => $invoice,
-            'message' => 'Your order is Delivered. Let we serve you again.',
-            'amount' => $total_amount,
-
-
-        ];
-        Mail::to($invoice->email)->send(new ConfirmedMail($data));
-        /*****************************END: SEND mail */
-
-        $notification = array(
-            'message' => 'Order updated to Delivered Successfully.',
-            'alert-type' => 'success',
-
-        );
-        return redirect()->route('shipped.orders')->with($notification);
     } //end method ShippedToDelivered    AdminInvoiceDownload
 
     public function AdminInvoiceDownload($order_id)

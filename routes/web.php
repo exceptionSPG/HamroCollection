@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BlogController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Backend\ShippingController;
 use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\StockController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -265,11 +267,11 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/approve/{review_id}', 'ReviewApprove')->name('approve.review');
         Route::get('/reject/{review_id}', 'ReviewReject')->name('reject.review');
         Route::get('/delete/{review_id}', 'reviewDelete')->name('delete.review');
-        // Route::get('/admin/all/request', 'AllReturnRequest')->name('all.request');
-        // Route::get('/admin/rejected/request', 'RejectedReturnRequest')->name('rejected.request');
-
-
-        // pending.reviews
+    });
+    //namespace App\Http\Controllers\Backend;
+    /*********Admin Stock management all routes */
+    Route::prefix('stock')->controller(StockController::class)->group(function () {
+        Route::get('/product', 'ProductStock')->name('product.stock');
     });
 }); //middleware end
 
