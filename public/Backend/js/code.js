@@ -185,3 +185,35 @@ $(function () {
     });
 
 });
+
+
+
+$(function () {
+    $(document).on('click', '#reject', function (e) {
+        e.preventDefault();
+        var link = $(this).attr("href");
+
+
+        Swal.fire({
+            title: 'Are you sure to reject return request?',
+            text: "Consider it, It can't be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Reject it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = link
+                Swal.fire(
+                    'Rejected!',
+                    'Return Request is Rejected.',
+                    'success'
+                )
+            }
+        })
+
+
+    });
+
+});

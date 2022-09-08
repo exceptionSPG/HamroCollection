@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ReturnMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class AllUserController extends Controller
 {
@@ -50,17 +52,42 @@ class AllUserController extends Controller
 
     public function ReturnOrder(Request $request, $order_id)
     {
-        Order::findOrFail($order_id)->update([
+
+        $update = Order::findOrFail($order_id)->update([
             'return_date' => Carbon::now()->format('d F Y'),
             'return_reason' => $request->return_reason,
+            'return_order' => 1,
         ]);
-        $notification = array(
-            'message' => 'Return Request Sent Successfully.',
-            'alert-type' => 'success',
 
-        );
+        if ($update) {
+            /*****************************START: SEND mail */
+            //Data to mail
+            $invoice = Order::findOrFail($order_id);
+            $data = [
+                'invoice' => $invoice,
+                'message' => 'We received your return order.',
 
-        return redirect()->route('my.orders')->with($notification);
+
+            ];
+            Mail::to($invoice->email)->send(new ReturnMail($data));
+            /*****************************END: SEND mail */
+
+            $notification = array(
+                'message' => 'Return Request Sent Successfully.',
+                'alert-type' => 'success',
+
+            );
+
+            return redirect()->route('return.orders.list')->with($notification);
+        } else {
+            $notification = array(
+                'message' => 'Return Request couldnot be sent at the moment. Try again later.',
+                'alert-type' => 'error',
+
+            );
+
+            return redirect()->route('return.orders.list')->with($notification);
+        }
     } //end method
 
 

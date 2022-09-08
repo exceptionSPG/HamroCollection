@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Controllers\Backend\ShippingController;
 use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -240,6 +241,23 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/site/update', 'UpdateSiteSetting')->name('update.site.setting');
         Route::get('/seo', 'SEOSetting')->name('seo.setting');
         Route::post('/seo/update', 'UpdateSEOSetting')->name('update.seo.setting');
+    });
+
+    //
+    //site.setting 
+    /* *****************Return Order Admin all routes**************/
+
+    Route::prefix('return')->controller(ReturnController::class)->group(function () {
+        Route::get('/admin/request', 'ReturnRequest')->name('return.request');
+        Route::get('/request/approve/{order_id}', 'ReturnRequestApprove')->name('approve.return_request');
+        Route::get('/request/reject/{order_id}', 'ReturnRequestReject')->name('reject.return_request');
+        Route::get('/admin/all/request', 'AllReturnRequest')->name('all.request');
+        Route::get('/admin/rejected/request', 'RejectedReturnRequest')->name('rejected.request');
+
+
+        // Route::post('/site/update', 'UpdateSiteSetting')->name('update.site.setting');
+        // Route::get('/seo', 'SEOSetting')->name('seo.setting');
+        // Route::post('/seo/update', 'UpdateSEOSetting')->name('update.seo.setting');
     });
 }); //middleware end
 

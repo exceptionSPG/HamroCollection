@@ -194,7 +194,7 @@ Order Details - HamroCollection
             @php
             $ret_order = App\Models\Order::where('id',$order->id)->where('return_reason','=',Null)->first();
             @endphp
-            @if($ret_order)
+            @if($order->return_order == 0)
 
 
 
@@ -207,11 +207,16 @@ Order Details - HamroCollection
                     <textarea name="return_reason" id="" cols="30" rows="5">Return Rason</textarea>
                 </div>
 
-                <button type="submit" class="btn btn-danger">Submit</button>
+                <button type="submit" class="btn btn-danger">Order Return</button>
 
             </form>
-            @else
-            <span class="badge badge-pill badge-warning" style="background: red;">You have sent return request for this product.</span>
+            @elseif($order->return_order == 1)
+            <span class="badge badge-pill badge-warning" style="background: red;">You have sent return request for this product. <a href="{{route('return.orders.list')}}">Check Status Here</a> </span>
+            @elseif($order->return_order == 2)
+            <h4> Your Return request is:<span class="badge badge-pill badge-success" style="background: green;"> <b>Approved</b> </span></h4>
+
+            @elseif($order->return_order == 3)
+            <h4> Your Return request is:<span class="badge badge-pill badge-warning" style="background: red;"> <b>Rejected</b> </span></h4>
 
             @endif
             @endif

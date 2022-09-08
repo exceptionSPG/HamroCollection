@@ -276,6 +276,32 @@ $site = App\Models\SiteSetting::find(1);
             </li>
 
 
+            <li class="treeview {{ ($prefix == '/return' ) ? 'active':'' }}">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Return Order</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'return.request' ) ? 'active':'' }}"><a href="{{ route('return.request') }}"><i class="ti-more"></i>Return Request</a></li>
+
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'all.request' ) ? 'active':'' }}"><a href="{{ route('all.request') }}"><i class="ti-more"></i>Approved Return Order</a></li>
+
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'rejected.request' ) ? 'active':'' }}"><a href="{{ route('rejected.request') }}"><i class="ti-more"></i>Rejected Return Order</a></li>
+
+                </ul>
+
+            </li>
+
+
 
             <li class="header nav-small-cap">EXTRA</li>
 

@@ -189,7 +189,7 @@ class OrderController extends Controller
         $data = [
             'invoice' => $invoice,
             'message' => 'Your Order is on the way. We just shipped it.',
-            'amount' => $total_amount,
+            //'amount' => $total_amount,
         ];
         Mail::to($invoice->email)->send(new ConfirmedMail($data));
         /*****************************END: SEND mail */
