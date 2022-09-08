@@ -277,6 +277,8 @@
                                                             <div class="arrows">
                                                                 <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                                                 <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+
+
                                                             </div>
                                                             <input type="text" id="quantity" value="1" min="1">
                                                         </div>
@@ -293,6 +295,10 @@
                                             </div><!-- /.row -->
                                         </div><!-- /.quantity-container -->
 
+
+
+                                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                        <div class="addthis_inline_share_toolbox"></div>
 
 
 
@@ -754,5 +760,10 @@
 
     </div>
 </div>
+
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6319c600efb7fb62"></script>
+
 
 @endsection
