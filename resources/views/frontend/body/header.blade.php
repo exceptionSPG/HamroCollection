@@ -61,7 +61,10 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo"> </a> </div>
+                    @php
+                    $site = App\Models\SiteSetting::find(1);
+                    @endphp
+                    <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset($site->logo) }}" alt="logo"> </a> </div>
                     <!-- /.logo -->
                     <!-- ============================================================= LOGO : END ============================================================= -->
                 </div>

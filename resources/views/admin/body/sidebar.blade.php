@@ -2,6 +2,9 @@
 $prefix = Request::route()->getPrefix();
 $route = Route::current()->getName();
 
+$site = App\Models\SiteSetting::find(1);
+
+
 @endphp
 
 <!-- Left side column. contains the logo and sidebar -->
@@ -14,7 +17,7 @@ $route = Route::current()->getName();
                 <a href="index.html">
                     <!-- logo for regular state and mobile devices -->
                     <div class="d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
+                        <img src="{{ asset($site->logo) }}" alt="">
                         <h3><b>HC</b> Admin</h3>
                     </div>
                 </a>
@@ -249,6 +252,26 @@ $route = Route::current()->getName();
 
                 </ul>
 
+
+            </li>
+
+            <li class="treeview {{ ($prefix == '/setting' ) ? 'active':'' }}">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Manage Setting</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'site.setting' ) ? 'active':'' }}"><a href="{{ route('site.setting') }}"><i class="ti-more"></i>Site Setting</a></li>
+
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'seo.setting' ) ? 'active':'' }}"><a href="{{ route('seo.setting') }}"><i class="ti-more"></i>SEO Setting</a></li>
+
+                </ul>
 
             </li>
 

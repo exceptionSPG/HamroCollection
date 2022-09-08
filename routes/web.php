@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ShippingController;
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripController;
 use App\Http\Controllers\User\WishlistController;
+use App\Models\SiteSetting;
 use App\Models\User;
 
 /*
@@ -228,6 +230,16 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/post/edit/{id}', 'BlogPostEdit')->name('blogpost.edit');
         Route::post('/post/update', 'BlogPostUpdate')->name('blogpost.update');
         Route::get('/post/delete/{id}', 'BlogPostDelete')->name('blogpost.delete');
+    });
+
+    //site.setting 
+    /* *****************Manage Site setting all routes**************/
+
+    Route::prefix('setting')->controller(SiteSettingController::class)->group(function () {
+        Route::get('/site', 'SiteSetting')->name('site.setting'); //update.site.setting
+        Route::post('/site/update', 'UpdateSiteSetting')->name('update.site.setting');
+        Route::get('/seo', 'SEOSetting')->name('seo.setting');
+        Route::post('/seo/update', 'UpdateSEOSetting')->name('update.seo.setting');
     });
 }); //middleware end
 
