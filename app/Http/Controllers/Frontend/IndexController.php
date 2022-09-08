@@ -145,6 +145,7 @@ class IndexController extends Controller
         $cat_id = $product->category_id;
         $related_products = Product::where('category_id', $cat_id)->where('id', '!=', $id)->orderBy('id', 'DESC')->get();
 
+        
 
 
         return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products'));

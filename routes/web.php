@@ -27,6 +27,7 @@ use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripController;
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\ReviewController;
 use App\Models\SiteSetting;
 use App\Models\User;
 
@@ -384,6 +385,15 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
         Route::get('/cancel/orders-list', 'CancelOrdersList')->name('cancel.orders.list'); //
 
     });
+
+    //Frontend Product Review Routes
+    Route::controller(ReviewController::class)->group(function () {
+        Route::post('/store/review', 'StoreReview')->name('store.review');
+    });
+
+
+
+    
 });
 
 //guest le cart page herna milna ko lagi middleware group bata bahira rakheko
