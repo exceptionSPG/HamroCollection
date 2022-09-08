@@ -305,6 +305,36 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="header nav-small-cap">EXTRA</li>
 
+
+
+
+
+            <li class="treeview {{ ($prefix == '/review' ) ? 'active':'' }}">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Review Management</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'pending.reviews' ) ? 'active':'' }}"><a href="{{ route('pending.reviews') }}"><i class="ti-more"></i>All Pending Reviews </a></li>
+
+                </ul>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'approved.reviews' ) ? 'active':'' }}"><a href="{{ route('approved.reviews') }}"><i class="ti-more"></i>All Approved Reviews </a></li>
+
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'rejected.reviews' ) ? 'active':'' }}"><a href="{{ route('rejected.reviews') }}"><i class="ti-more"></i>All Rejected Reviews </a></li>
+
+                </ul>
+
+            </li>
+
+
+
             <li class="treeview">
                 <a href="#">
                     <i data-feather="layers"></i>

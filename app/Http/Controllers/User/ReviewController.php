@@ -38,4 +38,73 @@ class ReviewController extends Controller
 
         return redirect()->back()->with($notification);
     } //end method
+
+
+
+    public function PendingReviews()
+    {
+        $reviews = Review::where('status', 0)->orderBy('id', 'DESC')->get();
+        return view('backend.review.pending_review', compact('reviews'));
+    } //end method 
+
+    public function ApprovedReviews()
+    {
+        $reviews = Review::where('status', 1)->orderBy('id', 'DESC')->get();
+        return view('backend.review.approved_review', compact('reviews'));
+    } //end method ApprovedReviews
+
+    public function RejectedReviews()
+    {
+        $reviews = Review::where('status', 2)->orderBy('id', 'DESC')->get();
+        return view('backend.review.rejected_review', compact('reviews'));
+    } //end method 
+
+
+    public function ReviewApprove($review_id)
+    {
+        $update = Review::findOrFail($review_id)->update([
+            'status' => 1,
+        ]);
+
+
+        $notification = array(
+            'message' => 'Review Approved Successfully.',
+            'alert-type' => 'success',
+
+        );
+
+        return redirect()->back()->with($notification);
+    } //end method 
+
+
+    public function ReviewReject($review_id)
+    {
+        $update = Review::findOrFail($review_id)->update([
+            'status' => 2,
+        ]);
+
+
+        $notification = array(
+            'message' => 'Review Approved Successfully.',
+            'alert-type' => 'success',
+
+        );
+
+        return redirect()->back()->with($notification);
+    } //end method 
+
+    public function reviewDelete($review_id)
+    {
+        Review::findOrFail($review_id)->delete();
+
+
+        $notification = array(
+            'message' => 'Review Deleted Successfully.',
+            'alert-type' => 'success',
+
+        );
+
+        return redirect()->back()->with($notification);
+    } //
+
 }

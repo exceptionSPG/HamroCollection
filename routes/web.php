@@ -256,9 +256,20 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/admin/rejected/request', 'RejectedReturnRequest')->name('rejected.request');
 
 
-        // Route::post('/site/update', 'UpdateSiteSetting')->name('update.site.setting');
-        // Route::get('/seo', 'SEOSetting')->name('seo.setting');
-        // Route::post('/seo/update', 'UpdateSEOSetting')->name('update.seo.setting');
+        // 
+    });
+    Route::prefix('review')->controller(ReviewController::class)->group(function () {
+        Route::get('/pending', 'PendingReviews')->name('pending.reviews');
+        Route::get('/approved', 'ApprovedReviews')->name('approved.reviews');
+        Route::get('/rejected', 'RejectedReviews')->name('rejected.reviews');
+        Route::get('/approve/{review_id}', 'ReviewApprove')->name('approve.review');
+        Route::get('/reject/{review_id}', 'ReviewReject')->name('reject.review');
+        Route::get('/delete/{review_id}', 'reviewDelete')->name('delete.review');
+        // Route::get('/admin/all/request', 'AllReturnRequest')->name('all.request');
+        // Route::get('/admin/rejected/request', 'RejectedReturnRequest')->name('rejected.request');
+
+
+        // pending.reviews
     });
 }); //middleware end
 
@@ -390,10 +401,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::controller(ReviewController::class)->group(function () {
         Route::post('/store/review', 'StoreReview')->name('store.review');
     });
-
-
-
-    
 });
 
 //guest le cart page herna milna ko lagi middleware group bata bahira rakheko
