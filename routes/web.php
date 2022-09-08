@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\HomeBlogController;
 use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CashController;
@@ -364,4 +365,12 @@ Route::controller(CartPageController::class)->group(function () {
     Route::get('/cart/product-remove/{id}', 'CartProductRemove');
     Route::get('/cart-increment/{id}', 'CartIncrement');
     Route::get('/cart-decrement/{id}', 'CartDecrement');
+});
+
+//home.blog
+/*****************Home Blog all routes  */
+Route::controller(HomeBlogController::class)->group(function () {
+    Route::get('/blog', 'AddBlogPost')->name('home.blog');
+    Route::get('/post/details/{id}', 'DetailsBlogPost')->name('post.details');
+    Route::get('/blog/category/post/{id}', 'HomeCatBlogPost');
 });

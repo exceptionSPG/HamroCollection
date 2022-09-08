@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog\BlogPost;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
@@ -35,10 +36,11 @@ class IndexController extends Controller
         $skip_brand_1 = Brand::skip(1)->first();
         $skip_brand_product_1 = Product::where('status', '1')->where('brand_id', $skip_brand_1->id)->orderBy('id', 'DESC')->get();
 
+        $blogs = BlogPost::orderBy('id', 'DESC')->limit(4)->get();
 
         // return $skip_category->id;
         // die();
-        return view('frontend.index', compact('categories', 'sliders', 'products', 'featured', 'hotDeals', 'special_offer', 'specialDeals', 'skip_category_0', 'skip_product_0', 'skip_category_1', 'skip_product_1', 'skip_brand_product_1', 'skip_brand_1'));
+        return view('frontend.index', compact('categories', 'sliders', 'products', 'featured', 'hotDeals', 'special_offer', 'specialDeals', 'skip_category_0', 'skip_product_0', 'skip_category_1', 'skip_product_1', 'skip_brand_product_1', 'skip_brand_1', 'blogs'));
     } //end method
 
     public function UserLogout()

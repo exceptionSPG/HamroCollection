@@ -28,13 +28,13 @@
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">INR</a></li>
-                                <li><a href="#">GBP</a></li>
+
+                                <li><a href="#">NPR</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">
-                                    @if(session()->get('language') == 'nepali')भाषा नेपाली @else Language @endif </span><b class="caret"></b></a>
+                                    @if(session()->get('language') == 'nepali')Language @else भाषा नेपाली @endif </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 @if(session()->get('language') == 'nepali')
                                 <li><a href="{{ route('english.language') }}">English</a></li>
@@ -224,6 +224,8 @@
 
 
                                 <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>
+                                <li class="dropdown  navbar-right special-menu"> <a href="{{route('home.blog') }}">Blog</a> </li>
+
                             </ul>
                             <!-- /.navbar-nav -->
                             <div class="clearfix"></div>
