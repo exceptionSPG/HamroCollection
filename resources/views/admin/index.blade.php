@@ -16,7 +16,7 @@ $pendings = App\Models\Order::where('status', 'Pending')->orderBy('id', 'DESC')-
 $pendingCount = count($pendings);
 
 $sumPending = App\Models\Order::where('status', 'Pending')->sum('amount');
-
+$order = (auth()->guard('admin')->user()->orders == 1);
 
 @endphp
 
@@ -66,7 +66,7 @@ $sumPending = App\Models\Order::where('status', 'Pending')->sum('amount');
             </div>
             <div class="col-xl-3 col-6">
                 <div class="box overflow-hidden pull-up">
-                    <a href="{{route('pending.orders') }}">
+                    <a href="{{$order == true ? route('pending.orders') : '#'}} ">
                         <div class="box-body">
                             <div class="icon bg-danger-light rounded w-60 h-60">
                                 <i class="text-danger mr-0 font-size-24 mdi mdi-clock-end"></i>
@@ -96,6 +96,8 @@ $sumPending = App\Models\Order::where('status', 'Pending')->sum('amount');
 
 
                     <div class="box-body">
+
+                        @if($order == true)
                         <div class="table-responsive">
                             <table class="table no-border">
                                 <thead>
@@ -179,6 +181,16 @@ $sumPending = App\Models\Order::where('status', 'Pending')->sum('amount');
 
                             </table>
                         </div>
+                        @else
+                        <div class="box-header">
+                            <h3 class="box-title text-center text-danger flex-column">
+                                You have No privilege to view Orders.
+                                <!-- <small class="subtitle">More than 400+ new members</small> -->
+                            </h3>
+                        </div>
+
+
+                        @endif
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\AdminUserController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
@@ -272,6 +273,18 @@ Route::middleware(['auth:admin'])->group(function () {
     /*********Admin Stock management all routes */
     Route::prefix('stock')->controller(StockController::class)->group(function () {
         Route::get('/product', 'ProductStock')->name('product.stock');
+    });
+
+    //all.admin-users
+
+    Route::prefix('adminuserrole')->controller(AdminUserController::class)->group(function () {
+        Route::get('/all', 'AllAminRoles')->name('all.admin-users'); //add.admin
+        Route::get('/add', 'AddAdminRole')->name('add.admin'); //admin.user.store
+        Route::post('/store', 'StoreAdminRole')->name('admin.user.store'); //edit.admin.user
+        Route::get('/edit/{id}', 'EditAdminRole')->name('edit.admin.user'); // admin.user.update
+        Route::post('/update', 'UpdateAdminRole')->name('admin.user.update'); //delete.admin.user 
+        Route::get('/delete/{id}', 'DeleteAdminRole')->name('delete.admin.user'); // 
+
     });
 }); //middleware end
 

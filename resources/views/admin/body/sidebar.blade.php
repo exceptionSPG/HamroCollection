@@ -14,7 +14,7 @@ $site = App\Models\SiteSetting::find(1);
 
         <div class="user-profile">
             <div class="ulogo">
-                <a href="index.html">
+                <a href="{{ url('/admin/dashboard') }}">
                     <!-- logo for regular state and mobile devices -->
                     <div class="d-flex align-items-center justify-content-center">
                         <img src="{{ asset($site->logo) }}" alt="">
@@ -34,6 +34,31 @@ $site = App\Models\SiteSetting::find(1);
                 </a>
             </li>
 
+            @php
+            $brand = (auth()->guard('admin')->user()->brand == 1);
+            $category = (auth()->guard('admin')->user()->category == 1);
+            $product = (auth()->guard('admin')->user()->product == 1);
+            $slider = (auth()->guard('admin')->user()->slider == 1);
+            $coupon = (auth()->guard('admin')->user()->coupon == 1);
+            $shipping = (auth()->guard('admin')->user()->shipping == 1);
+            $blog = (auth()->guard('admin')->user()->blog == 1);
+            $setting = (auth()->guard('admin')->user()->setting == 1);
+            $returnorder = (auth()->guard('admin')->user()->returnorder == 1);
+            $review = (auth()->guard('admin')->user()->review == 1);
+            $orders = (auth()->guard('admin')->user()->orders == 1);
+            $stock = (auth()->guard('admin')->user()->stock == 1);
+            $reports = (auth()->guard('admin')->user()->reports == 1);
+            $alluser = (auth()->guard('admin')->user()->alluser == 1);
+            $adminuserrole = (auth()->guard('admin')->user()->adminuserrole == 1);
+
+            @endphp
+
+
+
+
+
+
+            @if($brand == true)
             <li class="treeview {{ ($prefix == '/brand' ) ? 'active':'' }}">
                 <a href="#">
                     <i data-feather="briefcase"></i>
@@ -47,7 +72,11 @@ $site = App\Models\SiteSetting::find(1);
 
                 </ul>
             </li>
+            @else
+            @endif
 
+
+            @if($category == true)
             <li class="treeview {{ ($prefix == '/category' ) ? 'active':'' }}">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Category</span>
@@ -61,7 +90,10 @@ $site = App\Models\SiteSetting::find(1);
                     <li class="{{ ($route == 'all.subsubcategory' ) ? 'active':'' }}"><a href="{{ route('all.subsubcategory') }}"><i class="ti-more"></i>All Sub->Subcategory</a></li>
                 </ul>
             </li>
+            @else
+            @endif
 
+            @if($product == true)
             <li class="treeview {{ ($prefix == '/product' ) ? 'active':'' }}">
                 <a href="#">
                     <i data-feather="box"></i>
@@ -76,7 +108,10 @@ $site = App\Models\SiteSetting::find(1);
 
                 </ul>
             </li>
+            @else
+            @endif
 
+            @if($slider == true)
 
             <li class="treeview {{ ($prefix == '/slider' ) ? 'active':'' }}">
                 <a href="#">
@@ -92,7 +127,10 @@ $site = App\Models\SiteSetting::find(1);
 
                 </ul>
             </li>
+            @else
+            @endif
 
+            @if($coupon == true)
 
             <li class="treeview {{ ($prefix == '/coupon' ) ? 'active':'' }}">
                 <a href="#">
@@ -108,7 +146,10 @@ $site = App\Models\SiteSetting::find(1);
 
                 </ul>
             </li>
+            @else
+            @endif
 
+            @if($shipping == true)
 
             <li class="treeview {{ ($prefix == '/shipping' ) ? 'active':'' }}">
                 <a href="#">
@@ -135,10 +176,14 @@ $site = App\Models\SiteSetting::find(1);
 
                 </ul>
             </li>
+            @else
+            @endif
+
 
 
             <li class="header nav-small-cap">User Interface</li>
 
+            @if($orders == true)
             <li class="treeview {{ ($prefix == '/orders' ) ? 'active':'' }}">
                 <a href="#">
                     <i data-feather="box"></i>
@@ -184,7 +229,10 @@ $site = App\Models\SiteSetting::find(1);
                 </ul>
 
             </li>
+            @else
+            @endif
 
+            @if($reports == true)
 
             <li class="treeview {{ ($prefix == '/reports' ) ? 'active':'' }}">
                 <a href="#">
@@ -204,7 +252,10 @@ $site = App\Models\SiteSetting::find(1);
 
             </li>
 
+            @else
+            @endif
 
+            @if($alluser == true)
 
 
 
@@ -225,8 +276,30 @@ $site = App\Models\SiteSetting::find(1);
             </li>
 
 
+            @else
+            @endif
+
+            @if($adminuserrole == true)
 
 
+            <li class="treeview {{ ($prefix == '/adminuserrole' ) ? 'active':'' }}">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Admin User Role</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'all.admin-users' ) ? 'active':'' }}"><a href="{{ route('all.admin-users') }}"><i class="ti-more"></i>All Admin Users</a></li>
+
+                </ul>
+
+            </li>
+            @else
+            @endif
+
+            @if($blog == true)
 
 
 
@@ -254,6 +327,10 @@ $site = App\Models\SiteSetting::find(1);
 
 
             </li>
+            @else
+            @endif
+
+            @if($setting == true)
 
             <li class="treeview {{ ($prefix == '/setting' ) ? 'active':'' }}">
                 <a href="#">
@@ -274,7 +351,10 @@ $site = App\Models\SiteSetting::find(1);
                 </ul>
 
             </li>
+            @else
+            @endif
 
+            @if($returnorder == true)
 
             <li class="treeview {{ ($prefix == '/return' ) ? 'active':'' }}">
                 <a href="#">
@@ -306,7 +386,10 @@ $site = App\Models\SiteSetting::find(1);
             <li class="header nav-small-cap">EXTRA</li>
 
 
+            @else
+            @endif
 
+            @if($review == true)
 
 
             <li class="treeview {{ ($prefix == '/review' ) ? 'active':'' }}">
@@ -333,7 +416,10 @@ $site = App\Models\SiteSetting::find(1);
 
             </li>
 
+            @else
+            @endif
 
+            @if($stock == true)
 
 
             <li class="treeview {{ ($prefix == '/stock' ) ? 'active':'' }}">
@@ -351,45 +437,11 @@ $site = App\Models\SiteSetting::find(1);
 
 
             </li>
-
-
-            <li class="treeview">
-                <a href="#">
-                    <i data-feather="layers"></i>
-                    <span>Multilevel</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Level One</a></li>
-                    <li class="treeview">
-                        <a href="#">Level One
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#">Level Two</a></li>
-                            <li class="treeview">
-                                <a href="#">Level Two
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-right pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#">Level Three</a></li>
-                                    <li><a href="#">Level Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Level One</a></li>
-                </ul>
-            </li>
+            @else
+            @endif
 
             <li>
-                <a href="auth_login.html">
+                <a href="{{ route('admin.logout') }}">
                     <i data-feather="lock"></i>
                     <span>Log Out</span>
                 </a>

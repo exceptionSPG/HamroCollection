@@ -7,7 +7,6 @@ use App\Models\Blog\BlogPost;
 use App\Models\Blog\BlogPostCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 
 class BlogController extends Controller
 {
