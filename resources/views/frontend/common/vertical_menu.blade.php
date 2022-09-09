@@ -63,9 +63,7 @@
             <!-- /.menu-item -->
             @endforeach
 
-            <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-paper-plane"></i>Kids and Babies</a>
-                <!-- /.dropdown-menu -->
-            </li>
+           
             <!-- /.menu-item -->
 
 

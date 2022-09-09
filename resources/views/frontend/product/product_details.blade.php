@@ -37,7 +37,7 @@
                     <div class='col-md-3 sidebar'>
                         <div class="sidebar-module-container">
                             <div class="home-banner outer-top-n">
-                                <img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
+
                             </div>
 
 
@@ -47,53 +47,12 @@
                             <!-- ============================================== HOT DEALS: END ============================================== -->
 
                             <!-- ============================================== NEWSLETTER ============================================== -->
-                            <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
-                                <h3 class="section-title">Newsletters</h3>
-                                <div class="sidebar-widget-body outer-top-xs">
-                                    <p>Sign Up for Our Newsletter!</p>
-                                    <form>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail1">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Subscribe to our newsletter">
-                                        </div>
-                                        <button class="btn btn-primary">Subscribe</button>
-                                    </form>
-                                </div><!-- /.sidebar-widget-body -->
-                            </div><!-- /.sidebar-widget -->
+
+                            <!-- rakhne vaye common ma xa -->
                             <!-- ============================================== NEWSLETTER: END ============================================== -->
 
                             <!-- ============================================== Testimonials============================================== -->
-                            <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
-                                <div id="advertisement" class="advertisement">
-                                    <div class="item">
-                                        <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member1.png') }}" alt="Image">
-                                        </div>
-                                        <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port
-                                            mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                        <div class="clients_author">John Doe <span>Abc Company</span> </div>
-                                        <!-- /.container-fluid -->
-                                    </div><!-- /.item -->
-
-                                    <div class="item">
-                                        <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member3.png') }}" alt="Image">
-                                        </div>
-                                        <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port
-                                            mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                        <div class="clients_author">Stephen Doe <span>Xperia Designs</span> </div>
-                                    </div><!-- /.item -->
-
-                                    <div class="item">
-                                        <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member2.png') }}" alt="Image">
-                                        </div>
-                                        <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port
-                                            mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                        <div class="clients_author">Saraha Smith <span>Datsun &amp; Co</span> </div>
-                                        <!-- /.container-fluid -->
-                                    </div><!-- /.item -->
-
-                                </div><!-- /.owl-carousel -->
-                            </div>
-
+                            @include('frontend.common.product_tags')
                             <!-- ============================================== Testimonials: END ============================================== -->
 
 
@@ -201,17 +160,13 @@
                                                 </div>
 
                                                 <div class="col-sm-6">
-                                                    <div class="favorite-button m-t-10">
-                                                        <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" href="#">
-                                                            <i class="fa fa-heart"></i>
-                                                        </a>
-                                                        <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" href="#">
-                                                            <i class="fa fa-signal"></i>
-                                                        </a>
-                                                        <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" href="#">
-                                                            <i class="fa fa-envelope"></i>
-                                                        </a>
-                                                    </div>
+
+
+                                                    <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)"> <i class="fa fa-heart"></i> </button>
+
+
+
+
                                                 </div>
 
                                             </div><!-- /.row -->
@@ -233,8 +188,8 @@
 
 
                                                     <label class="info-title control-label">Choose Color <span></span></label>
-                                                    <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color">
-                                                        <option selected disabled>--Select options--</option>
+                                                    <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required="">
+
                                                         @foreach($product_color_en as $color)
                                                         <option value="{{ $color }}">{{ ucwords($color) }}</option>
                                                         @endforeach
@@ -255,9 +210,9 @@
                                                 <div class="form-group">
                                                     <label class="info-title control-label">Choose Size <span></span></label>
                                                     <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size">
-                                                        <option selected disabled>--Select options--</option>
+
                                                         @foreach($product_size_en as $size)
-                                                        <option value="{{ $size }}">{{ ucwords($size) }}</option>
+                                                        <option value="{{ $size }}" required="">{{ ucwords($size) }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -284,13 +239,13 @@
                                                 <div class="col-sm-2">
                                                     <div class="cart-quantity">
                                                         <div class="quant-input">
-                                                            <div class="arrows">
+                                                            <!-- <div class="arrows">
                                                                 <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                                                 <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
 
 
-                                                            </div>
-                                                            <input type="text" id="quantity" value="1" min="1">
+                                                            </div> -->
+                                                            <input type="number" class="form-control" id="quantity" value="1" min="1">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -326,7 +281,7 @@
                                     <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                         <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
                                         <li><a data-toggle="tab" href="#review">REVIEW</a></li>
-                                        <li><a data-toggle="tab" href="#tags">TAGS</a></li>
+                                        <!-- <li><a data-toggle="tab" href="#tags">TAGS</a></li> -->
                                     </ul><!-- /.nav-tabs #product-tabs -->
                                 </div>
                                 <div class="col-sm-9">
@@ -459,35 +414,6 @@
 
 
 
-                                        <div id="tags" class="tab-pane">
-                                            <div class="product-tag">
-
-                                                <h4 class="title">Product Tags</h4>
-                                                <form role="form" class="form-inline form-cnt">
-                                                    <div class="form-container">
-
-                                                        <div class="form-group">
-                                                            <label for="exampleInputTag">Add Your Tags: </label>
-                                                            <input type="email" id="exampleInputTag" class="form-control txt">
-
-
-                                                        </div>
-
-                                                        <button class="btn btn-upper btn-primary" type="submit">ADD
-                                                            TAGS</button>
-                                                    </div><!-- /.form-container -->
-                                                </form><!-- /.form-cnt -->
-
-                                                <form role="form" class="form-inline form-cnt">
-                                                    <div class="form-group">
-                                                        <label>&nbsp;</label>
-                                                        <span class="text col-md-offset-3">Use spaces to separate tags. Use
-                                                            single quotes (') for phrases.</span>
-                                                    </div>
-                                                </form><!-- /.form-cnt -->
-
-                                            </div><!-- /.product-tab -->
-                                        </div><!-- /.tab-pane -->
 
                                     </div><!-- /.tab-content -->
                                 </div><!-- /.col -->
@@ -550,11 +476,16 @@
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
-                                                            <button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
+
+                                                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
                                                             <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                         </li>
-                                                        <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                        <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+
+
+
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)"> <i class="fa fa-heart"></i> </button>
+
+
                                                     </ul>
                                                 </div>
                                                 <!-- /.action -->
@@ -633,11 +564,14 @@
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
-                                                            <button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
+
+                                                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
                                                             <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                         </li>
-                                                        <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                        <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+
+
+
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)"> <i class="fa fa-heart"></i> </button>
                                                     </ul>
                                                 </div>
                                                 <!-- /.action -->
