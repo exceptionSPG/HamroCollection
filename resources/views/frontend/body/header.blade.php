@@ -30,12 +30,8 @@
 
                 <div class="cnt-block">
                     <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">NPR </span><b class="caret"></b></a>
 
-                                <li><a href="#">NPR</a></li>
-
-                            </ul>
                         </li>
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">
                                     @if(session()->get('language') == 'nepali')Language @else भाषा नेपाली @endif </span><b class="caret"></b></a>
@@ -94,11 +90,13 @@
                                 </ul>
 
 
-                                <input class="search-field" name="search" placeholder="Search here..." />
-                                <a class="search-button" type="submit" href="{{ route('product.search') }}"></a>
+                                <input class="search-field" onfocus="search_result_show()" onblur="search_result_hide()" id="search" name="search" placeholder="Search here..." required />
+                                <button class="search-button" type="submit"></button>
+
 
                             </div>
                         </form>
+                        <div id="searchProduct"></div>
                     </div>
                     <!-- /.search-area -->
                     <!-- ============================================================= SEARCH AREA : END ============================================================= -->
@@ -305,3 +303,33 @@
 </header>
 
 <!-- ============================================== HEADER : END ============================================== -->
+<!-- Css for searchProduct -->
+<style>
+    .search-area {
+        position: relative;
+    }
+
+    #searchProduct {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        z-index: 999;
+        border-radius: 8px;
+        margin-top: 5px;
+
+    }
+</style>
+
+<script>
+    function search_result_show() {
+        $("#searchProduct").slideDown();
+
+    }
+
+    function search_result_hide() {
+        $("#searchProduct").slideUp();
+
+    }
+</script>

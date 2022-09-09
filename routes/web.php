@@ -326,6 +326,9 @@ Route::controller(IndexController::class)->group(function () {
 
     //Product Search Routes
     Route::post('/search', 'ProductSearch')->name('product.search');
+
+    //Advance Search routes
+    Route::post('/search-product', 'AdvProductSearch');
 });
 
 /************ Multi Language All route**************/

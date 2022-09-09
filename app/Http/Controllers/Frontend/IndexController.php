@@ -207,6 +207,7 @@ class IndexController extends Controller
 
     public function ProductSearch(Request $request)
     {
+        $request->validate(['search' => 'required']);
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
 
         $item = $request->search;
@@ -214,5 +215,20 @@ class IndexController extends Controller
 
 
         return view('frontend.product.search', compact('products', 'categories', 'item'));
+    } //end method 
+
+    /*******Advance search methods */
+    public function AdvProductSearch(Request $request)
+    {
+        $request->validate(['search' => 'required']);
+
+        $item = $request->search;
+
+        $products = Product::where('product_name_en', 'LIKE', "%$item%")->orWhere('selling_price', 'LIKE', "%$item%")->select('id', 'product_name_en', 'product_thumbnail', 'selling_price', 'product_slug_en')->limit(5)->get();
+
+
+        return view('frontend.product.search_product', compact('products'));
     } //end method
+
+
 }
