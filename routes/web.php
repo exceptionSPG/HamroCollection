@@ -323,6 +323,9 @@ Route::controller(IndexController::class)->group(function () {
 
     //Product view modal with ajax /product/view/modal/'+id
     Route::get('/product/view/modal/{id}', 'ProductViewAjax');
+
+    //Product Search Routes
+    Route::post('/search', 'ProductSearch')->name('product.search');
 });
 
 /************ Multi Language All route**************/

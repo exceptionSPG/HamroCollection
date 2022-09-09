@@ -191,7 +191,7 @@ Order Traking Page
 
                 <div class="col-md-2">
                     <b> Total Amount </b><br>
-                    $ {{ $track->amount  }}
+                    Rs. {{ $track->amount  }}
                 </div> <!-- // end col md 2 -->
 
             </div> <!-- // end row   -->

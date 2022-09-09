@@ -145,7 +145,7 @@ class IndexController extends Controller
         $cat_id = $product->category_id;
         $related_products = Product::where('category_id', $cat_id)->where('id', '!=', $id)->orderBy('id', 'DESC')->get();
 
-        
+
 
 
         return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products'));
@@ -194,5 +194,14 @@ class IndexController extends Controller
             'size' => $product_size,
 
         ));
+    } //end method
+
+    public function ProductSearch(Request $request)
+    {
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+
+        $item = $request->search;
+        $products = Product::where('product_name_en', 'LIKE', "%$item%")->get();
+        return view('frontend.product.search', compact('products', 'categories'));
     } //end method
 }
