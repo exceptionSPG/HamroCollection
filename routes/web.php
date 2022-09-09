@@ -374,7 +374,7 @@ Route::controller(CheckoutController::class)->group(function () {
 
 
 
-
+/**********Below routes are for USER Must Logged in */
 
 Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'App\Http\Controllers\User'], function () {
     //Wishlist all routes  /wishlist/product-remove/' + id,  
@@ -384,6 +384,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
         Route::get('/wishlist', 'Wishlist')->name('wishlist');
         Route::get('/get-wishlist-product', 'GetWishlistProducts');
         Route::get('/wishlist/product-remove/{id}', 'RemoveProducts');
+
+        //order tracking order.tracking
+        Route::post('/order/tracking', 'OrderTracking')->name('order.tracking');
     });
 
     //Strip Payment related routes....strip.order

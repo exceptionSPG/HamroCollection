@@ -11,8 +11,12 @@
                         <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                         <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>Checkout</a></li>
+
+
                         @auth
+                        <li><a href="" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1"><i class="icon fa fa-check"></i>Order Tracking</a></li>
                         <li><a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>User Profile</a></li>
+
                         @else
                         <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
 
@@ -247,6 +251,52 @@
     </div>
     <!-- /.header-nav -->
     <!-- ============================================== NAVBAR : END ============================================== -->
+
+
+
+    <!-- START: Order Tracking Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Track Your Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('order.tracking') }}" method="POST">
+                        @csrf
+
+                        <div class="modal-body">
+                            <label for="">Invoice Code</label>
+                            <input type="text" name="code" class="form-control" required="" placeholder="e.g HC1234567">
+
+                        </div>
+                        <button type="submit" style="margin-left: 17px;" class="btn btn-danger">Track Now</button>
+
+
+                    </form>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Order Tracking Modal -->
+
+
+
+
+
+
+
+
+
+
+
 
 </header>
 

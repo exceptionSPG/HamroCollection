@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,5 +27,25 @@ class WishlistController extends Controller
     {
         Wishlist::where('user_id', Auth::id())->where('id', $id)->delete();
         return response()->json(['success' => 'Product Removed from Wishlist']);
+    } //end method OrderTracking
+
+    public function OrderTracking(Request $request)
+    {
+        $invoice = $request->code;
+        $track = Order::where('invoice_number', $invoice)->first();
+        if ($track) {
+            return view('frontend.tracking.track_order', compact('track'));
+        } else {
+
+            $notification = array(
+                'message' => 'Invalid Invoice Number.',
+                'alert-type' => 'error',
+
+            );
+
+            return redirect()->back()->with($notification);
+        }
     } //end method
+
+
 }
