@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -146,9 +148,13 @@ class IndexController extends Controller
         $related_products = Product::where('category_id', $cat_id)->where('id', '!=', $id)->orderBy('id', 'DESC')->get();
 
 
+        $subsub_id = $product->subsubcategory_id;
+
+        $breadsubcat = SubSubCategory::with('category', 'subcategory')->where('id', $subsub_id)->get();
 
 
-        return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products'));
+
+        return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products', 'breadsubcat'));
     } //end method TagWiseProduct
 
     public function TagWiseProduct($tags)
@@ -164,7 +170,9 @@ class IndexController extends Controller
         $products = Product::where('status', 1)->where('subcategory_id', $subcat_id)->orderBy('id', 'DESC')->paginate(3);
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
 
-        return view('frontend.product.subcategory_view', compact('products', 'categories'));
+        $breadsubcat = SubCategory::with('category')->where('id', $subcat_id)->get();
+
+        return view('frontend.product.subcategory_view', compact('products', 'categories', 'breadsubcat'));
     } //end method 
 
 
@@ -172,8 +180,9 @@ class IndexController extends Controller
     {
         $products = Product::where('status', 1)->where('subsubcategory_id', $subsubcat_id)->orderBy('id', 'DESC')->paginate(6);
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        $breadsubcat = SubSubCategory::with('category', 'subcategory')->where('id', $subsubcat_id)->get();
 
-        return view('frontend.product.sub_subcategory_view', compact('products', 'categories'));
+        return view('frontend.product.sub_subcategory_view', compact('products', 'categories', 'breadsubcat'));
     } //end method
 
 
@@ -202,6 +211,8 @@ class IndexController extends Controller
 
         $item = $request->search;
         $products = Product::where('product_name_en', 'LIKE', "%$item%")->get();
-        return view('frontend.product.search', compact('products', 'categories'));
+
+
+        return view('frontend.product.search', compact('products', 'categories', 'item'));
     } //end method
 }

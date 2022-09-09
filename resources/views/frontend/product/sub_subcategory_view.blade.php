@@ -10,8 +10,18 @@ Sub-SubCategory Product - HamroCollection
     <div class="container">
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
-                <li><a href="#">Home</a></li>
-                <li class='active'>Handbags</li>
+
+                <li><a href="{{ url('/') }}">Home</a></li>
+                @foreach($breadsubcat as $item)
+                <li class='active'>{{$item->category->category_name_en}}</li>
+                @endforeach
+                @foreach($breadsubcat as $item)
+                <li class='active'>{{ $item->subcategory->subcategory_name_en }}</li>
+                @endforeach
+
+                @foreach($breadsubcat as $item)
+                <li class='active'>{{$item->sub_subcategory_name_en}}</li>
+                @endforeach
             </ul>
         </div>
         <!-- /.breadcrumb-inner -->
@@ -79,23 +89,7 @@ Sub-SubCategory Product - HamroCollection
                         <!-- /.sidebar-widget -->
                         <!-- ============================================== SIDEBAR CATEGORY : END ============================================== -->
 
-                        <!-- ============================================== PRICE SILDER============================================== -->
-                        <div class="sidebar-widget wow fadeInUp">
-                            <div class="widget-header">
-                                <h4 class="widget-title">Price Slider</h4>
-                            </div>
-                            <div class="sidebar-widget-body m-t-10">
-                                <div class="price-range-holder"> <span class="min-max"> <span class="pull-left">$200.00</span> <span class="pull-right">$800.00</span> </span>
-                                    <input type="text" id="amount" style="border:0; color:#666666; font-weight:bold;text-align:center;">
-                                    <input type="text" class="price-slider" value="">
-                                </div>
-                                <!-- /.price-range-holder -->
-                                <a href="#" class="lnk btn btn-primary">Show Now</a>
-                            </div>
-                            <!-- /.sidebar-widget-body -->
-                        </div>
-                        <!-- /.sidebar-widget -->
-                        <!-- ============================================== PRICE SILDER : END ============================================== -->
+
                         <!-- ============================================== MANUFACTURES============================================== -->
                         <div class="sidebar-widget wow fadeInUp">
                             <div class="widget-header">
@@ -136,19 +130,6 @@ Sub-SubCategory Product - HamroCollection
                         <!-- /.sidebar-widget -->
                         <!-- ============================================== COLOR: END ============================================== -->
 
-                        <!-- ============================================== COMPARE============================================== -->
-                        <div class="sidebar-widget wow fadeInUp outer-top-vs">
-                            <h3 class="section-title">Compare products</h3>
-                            <div class="sidebar-widget-body">
-                                <div class="compare-report">
-                                    <p>You have no <span>item(s)</span> to compare</p>
-                                </div>
-                                <!-- /.compare-report -->
-                            </div>
-                            <!-- /.sidebar-widget-body -->
-                        </div>
-                        <!-- /.sidebar-widget -->
-                        <!-- ============================================== COMPARE: END ============================================== -->
 
 
                         <!-- ============================================== PRODUCT TAGS ============================================== -->
@@ -175,20 +156,6 @@ Sub-SubCategory Product - HamroCollection
             <div class='col-md-9'>
                 <!-- ========================================== SECTION – HERO ========================================= -->
 
-                <div id="category" class="category-carousel hidden-xs">
-                    <div class="item">
-                        <div class="image"> <img src="{{ asset('frontend/assets/images/banners/cat-banner-1.jpg') }}" alt="" class="img-responsive"> </div>
-                        <div class="container-fluid">
-                            <div class="caption vertical-top text-left">
-                                <div class="big-text"> Big Sale </div>
-                                <div class="excerpt hidden-sm hidden-md"> Save up to 49% off </div>
-                                <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </div>
-                            </div>
-                            <!-- /.caption -->
-                        </div>
-                        <!-- /.container-fluid -->
-                    </div>
-                </div>
 
 
                 <div class="clearfix filters-container m-t-10">

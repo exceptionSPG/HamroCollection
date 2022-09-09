@@ -9,13 +9,23 @@
 @section('content')
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
     <div class="container">
+
         <div class="breadcrumb">
             <div class="container">
                 <div class="breadcrumb-inner">
                     <ul class="list-inline list-unstyled">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Clothing</a></li>
-                        <li class='active'>Floral Print Buttoned</li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
+                        @foreach($breadsubcat as $item)
+                        <li class='active'>{{$item->category->category_name_en}}</li>
+                        @endforeach
+                        @foreach($breadsubcat as $item)
+                        <li class='active'>{{ $item->subcategory->subcategory_name_en }}</li>
+                        @endforeach
+
+                        @foreach($breadsubcat as $item)
+                        <li class='active'>{{$item->sub_subcategory_name_en}}</li>
+                        @endforeach
+
                     </ul>
                 </div><!-- /.breadcrumb-inner -->
             </div><!-- /.container -->

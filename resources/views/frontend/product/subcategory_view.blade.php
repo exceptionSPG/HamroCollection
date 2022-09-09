@@ -10,8 +10,14 @@ SubCategory Product - HamroCollection
     <div class="container">
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
-                <li><a href="#">Home</a></li>
-                <li class='active'>Handbags</li>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                @foreach($breadsubcat as $item)
+                <li class='active'>{{$item->category->category_name_en}}</li>
+                @endforeach
+                @foreach($breadsubcat as $item)
+                <li class='active'>{{$item->subcategory_name_en}}</li>
+                @endforeach
+
             </ul>
         </div>
         <!-- /.breadcrumb-inner -->
@@ -175,20 +181,6 @@ SubCategory Product - HamroCollection
             <div class='col-md-9'>
                 <!-- ========================================== SECTION – HERO ========================================= -->
 
-                <div id="category" class="category-carousel hidden-xs">
-                    <div class="item">
-                        <div class="image"> <img src="{{ asset('frontend/assets/images/banners/cat-banner-1.jpg') }}" alt="" class="img-responsive"> </div>
-                        <div class="container-fluid">
-                            <div class="caption vertical-top text-left">
-                                <div class="big-text"> Big Sale </div>
-                                <div class="excerpt hidden-sm hidden-md"> Save up to 49% off </div>
-                                <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </div>
-                            </div>
-                            <!-- /.caption -->
-                        </div>
-                        <!-- /.container-fluid -->
-                    </div>
-                </div>
 
 
                 <div class="clearfix filters-container m-t-10">
