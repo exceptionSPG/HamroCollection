@@ -40,49 +40,44 @@ All Products Shop Page - HamroCollection
                             <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
                             <div class="sidebar-widget wow fadeInUp">
                                 <h3 class="section-title">shop by</h3>
+
                                 <div class="widget-header">
                                     <h4 class="widget-title">Category</h4>
                                 </div>
                                 <div class="sidebar-widget-body">
                                     <div class="accordion">
 
+                                        @if(!empty($_GET['category']))
+
+                                        @php
+
+                                        $filterCat = explode(',',$_GET['category']);
+                                        @endphp
+
+                                        @endif
 
                                         @foreach($categories as $category)
                                         <div class="accordion-group">
 
-                                            <div class="accordion-heading"> <a href="#collapse{{ $category->id }}" data-toggle="collapse" class="accordion-toggle collapsed"> @if(session()->get('language') == 'nepali'){{ $category->category_name_nep }} @else {{ $category->category_name_en }} @endif </a> </div>
-                                            <!-- /.accordion-heading -->
-                                            <div class="accordion-body collapse" id="collapse{{ $category->id }}" style="height: 0px;">
-                                                <div class="accordion-inner">
+                                            <div class="accordion-heading">
+                                                <label for="" class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" name="category[]" value="{{ $category->category_slug_en }}" onchange="this.form.submit()" @if(!empty($filterCat) && in_array($category->category_slug_en,$filterCat)) checked @endif>@if(session()->get('language') == 'nepali'){{ $category->category_name_nep }} @else {{ $category->category_name_en }} @endif
+                                                </label>
 
-                                                    @php
-                                                    $subcategories = App\Models\SubCategory::where('category_id', $category->id)->orderBy('subcategory_name_en','ASC')->get();
-
-
-                                                    @endphp
-
-
-                                                    <ul>
-                                                        @foreach($subcategories as $subcat)
-                                                        <li><a href="#">@if(session()->get('language') == 'nepali'){{ $subcat->subcategory_name_nep }} @else {{ $subcat->subcategory_name_en }} @endif</a></li>
-                                                        @endforeach
-
-                                                    </ul>
-                                                </div>
-                                                <!-- /.accordion-inner -->
                                             </div>
-                                            <!-- /.accordion-body -->
+                                            <!-- /.accordion-heading -->
+
                                         </div>
                                         <!-- /.accordion-group -->
-
-
-
                                         @endforeach
 
                                     </div>
                                     <!-- /.accordion -->
                                 </div>
                                 <!-- /.sidebar-widget-body -->
+
+
+
                             </div>
                             <!-- /.sidebar-widget -->
                             <!-- ============================================== SIDEBAR CATEGORY : END ============================================== -->
@@ -459,7 +454,7 @@ All Products Shop Page - HamroCollection
                         </div>
                         <!-- /.tab-content -->
 
-                        {{ $products->links('vendor.pagination.custom')}}
+                        {{ $products->appends($_GET)->links('vendor.pagination.custom') }}
 
                     </div>
                     <!-- /.search-result-container -->
