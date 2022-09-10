@@ -74,17 +74,35 @@
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
+
+
+                        @php
+                        $categories = App\Models\Category::orderBy('category_name_en','ASC')->get();
+
+
+                        @endphp
                         <form action="{{ route('product.search') }}" method="post">
                             @csrf
                             <div class="control-group">
                                 <ul class="categories-filter animate-dropdown">
                                     <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li class="menu-header">Computer</li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Clothing</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Electronics</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Shoes</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Watches</a></li>
+                                            @foreach($categories as $category)
+                                            <li class="menu-header"><b>{{ $category->category_name_en }}</b></li>
+
+
+                                            @php
+                                            $subcategories = App\Models\SubCategory::where('category_id', $category->id)->orderBy('subcategory_name_en','ASC')->get();
+
+
+                                            @endphp
+
+                                            @foreach($subcategories as $subcat)
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{{url('subcategory/product/'.$subcat->id.'/'.$subcat->subcategory_slug_en)  }}">-{{ $subcat->subcategory_name_en }} </a></li>
+                                            @endforeach
+                                            @endforeach
+
+
                                         </ul>
                                     </li>
                                 </ul>
@@ -232,7 +250,7 @@
 
 
 
-                                <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>
+                                <li class="dropdown  navbar-right special-menu"> <a href="{{ route('shop.page') }}">Shop Page</a> </li>
                                 <li class="dropdown  navbar-right special-menu"> <a href="{{route('home.blog') }}">Blog</a> </li>
 
                             </ul>

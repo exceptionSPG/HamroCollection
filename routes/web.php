@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeBlogController;
+use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CashController;
@@ -445,4 +446,10 @@ Route::controller(HomeBlogController::class)->group(function () {
     Route::get('/blog', 'AddBlogPost')->name('home.blog');
     Route::get('/post/details/{id}', 'DetailsBlogPost')->name('post.details');
     Route::get('/blog/category/post/{id}', 'HomeCatBlogPost');
+});
+
+//Shop Page Routes 
+Route::controller(ShopController::class)->group(function () {
+    Route::get('/shop', 'ShopPage')->name('shop.page');
+   
 });
