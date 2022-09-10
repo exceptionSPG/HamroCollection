@@ -3,10 +3,15 @@
 @section('title')
 {{ $product->product_name_en }}
 @endsection
-@section('content')
 
 
+
 @section('content')
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
     <div class="container">
 
@@ -107,6 +112,16 @@
 
                                     </div><!-- /.single-product-gallery -->
                                 </div><!-- /.gallery-holder -->
+                                @php
+
+                                $reviewCount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
+                                $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+                                @endphp
+
+
+
+
+
                                 <div class='col-sm-6 col-md-7 product-info-block'>
                                     <div class="product-info">
                                         <h1 class="name" id="pname">@if(session()->get('language') == 'nepali'){{ $product->product_name_nep }} @else {{ $product->product_name_en }} @endif</h1>
@@ -114,11 +129,44 @@
                                         <div class="rating-reviews m-t-20">
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <div class="rating rateit-small"></div>
+                                                    @if($average == 0)
+                                                    No Rating Yet
+                                                    @elseif($average == 1 || $average < 2) <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        @elseif($average == 2 || $average < 3) <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            @elseif($average == 3 || $average < 4) <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+
+                                                                @elseif($average == 4 || $average < 5) <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    @elseif($average == 5 || $average > 5) <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    @endif
+
+
+
+
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <div class="reviews">
-                                                        <a href="#" class="lnk">(13 Reviews)</a>
+
+                                                        <a href="#" class="lnk">({{ count($reviewCount )}} Reviews)</a>
                                                     </div>
                                                 </div>
                                             </div><!-- /.row -->
@@ -322,12 +370,50 @@
                                                         <div class="review">
 
                                                             <div class="row">
-                                                                <div class="col-md-3">
-                                                                    <img src="{{ (!empty($item->user->profile_photo_path)) ? url('upload/user_images/'.$item->user->profile_photo_path) : url('upload/no_image.png') }}" alt="User Profile pic" class="card-img-top" style="border-radius: 50%;" height="40%" width="40%"><b>{{$item->user->name }}</b>
+                                                                <div class="col-md-6">
+                                                                    <img src="{{ (!empty($item->user->profile_photo_path)) ? url('upload/user_images/'.$item->user->profile_photo_path) : url('upload/no_image.png') }}" alt="User Profile pic" class="card-img-top" style="border-radius: 50%;" height="40%" width="40%"><b>{{$item->user->name }}<br>
+
+                                                                        @if($item->rating == NULL)
+                                                                        @elseif($item->rating == 1)
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+
+                                                                        @elseif($item->rating == 2)
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+
+                                                                        @elseif($item->rating == 3)
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        @elseif($item->rating == 4)
+
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        @elseif($item->rating == 5)
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        @endif
+                                                                    </b>
+
                                                                 </div>
 
-                                                                <div class="col-md-9">
-                                                                    <b></b>
+                                                                <div class="col-md-6">
+
                                                                 </div>
                                                             </div>
                                                             <div class="review-title"><span class="summary">{{$item->summary}}</span><span class="date"><i class="fa fa-calendar"></i><span>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span></span></div>
@@ -367,6 +453,30 @@
                                                                 @csrf
 
                                                                 <input type="hidden" name="product_id" value="{{$product->id}}">
+
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="cell-label">&nbsp;</th>
+                                                                            <th>1 star</th>
+                                                                            <th>2 stars</th>
+                                                                            <th>3 stars</th>
+                                                                            <th>4 stars</th>
+                                                                            <th>5 stars</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="cell-label">Rating</td>
+                                                                            <td><input type="radio" name="quality" class="radio" value="1"></td>
+                                                                            <td><input type="radio" name="quality" class="radio" value="2"></td>
+                                                                            <td><input type="radio" name="quality" class="radio" value="3"></td>
+                                                                            <td><input type="radio" name="quality" class="radio" value="4"></td>
+                                                                            <td><input type="radio" name="quality" class="radio" value="5"></td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
 
 
 
@@ -454,7 +564,58 @@
 
                                             <div class="product-info text-left">
                                                 <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'nepali'){{ $product->product_name_nep }} @else {{ $product->product_name_en }} @endif</a></h3>
-                                                <div class="rating rateit-small"></div>
+
+
+
+                                                @php
+
+                                                $reviewCount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
+                                                $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+                                                @endphp
+                                                <div class="row">
+                                                    <div class="col-md-6">
+
+                                                        @if($average == 0)
+                                                        No Rating Yet
+                                                        @elseif($average == 1 || $average < 2) <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            @elseif($average == 2 || $average < 3) <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                @elseif($average == 3 || $average < 4) <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+
+                                                                    @elseif($average == 4 || $average < 5) <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        @elseif($average == 5 || $average > 5) <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        @endif
+
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="#" class="lnk">({{ count($reviewCount )}} Reviews)</a>
+                                                    </div>
+                                                </div><!-- /.rating-reviews -->
+
+
+
+
                                                 <div class="description"></div>
 
                                                 <div class="product-price">@if($product->discount_price == NULL)
@@ -542,7 +703,52 @@
 
                                             <div class="product-info text-left">
                                                 <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'nepali'){{ $product->product_name_nep }} @else {{ $product->product_name_en }} @endif</a></h3>
-                                                <div class="rating rateit-small"></div>
+                                                @php
+
+                                                $reviewCount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
+                                                $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+                                                @endphp
+                                                <div class="row">
+                                                    <div class="col-md-6">
+
+                                                        @if($average == 0)
+                                                        No Rating Yet
+                                                        @elseif($average == 1 || $average < 2) <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            @elseif($average == 2 || $average < 3) <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                @elseif($average == 3 || $average < 4) <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+
+                                                                    @elseif($average == 4 || $average < 5) <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        @elseif($average == 5 || $average > 5) <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        @endif
+
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="#" class="lnk">({{ count($reviewCount )}} Reviews)</a>
+                                                    </div>
+                                                </div><!-- /.rating-reviews -->
+
                                                 <div class="description"></div>
 
                                                 <div class="product-price">@if($product->discount_price == NULL)

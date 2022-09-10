@@ -240,24 +240,68 @@ Product Search Page
                                                 </div>
                                                 <!-- /.product-image -->
 
+
                                                 <div class="product-info text-left">
-                                                    <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
-                                                            @if(session()->get('language') == 'hindi') {{ $product->product_name_hin }} @else {{ $product->product_name_en }} @endif</a></h3>
-                                                    <div class="rating rateit-small"></div>
+                                                    <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'nepali'){{ $product->product_name_nep }} @else {{ $product->product_name_en }} @endif</a></h3>
+                                                    @php
+
+                                                    $reviewCount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
+                                                    $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+                                                    @endphp
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+
+                                                            @if($average == 0)
+                                                            No Rating Yet
+                                                            @elseif($average == 1 || $average < 2) <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                @elseif($average == 2 || $average < 3) <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    @elseif($average == 3 || $average < 4) <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+
+                                                                        @elseif($average == 4 || $average < 5) <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                            @elseif($average == 5 || $average > 5) <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            @endif
+
+
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}" class="lnk">({{ count($reviewCount )}} Reviews)</a>
+                                                        </div>
+                                                    </div><!-- /.rating-reviews -->
+
                                                     <div class="description"></div>
 
+                                                    <div class="product-price">@if($product->discount_price == NULL)
+                                                        <span class="price">Rs. {{ $product->selling_price }}</span>
+                                                        @else
 
-                                                    @if ($product->discount_price == NULL)
-                                                    <div class="product-price"> <span class="price"> ${{ $product->selling_price }} </span> </div>
+                                                        <span class="price">
 
-                                                    @else
+                                                            Rs. {{ $product->discount_price }}
 
-                                                    <div class="product-price"> <span class="price"> ${{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
-                                                    @endif
-
-
-
-
+                                                        </span> <span class="price-before-discount">Rs. {{ $product->selling_price }}</span>
+                                                        @endif
+                                                    </div>
                                                     <!-- /.product-price -->
 
                                                 </div>
@@ -333,35 +377,69 @@ Product Search Page
                                                 </div>
                                                 <!-- /.col -->
                                                 <div class="col col-sm-8 col-lg-8">
-                                                    <div class="product-info">
-                                                        <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
-                                                                @if(session()->get('language') == 'hindi') {{ $product->product_name_hin }} @else {{ $product->product_name_en }} @endif</a></h3>
-                                                        <div class="rating rateit-small"></div>
+
+                                                    <div class="product-info ">
+                                                        <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'nepali'){{ $product->product_name_nep }} @else {{ $product->product_name_en }} @endif</a></h3>
+                                                        @php
+
+                                                        $reviewCount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
+                                                        $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+                                                        @endphp
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+
+                                                                @if($average == 0)
+                                                                No Rating Yet
+                                                                @elseif($average == 1 || $average < 2) <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    @elseif($average == 2 || $average < 3) <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                        @elseif($average == 3 || $average < 4) <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                            <span class="fa fa-star"></span>
+
+                                                                            @elseif($average == 4 || $average < 5) <span class="fa fa-star checked"></span>
+                                                                                <span class="fa fa-star checked"></span>
+                                                                                <span class="fa fa-star checked"></span>
+                                                                                <span class="fa fa-star checked"></span>
+                                                                                <span class="fa fa-star"></span>
+                                                                                @elseif($average == 5 || $average > 5) <span class="fa fa-star checked"></span>
+                                                                                <span class="fa fa-star checked"></span>
+                                                                                <span class="fa fa-star checked"></span>
+                                                                                <span class="fa fa-star checked"></span>
+                                                                                <span class="fa fa-star checked"></span>
+                                                                                @endif
 
 
-                                                        @if ($product->discount_price == NULL)
-                                                        <div class="product-price"> <span class="price"> ${{ $product->selling_price }} </span> </div>
-                                                        @else
-                                                        <div class="product-price"> <span class="price"> ${{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
-                                                        @endif
 
-                                                        <!-- /.product-price -->
-                                                        <div class="description m-t-10">
-                                                            @if(session()->get('language') == 'hindi') {{ $product->short_descp_hin }} @else {{ $product->short_descp_en }} @endif</div>
-                                                        <div class="cart clearfix animate-effect">
-                                                            <div class="action">
-                                                                <ul class="list-unstyled">
-                                                                    <li class="add-cart-button btn-group">
-                                                                        <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                                                                        <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                                                    </li>
-                                                                    <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                                    <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
-                                                                </ul>
                                                             </div>
-                                                            <!-- /.action -->
+                                                            <div class="col-md-6">
+                                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}" class="lnk">({{ count($reviewCount )}} Reviews)</a>
+                                                            </div>
+                                                        </div><!-- /.rating-reviews -->
+
+                                                        <div class="description"></div>
+
+                                                        <div class="product-price">@if($product->discount_price == NULL)
+                                                            <span class="price">Rs. {{ $product->selling_price }}</span>
+                                                            @else
+
+                                                            <span class="price">
+
+                                                                Rs. {{ $product->discount_price }}
+
+                                                            </span> <span class="price-before-discount">Rs. {{ $product->selling_price }}</span>
+                                                            @endif
                                                         </div>
-                                                        <!-- /.cart -->
+                                                        <!-- /.product-price -->
 
                                                     </div>
                                                     <!-- /.product-info -->
@@ -435,44 +513,7 @@ Product Search Page
         </div>
         <!-- /.row -->
         <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-        <div id="brands-carousel" class="logo-slider wow fadeInUp">
-            <div class="logo-slider-inner">
-                <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-                    <div class="item m-t-15"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
 
-                    <div class="item m-t-10"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-
-                    <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-
-                    <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-
-                    <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-
-                    <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-
-                    <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-
-                    <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-
-                    <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-
-                    <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
-                    <!--/.item-->
-                </div>
-                <!-- /.owl-carousel #logo-slider -->
-            </div>
-            <!-- /.logo-slider-inner -->
-
-        </div>
         <!-- /.logo-slider -->
         <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
     </div>

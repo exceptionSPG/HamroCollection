@@ -19,6 +19,7 @@ class ReviewController extends Controller
 
             'summary' => 'required',
             'comment' => 'required',
+            'quality' => 'required',
         ]);
 
         Review::insert([
@@ -26,7 +27,7 @@ class ReviewController extends Controller
             'user_id' => Auth::id(),
             'comment' => $request->comment,
             'summary' => $request->summary,
-            //'rating' => $request->quality,
+            'rating' => $request->quality,
             'created_at' => Carbon::now(),
 
         ]);

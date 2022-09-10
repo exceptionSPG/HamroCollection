@@ -44,7 +44,11 @@ $seo = App\Models\SEOSetting::find(1);
 
     <!--toaster css-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
 
 </head>
 
@@ -184,8 +188,8 @@ $seo = App\Models\SEOSetting::find(1);
                             </div>
 
                             <input type="hidden" id="product_id">
-                            <button type="submit" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
-
+                            <button type="submit" id="btnAddToCart" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+                            <span id="stockMsg"></span>
                         </div>
                         <!-- End col-md-4 -->
                     </div>
@@ -263,15 +267,21 @@ $seo = App\Models\SEOSetting::find(1);
                         }
                     }) //end size
 
-                    //stock 
+                    //stock  stockMsg
                     if (data.product.product_qty > 0) {
                         $('#available').text('');
                         $('#stockout').text('');
                         $('#available').text('available');
+                        $('#btnAddToCart').show();
+                        $('#stockMsg').text('');
+
                     } else {
                         $('#available').text('');
                         $('#stockout').text('');
                         $('#stockout').text('stockout');
+                        $('#btnAddToCart').hide();
+                        $('#stockMsg').text('You can buy once Product is available.Add to wishlist for now.');
+
                     }
 
                     //end stock
@@ -291,6 +301,8 @@ $seo = App\Models\SEOSetting::find(1);
             //var name = 'next';
             var dataObject = {};
             dataObject['product_name'] = product_name;
+
+
 
             $.ajax({
                 type: "POST",
@@ -490,14 +502,7 @@ $seo = App\Models\SEOSetting::find(1);
                                     <td class="col-md-2"><img src="/${value.product.product_thumbnail}" alt="${value.product.product_name_en}"></td>
                                     <td class="col-md-7">
                                         <div class="product-name"><a href="#">${value.product.product_name_en}</a></div>
-                                        <div class="rating">
-                                            <i class="fa fa-star rate"></i>
-                                            <i class="fa fa-star rate"></i>
-                                            <i class="fa fa-star rate"></i>
-                                            <i class="fa fa-star rate"></i>
-                                            <i class="fa fa-star non-rate"></i>
-                                            <span class="review">( 06 Reviews )</span>
-                                        </div>
+                                        
                                         <div class="price">
 
                                         ${value.product.discount_price == null ? `Rs. ${value.product.selling_price}` : `Rs. ${value.product.discount_price} <span>Rs. ${value.product.selling_price} </span> ` }
