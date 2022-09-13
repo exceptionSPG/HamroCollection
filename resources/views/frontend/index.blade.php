@@ -1113,9 +1113,151 @@ Home - HamroCollection
                 <!-- ============================================== Recommendation vaneko jastai Skip Product 1 : END =============-->
 
 
-                <!-- ============================================== BEST SELLER ============================================== -->
+                <!-- ============================================== BEST SELLER / Trending Products ============================================== -->
 
                 <!--  Best seller lai include garna milxa 'frontend.common.best_seller') -->
+
+                <section class="section featured-product wow fadeInUp">
+                    <h3 class="section-title">Trending products</h3>
+                    <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+
+                        @foreach($trending as $item)
+
+                        @php
+                        $product = App\Models\Product::findOrFail($item);
+                        @endphp
+
+                        <div class="item item-carousel">
+
+                            <div class="products">
+                                <div class="product">
+
+                                    <div class="product-image">
+                                        <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
+                                        <!-- /.image -->
+
+                                        @php
+                                        $amount = $product->selling_price - $product->discount_price;
+                                        $discount = ($amount/$product->selling_price)*100;
+                                        @endphp
+                                        <div>
+                                            @if($product->discount_price == NULL)
+                                            <div class="tag new"><span>new</span></div>
+                                            @else
+                                            <div class="tag hot"><span>{{ round($discount) }}%</span></div>
+                                            @endif
+                                        </div>
+
+
+
+                                    </div>
+                                    <!-- /.product-image -->
+
+
+                                    <div class="product-info text-left">
+                                        <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'nepali'){{ $product->product_name_nep }} @else {{ $product->product_name_en }} @endif</a></h3>
+                                        @php
+
+                                        $reviewCount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
+                                        $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+                                        @endphp
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                                @if($average == 0)
+                                                No Rating Yet
+                                                @elseif($average == 1 || $average < 2) <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    @elseif($average == 2 || $average < 3) <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        @elseif($average == 3 || $average < 4) <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+
+                                                            @elseif($average == 4 || $average < 5) <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                @elseif($average == 5 || $average > 5) <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                @endif
+
+
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}" class="lnk">({{ count($reviewCount )}} Reviews)</a>
+                                            </div>
+                                        </div><!-- /.rating-reviews -->
+
+                                        <div class="description"></div>
+
+                                        <div class="product-price">@if($product->discount_price == NULL)
+                                            <span class="price">Rs. {{ $product->selling_price }}</span>
+                                            @else
+
+                                            <span class="price">
+
+                                                Rs. {{ $product->discount_price }}
+
+                                            </span> <span class="price-before-discount">Rs. {{ $product->selling_price }}</span>
+                                            @endif
+                                        </div>
+                                        <!-- /.product-price -->
+
+                                    </div>
+                                    <!-- /.product-info -->
+                                    <div class="cart clearfix animate-effect">
+                                        <div class="action">
+                                            <ul class="list-unstyled">
+
+                                                <li class="add-cart-button btn-group">
+
+                                                    <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
+                                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                </li>
+
+
+
+                                                <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)"> <i class="fa fa-heart"></i> </button>
+
+
+
+
+
+
+                                            </ul>
+                                        </div>
+                                        <!-- /.action -->
+                                    </div>
+                                    <!-- /.cart -->
+                                </div>
+                                <!-- /.product -->
+
+                            </div>
+                            <!-- /.products -->
+                        </div>
+
+                        <!-- /.item -->
+
+                        @endforeach
+
+
+                    </div>
+                    <!-- /.home-owl-carousel -->
+                </section>
                 <!-- /.sidebar-widget -->
                 <!-- ============================================== BEST SELLER : END ============================================== -->
 
@@ -1256,43 +1398,8 @@ Home - HamroCollection
 
 
                 <!-- ============================================== BLOG SLIDER ============================================== -->
-                <section class="section latest-blog outer-bottom-vs wow fadeInUp">
-                    <h3 class="section-title">latest form blog</h3>
-                    <div class="blog-slider-container outer-top-xs">
-                        <div class="owl-carousel blog-slider custom-carousel">
-
-
-                            @foreach($blogs as $blog)
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="{{ route('post.details',$blog->id)}}"><img src="{{ asset($blog->post_image) }}" alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="{{ route('post.details',$blog->id)}}">@if(session()->get('language') == 'nepali'){{ $blog->post_title_nep }} @else {{ $blog->post_title_en }} @endif</a></h3>
-                                        <span class="info">By Admin &nbsp;|&nbsp; {{ Carbon\Carbon::parse($blog->created_at)->diffForHumans() }} </span>
-                                        <p class="text">@if(session()->get('language') == 'nepali'){!! Str::limit($blog->post_details_nep,100) !!} @else {!! Str::limit($blog->post_details_nep,100) !!} @endif....</p>
-                                        <a href="{{ route('post.details',$blog->id)}}" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            @endforeach
-
-
-
-                        </div>
-                        <!-- /.owl-carousel -->
-                    </div>
-                    <!-- /.blog-slider-container -->
-                </section>
+                <!-- Blog -->
+                @include('frontend.common.blogs')
                 <!-- /.section -->
                 <!-- ============================================== BLOG SLIDER : END ============================================== -->
 

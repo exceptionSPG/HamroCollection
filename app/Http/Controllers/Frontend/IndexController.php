@@ -7,6 +7,7 @@ use App\Models\Blog\BlogPost;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\SubCategory;
@@ -14,6 +15,7 @@ use App\Models\SubSubCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
@@ -40,9 +42,14 @@ class IndexController extends Controller
 
         $blogs = BlogPost::orderBy('id', 'DESC')->limit(4)->get();
 
+        //$trending = OrderItem::select('product_id')->groupBy('product_id')->orderBy('product_id');
+        //dd($trending);
+        $trending = DB::table('order_items')->orderBy('sum', 'DESC')->groupBy('product_id')->limit(5)->selectRaw('product_id,sum(qty) as sum')->pluck('product_id', 'sum');
+        //dd($trending);
+
         // return $skip_category->id;
         // die();
-        return view('frontend.index', compact('categories', 'sliders', 'products', 'featured', 'hotDeals', 'special_offer', 'specialDeals', 'skip_category_0', 'skip_product_0', 'skip_category_1', 'skip_product_1', 'skip_brand_product_1', 'skip_brand_1', 'blogs'));
+        return view('frontend.index', compact('categories', 'sliders', 'products', 'featured', 'hotDeals', 'special_offer', 'specialDeals', 'skip_category_0', 'skip_product_0', 'skip_category_1', 'skip_product_1', 'skip_brand_product_1', 'skip_brand_1', 'blogs', 'trending'));
     } //end method
 
     public function UserLogout()
