@@ -121,18 +121,41 @@ class CartController extends Controller
 
         if ($coupon) {
 
+            $ca = $coupon->coupon_discount;
+            session()->put(
+                'coupon',
+                'coupon xa hai'
+            );
+            session()->put(
+                'coupon_name',
+                $coupon->coupon_name,
+            );
+            session()->put(
+                'coupon_discount',
+                $ca
+            );
+            session()->put(
+                'discount_amount',
+                round(Cart::totalFloat() * $ca / 100)
+            );
 
-            session([
-                'coupon' => 'coupon xa hai',
-                'coupon_name' => $coupon->coupon_name,
-                'coupon_discount' => $coupon->coupon_discount,
-                'discount_amount' => round(Cart::total() * $coupon->coupon_discount / 100),
-                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
+            session()->put(
+                'total_amount',
+                round(Cart::totalFloat() - Cart::totalFloat() * $ca / 100),
+            );
 
-            ]);
+            //session()->put('step_1.security', 'yes');
+            // session([
+            //     'coupon' => 'coupon xa hai',
+            //     'coupon_name' => $coupon->coupon_name,
+            //     'coupon_discount' => 25,
+            //     'discount_amount' => round(Cart::total() * $ca / 100),
+            //     'total_amount' => round(Cart::total() - Cart::total() * $ca / 100),
+
+            // ]);
             return response()->json([
 
-                'success' =>  $coupon->coupon_discount . '% Coupon Applied Successfully ' . $msg,
+                'success' =>  $ca . '% Coupon Applied Successfully ' . $msg,
 
             ]);
         } else {
