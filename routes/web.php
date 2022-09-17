@@ -358,12 +358,16 @@ Route::controller(CartController::class)->group(function () {
     /************START: Checkout All routes*****************/
     ///checkout/district-get/ajax
 
-    Route::get('/checkout', 'CheckoutCreate')->name('checkout');
+    Route::middleware([
+        'verified'
+    ])->get('/checkout', 'CheckoutCreate')->name('checkout');
 
     /************END: Checkout All routes*****************/
 });
 
-Route::controller(CheckoutController::class)->group(function () {
+Route::middleware([
+    'verified'
+])->controller(CheckoutController::class)->group(function () {
 
 
 
@@ -383,7 +387,7 @@ Route::controller(CheckoutController::class)->group(function () {
 
 /**********Below routes are for USER Must Logged in */
 
-Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'App\Http\Controllers\User'], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth', 'verified'], 'namespace' => 'App\Http\Controllers\User'], function () {
     //Wishlist all routes  /wishlist/product-remove/' + id,  
 
     Route::controller(WishlistController::class)->group(function () {

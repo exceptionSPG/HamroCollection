@@ -1,4 +1,7 @@
 @extends('frontend.main_master')
+@section('title')
+Login/Registration - HamroCollection
+@endsection
 @section('content')
 
 
