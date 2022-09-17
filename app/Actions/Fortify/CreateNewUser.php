@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -20,36 +21,27 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'max:255'],
-            'regpassword' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-        ])->validate();
+        Validator::make(
+            $input,
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'phone' => ['required', 'string', 'max:255'],
+                'password' => $this->passwordRules(),
+                'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+            ],
+            [
+                'email.required' => 'Email Field is required',
+                'password.required' => 'Password Field is required',
 
-        $user = User::create([
+            ]
+        )->validate();
+
+        return User::create([
             'name' => $input['name'],
-            'email' => $input['regemail'],
+            'email' => $input['email'],
             'phone' => $input['phone'],
-            'password' => Hash::make($input['regpassword']),
+            'password' => Hash::make($input['password']),
         ]);
-        if ($user) {
-            $notification = array(
-                'message' => 'Account Created Successfully.',
-                'alert-type' => 'success',
-
-            );
-
-            return redirect()->back()->with($notification);
-        } else {
-            $notification = array(
-                'message' => 'Account Created Successfully.',
-                'alert-type' => 'success',
-
-            );
-
-            return redirect()->back()->with($notification);
-        }
     }
 }

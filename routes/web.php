@@ -452,5 +452,5 @@ Route::controller(HomeBlogController::class)->group(function () {
 Route::controller(ShopController::class)->group(function () {
     Route::get('/shop', 'ShopPage')->name('shop.page'); //shop.filter
     Route::post('/shop/filter', 'ShopFilter')->name('shop.filter'); //
-   
+
 });
