@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ship_districts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('province_id');
+            $table->unsignedBigInteger('province_id')->references('id')->on('shipping_provinces')->onDelete('cascade');;
             $table->string('district_name');
             $table->timestamps();
         });
