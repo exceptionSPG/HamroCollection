@@ -534,7 +534,12 @@
                         <section class="section featured-product wow fadeInUp">
                             <h3 class="section-title">Similar products</h3>
                             <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-                                @foreach($related_products as $product)
+                                @forelse($cat_trending as $item)
+
+                                @php
+                                $product = App\Models\Product::findOrFail($item->product_id);
+                                @endphp
+
 
                                 <div class="item item-carousel">
 
@@ -660,7 +665,11 @@
                                 </div>
                                 <!-- /.item -->
 
-                                @endforeach
+
+                                @empty
+                                <h3 class="text-danger">No Recommendation for this product yet.</h3>
+
+                                @endforelse
 
 
                             </div><!-- /.home-owl-carousel -->
@@ -673,7 +682,11 @@
                         <section class="section featured-product wow fadeInUp">
                             <h3 class="section-title">Who Bought This also Bought:</h3>
                             <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-                                @foreach($related_products as $product)
+                                @forelse($brand_trending as $item)
+
+                                @php
+                                $product = App\Models\Product::findOrFail($item->product_id);
+                                @endphp
 
                                 <div class="item item-carousel">
 
@@ -788,13 +801,18 @@
 
                                     </div>
                                     <!-- /.products -->
+
                                 </div>
                                 <!-- /.item -->
 
-                                @endforeach
+                                @empty
+                                <h3 class="text-danger">No Recommendation for this product yet.</h3>
+
+                                @endforelse
 
 
                             </div><!-- /.home-owl-carousel -->
+
                         </section><!-- /.section -->
                         <!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
 

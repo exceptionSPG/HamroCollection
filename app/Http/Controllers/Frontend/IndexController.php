@@ -152,6 +152,7 @@ class IndexController extends Controller
 
         //recommendation ko lagi
         $cat_id = $product->category_id;
+        $brand_id = $product->brand_id;
         $related_products = Product::where('category_id', $cat_id)->where('id', '!=', $id)->orderBy('id', 'DESC')->get();
 
 
@@ -160,8 +161,28 @@ class IndexController extends Controller
         $breadsubcat = SubSubCategory::with('category', 'subcategory')->where('id', $subsub_id)->get();
 
 
+        //trending recomm
+        $cat_trending = DB::table('order_items')
+            ->join('products', function ($join) {
+                $join->on("order_items.product_id", "=", "products.id");
+            })
+            ->where("category_id", "=", $cat_id)
+            ->where('order_items.product_id', '!=', $id)
+            ->orderBy('sum', 'DESC')->groupBy('product_id')->limit(5)->selectRaw('product_id,sum(qty) as sum')->get();
 
-        return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products', 'breadsubcat'));
+
+        //brand recomm
+        $brand_trending = DB::table('order_items')
+            ->join('products', function ($join) {
+                $join->on("order_items.product_id", "=", "products.id");
+            })
+            ->where("brand_id", "=", $brand_id)
+            ->where('order_items.product_id', '!=', $id)
+            ->orderBy('sum', 'DESC')->groupBy('product_id')->limit(5)->selectRaw('product_id,sum(qty) as sum')->get();
+
+
+        //dd($brand_trending);
+        return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products', 'breadsubcat', 'cat_trending', 'brand_trending'));
     } //end method TagWiseProduct
 
     public function TagWiseProduct($tags)
