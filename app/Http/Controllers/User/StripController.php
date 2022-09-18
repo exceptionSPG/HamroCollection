@@ -123,6 +123,6 @@ class StripController extends Controller
             'alert-type' => 'success',
 
         );
-        return redirect()->route('dashboard')->with($notification);
+        return redirect()->route('my.orders')->with($notification);
     } //end method
 }

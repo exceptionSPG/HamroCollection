@@ -55,7 +55,7 @@ class CheckoutController extends Controller
         $cartTotal = Cart::total();
 
         if ($request->payment_method == 'khalti') {
-            return view('frontend.payment.khalti', compact('data'));
+            return view('frontend.payment.esewa', compact('data', 'cartTotal'));
         } elseif ($request->payment_method == 'stripe') {
 
             return view('frontend.payment.stripe', compact('data', 'cartTotal'));

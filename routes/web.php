@@ -29,6 +29,7 @@ use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\EsewaController;
 use App\Http\Controllers\User\StripController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\ReviewController;
@@ -405,6 +406,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth', 'verified'], 
 
     Route::controller(StripController::class)->group(function () {
         Route::post('/strip/order', 'StripOrder')->name('strip.order');
+    });
+
+    //esewa payement .order
+    Route::controller(EsewaController::class)->group(function () {
+        Route::post('/esewa/order', 'eSewaOrder')->name('esewa.order');
+
+        Route::get('/success', 'esewaSuccess');
+        Route::get('/failure', 'esewaFailure');
     });
 
     //Cash on Delivery routes
