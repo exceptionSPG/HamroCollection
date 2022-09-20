@@ -67,7 +67,7 @@ class StockController extends Controller
         $allData = [];
         foreach ($product_below as $product) {
             $allData[$product->id] = [
-
+                'product_code' => $product->product_code,
                 'product_name' => $product->product_name_en,
                 'quantity' => $product->product_qty,
             ];

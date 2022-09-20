@@ -43,7 +43,7 @@ $site = App\Models\SiteSetting::find(1);
                     <tr>
                         <td class="header" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; padding: 25px 0; text-align: center;">
                             <a href="http://127.0.0.1:8000" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 19px; font-weight: bold; text-decoration: none; display: inline-block;">
-                                <img src="{{ asset($site->logo) }}" class="logo" alt="Laravel Logo" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100%; border: none; height: 75px; max-height: 75px; width: 75px;">
+                                <img src="{{ asset($site->logo) }}" class="logo" alt="HamroCollection Logo" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100%; border: none; height: 75px; max-height: 75px; width: 75px;">
                             </a>
                         </td>
                     </tr>
@@ -67,6 +67,7 @@ $site = App\Models\SiteSetting::find(1);
 
                                                         <thead>
                                                             <tr>
+                                                                <td><b>Product Code</b></td>
                                                                 <td><b> Product Name</b></td>
                                                                 <td><b> Product Quantity </b></td>
                                                             </tr>
@@ -75,6 +76,8 @@ $site = App\Models\SiteSetting::find(1);
 
                                                         @foreach($data as $item)
                                                         <tr>
+
+                                                            <td>{{$item['product_code']}}</td>
 
                                                             <td>{{$item['product_name']}}</td>
                                                             <td>{{$item['quantity'] }}</td>
