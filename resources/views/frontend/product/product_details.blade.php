@@ -177,11 +177,26 @@
                                                 <div class="col-sm-2">
                                                     <div class="stock-box">
                                                         <span class="label">Availability :</span>
+
+
+
+
+
+
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <div class="stock-box">
-                                                        <span class="value">In Stock</span>
+                                                        @if($product->product_qty>0)
+                                                        <span class="badge badge-success badge-pill" id="available" style="background-color: green; color: white">Available</span>
+
+
+                                                        @else
+                                                        <span class="badge badge-danger badge-pill" id="stockout" style="background-color: red; color: white">In Stock</span>
+                                                        <!-- <span class="value">In Stock</span> -->
+                                                        @endif
+
                                                     </div>
                                                 </div>
                                             </div><!-- /.row -->
@@ -301,7 +316,11 @@
                                                 <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
 
                                                 <div class="col-sm-7">
-                                                    <button class="btn btn-primary" onclick="addToCart()"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+                                                    <button class="btn btn-primary" onclick="addToCart()" {{ $product->product_qty>0 ? '':'disabled' }}><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button><br>
+                                                    @if($product->product_qty>0)
+                                                    @else
+                                                    <span class="text-danger">Product is <b> not available for now</b>. You can buy once Product is available.Add to wishlist for now.</span>
+                                                    @endif
                                                 </div>
 
 
