@@ -168,7 +168,11 @@ class IndexController extends Controller
             })
             ->where("category_id", "=", $cat_id)
             ->where('order_items.product_id', '!=', $id)
-            ->orderBy('sum', 'DESC')->groupBy('product_id')->limit(5)->selectRaw('product_id,sum(qty) as sum')->get();
+            ->orderBy('sum', 'DESC')
+            ->groupBy('product_id')
+            ->limit(5)
+            ->selectRaw('product_id,sum(qty) as sum')
+            ->get();
 
 
         //brand recomm
@@ -181,8 +185,33 @@ class IndexController extends Controller
             ->orderBy('sum', 'DESC')->groupBy('product_id')->limit(5)->selectRaw('product_id,sum(qty) as sum')->get();
 
 
-        //dd($brand_trending);
-        return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products', 'breadsubcat', 'cat_trending', 'brand_trending'));
+        //user who bought this also bought...
+        $id_this = $id;
+        DB::statement(DB::raw('SET @hamro_id = ' . $id_this));
+        $users_likes = DB::table('products')
+            ->select('*')
+            ->whereIn('id', (function ($query) {
+                $query->from('order_items')
+                    ->select('product_id')
+                    ->join('orders', 'order_items.order_id', '=', 'orders.id')
+                    ->join('products', 'order_items.product_id', '=', 'products.id')
+                    ->whereIn('user_id', (function ($query) {
+                        $query->from('order_items')
+                            ->select('user_id')
+                            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+                            ->join('products', 'order_items.product_id', '=', 'products.id')
+                            ->where('product_id', '=', DB::raw('@hamro_id'));
+                    }))
+                    ->where('product_id', '!=', DB::raw('@hamro_id'))
+                    ->groupBy('product_id');
+            }))
+            ->limit(5)
+            ->get();
+
+
+
+        //dd($users_likes);
+        return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products', 'breadsubcat', 'cat_trending', 'brand_trending', 'users_likes'));
     } //end method TagWiseProduct
 
     public function TagWiseProduct($tags)
