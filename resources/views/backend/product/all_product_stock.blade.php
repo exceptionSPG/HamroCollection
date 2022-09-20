@@ -8,6 +8,8 @@
     <!-- Content Header (Page header) -->
 
 
+
+
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -15,15 +17,13 @@
 
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Product Stock Below Threshold List <span class="badge badge-pill badge-success"> {{ count($product_below) }}</span></h3>
-
-                        <a href="{{ route('all.stock') }}" class="btn btn-primary" style="float: right;">View All Stock</a><span></span>
-                        <a href="{{ route('send.stock.mail') }}" class="btn btn-info mr-4" style="float: right;">Send Mail</a>
+                        <h3 class="box-title"> All Product Stock List <span class="badge badge-pill badge-success"> {{ count($products) }}</span></h3>
+                        <a href="{{ route('product.stock') }}" class="btn btn-danger" style="float: right;">View Limited Stock</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example2" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Image</th>
@@ -39,8 +39,8 @@
                                 </thead>
                                 <tbody>
                                     <!--url('upload/brand/'.$item->brand_image)-->
-                                    @foreach($product_below as $item)
-                                    <tr class="bg-danger">
+                                    @foreach($products as $item)
+                                    <tr>
                                         <td><img src="{{ asset($item->product_thumbnail) }}" alt="" style="width: 60px; height: 50px;"></td>
                                         <td>{{ $item->product_name_en }}</td>
                                         <td>Rs. {{ $item->selling_price }}</td>
@@ -114,6 +114,7 @@
         <!-- /.row -->
     </section>
     <!-- /.content -->
+
 
 
 

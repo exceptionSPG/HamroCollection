@@ -272,9 +272,12 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/delete/{review_id}', 'reviewDelete')->name('delete.review');
     });
     //namespace App\Http\Controllers\Backend;
-    /*********Admin Stock management all routes */
+    /*********Admin Stock management   */
     Route::prefix('stock')->controller(StockController::class)->group(function () {
         Route::get('/product', 'ProductStock')->name('product.stock');
+        Route::post('/update', 'UpdateStock')->name('update.quantity');
+        Route::get('/all', 'AllProductStock')->name('all.stock');
+        Route::get('/send/mail', 'SendStockMail')->name('send.stock.mail');
     });
 
     //all.admin-users
