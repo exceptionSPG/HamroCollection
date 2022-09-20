@@ -50,6 +50,11 @@ $seo = App\Models\SEOSetting::find(1);
         }
     </style>
 
+    <!-- App icon -->
+
+    <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
+
+
 </head>
 
 <body class="cnt-home">

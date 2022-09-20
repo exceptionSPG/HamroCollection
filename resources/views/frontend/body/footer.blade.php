@@ -14,7 +14,7 @@
                      <!-- /.module-heading -->
 
                      <div class="module-body">
-                         <ul class="toggle-footer" style="">
+                         <ul class="toggle-footer">
                              <li class="media">
                                  <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
                                  <div class="media-body">
@@ -31,7 +31,7 @@
                              </li>
                              <li class="media">
                                  <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
-                                 <div class="media-body"> <span><a href="#">{{ $site->email}}</a></span> </div>
+                                 <div class="media-body"> <span><a href="mailto:{{ $site->email}}">{{ $site->email}}</a></span> </div>
                              </li>
                          </ul>
                      </div>
@@ -47,11 +47,18 @@
 
                      <div class="module-body">
                          <ul class='list-unstyled'>
-                             <li class="first"><a href="#" title="Contact us">My Account</a></li>
+                             @auth
+
+                             <li class="first"><a href="{{ route('dashboard') }}" title="My Account">My Account</a></li>
                              <li><a href="#" title="About us">Order History</a></li>
-                             <li><a href="#" title="faq">FAQ</a></li>
-                             <li><a href="#" title="Popular Searches">Specials</a></li>
-                             <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
+                             @else
+                             <li><a href="{{ route('login') }}">Login/Register </a></li>
+
+                             @endauth
+
+
+                             <li><a href="{{ route('shop.page') }}" title="Popular Searches">Specials</a></li>
+                             <li class="last"><a href="#" title="Where is my order?">Contact Us</a></li>
                          </ul>
                      </div>
                      <!-- /.module-body -->
@@ -86,7 +93,7 @@
                      <div class="module-body">
                          <ul class='list-unstyled'>
                              <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
-                             <li><a href="#" title="Blog">Blog</a></li>
+                             <li><a href="{{route('home.blog') }}" title="Blog">Blog</a></li>
                              <li><a href="#" title="Company">Company</a></li>
                              <li><a href="#" title="Investor Relations">Investor Relations</a></li>
                              <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>

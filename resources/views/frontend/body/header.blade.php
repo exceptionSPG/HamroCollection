@@ -7,10 +7,10 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'nepali')मेरो खाता @else My Account @endif</a></li>
-                        <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                        <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                        <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>Checkout</a></li>
+                        <!-- <li><a href="#"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'nepali')मेरो खाता @else My Account @endif</a></li> -->
+                        <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>@if(session()->get('language') == 'nepali')इच्छा सुची @else Wishlist @endif</a></li>
+                        <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'nepali')मेरो कार्ट @else My Cart @endif</a></li>
+                        <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>@if(session()->get('language') == 'nepali')चेकआउट @else Checkout @endif</a></li>
 
 
                         @auth
@@ -18,7 +18,7 @@
                         <li><a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>User Profile</a></li>
 
                         @else
-                        <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
+                        <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>@if(session()->get('language') == 'nepali')लगइन / दर्ता गर्नुहोस् @else Login/Register @endif</a></li>
 
                         @endauth
 
@@ -30,9 +30,7 @@
 
                 <div class="cnt-block">
                     <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">NPR </span><b class="caret"></b></a>
 
-                        </li>
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">
                                     @if(session()->get('language') == 'nepali')Language @else भाषा नेपाली @endif </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
