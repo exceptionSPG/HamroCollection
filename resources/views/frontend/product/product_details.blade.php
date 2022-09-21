@@ -193,7 +193,7 @@
 
 
                                                         @else
-                                                        <span class="badge badge-danger badge-pill" id="stockout" style="background-color: red; color: white">In Stock</span>
+                                                        <span class="badge badge-danger badge-pill" id="stockout" style="background-color: red; color: white">Out of Stock</span>
                                                         <!-- <span class="value">In Stock</span> -->
                                                         @endif
 

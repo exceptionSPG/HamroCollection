@@ -25,12 +25,12 @@ Blog Category Page - HamroCollection
 
                     <div class="blog-post  wow fadeInUp">
                         <a href="{{ route('post.details',$blog->id)}}"><img class="img-responsive" src="{{ asset($blog->post_image) }}" alt=""></a>
-                        <h1><a href="{{ route('post.details',$blog->id)}}">@if(session()->get('language') == 'nepali'){{ $blog->post_title_nep }} @else {{ $blog->post_title_nep }} @endif</a></h1>
+                        <h1><a href="{{ route('post.details',$blog->id)}}">@if(session()->get('language') == 'nepali'){{ $blog->post_title_nep }} @else {{ $blog->post_title_en }} @endif</a></h1>
                         <span class="author">Admin</span>
                         <!-- <span class="review">6 Comments</span> -->
                         <span class="date-time">{{ Carbon\Carbon::parse($blog->created_at)->diffForHumans() }}</span>
 
-                        <p>@if(session()->get('language') == 'nepali'){!! Str::limit($blog->post_details_nep,200) !!} @else {!! Str::limit($blog->post_details_nep,200) !!} @endif...</p>
+                        <p>@if(session()->get('language') == 'nepali'){!! Str::limit($blog->post_details_nep,200) !!} @else {!! Str::limit($blog->post_details_en,200) !!} @endif...</p>
                         <a href="{{ route('post.details',$blog->id)}}" class="btn btn-upper btn-primary read-more">read more</a>
                     </div>
 

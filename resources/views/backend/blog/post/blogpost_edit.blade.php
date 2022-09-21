@@ -125,7 +125,7 @@
                                             <div class="form-group">
                                                 <h5>Blog Post Details En <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <textarea name="post_details_en" value="{{ $post->post_details_en}}" id="editor1" rows="10" cols="80" class="form-control" required="">Post Details English</textarea>
+                                                    <textarea name="post_details_en" value="{{ $post->post_details_en}}" id="editor1" rows="10" cols="80" class="form-control" required="">{!! $post->post_details_en!!}</textarea>
 
                                                     @error('post_details_en')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -141,7 +141,7 @@
                                             <div class="form-group">
                                                 <h5>Post Details Nepali <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <textarea name="post_details_nep" value="{{ $post->post_details_nep}}" id="editor2" rows="10" cols="80" class="form-control" required="">Post Details  Nep</textarea>
+                                                    <textarea name="post_details_nep" id="editor2" rows="10" cols="80" class="form-control" required="">{!! $post->post_details_nep !!}</textarea>
 
                                                     @error('post_details_nep')
                                                     <span class="text-danger">{{ $message }}</span>
