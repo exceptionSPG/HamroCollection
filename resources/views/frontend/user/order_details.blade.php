@@ -206,8 +206,11 @@ Order Details - HamroCollection
                     <label for="label">Order Return Reason:</label><br>
                     <textarea name="return_reason" id="" cols="30" rows="5">Return Rason</textarea>
                 </div>
+                <div>
+                    <button type="submit" class="btn btn-danger">Order Return</button>
+                    <h4>Know More about our:<a href="{{ route('return-policy') }}"><strong>Return Policy</strong></a></h4>
 
-                <button type="submit" class="btn btn-danger">Order Return</button>
+                </div>
 
             </form>
             @elseif($order->return_order == 1)
@@ -217,11 +220,12 @@ Order Details - HamroCollection
 
             @elseif($order->return_order == 3)
             <h4> Your Return request is:<span class="badge badge-pill badge-warning" style="background: red;"> <b>Rejected</b> </span></h4>
-
+            <h4>Know More about our:<a href="{{ route('return-policy') }}"><strong>Return Policy</strong></a></h4>
             @endif
             @endif
             <!-- </div> -->
             <br><br>
+
         </div>
     </div>
 </div>

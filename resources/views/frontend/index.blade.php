@@ -298,7 +298,7 @@ Home - HamroCollection
                                             <h4 class="info-box-heading green">money back</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">30 Days Money Back Guarantee</h6>
+                                    <h6 class="text">30 Days Money Back Guarantee</h6><br>
                                 </div>
                             </div>
                             <!-- .col -->
@@ -310,7 +310,7 @@ Home - HamroCollection
                                             <h4 class="info-box-heading green">free shipping</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">Shipping on orders over Rs.5000</h6>
+                                    <h6 class="text">Shipping within Kathmandu Valley</h6>
                                 </div>
                             </div>
                             <!-- .col -->
@@ -322,7 +322,7 @@ Home - HamroCollection
                                             <h4 class="info-box-heading green">Special Sale</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">Extra Rs.50 off on all items </h6>
+                                    <h6 class="text">Extra off With our Coupon System </h6>
                                 </div>
                             </div>
                             <!-- .col -->

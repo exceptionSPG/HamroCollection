@@ -64,6 +64,8 @@ MyCart Page - HamroCollection
                                 <th>
                                     <span class="estimate-title">Discount Code</span>
                                     <p>Enter your coupon code if you have one..</p>
+                                    <h5>Discover Available Coupon :<a href="{{route('home.blog') }}"><strong> <span class="text-danger"> Here</span></strong></a></h5>
+
                                 </th>
                             </tr>
                         </thead>

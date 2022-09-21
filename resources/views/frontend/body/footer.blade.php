@@ -50,15 +50,16 @@
                              @auth
 
                              <li class="first"><a href="{{ route('dashboard') }}" title="My Account">My Account</a></li>
-                             <li><a href="#" title="About us">Order History</a></li>
+                             <li><a href="{{route('my.orders') }}" title="Order History">Order History</a></li>
                              @else
                              <li><a href="{{ route('login') }}">Login/Register </a></li>
 
                              @endauth
 
 
-                             <li><a href="{{ route('shop.page') }}" title="Popular Searches">Specials</a></li>
-                             <li class="last"><a href="#" title="Where is my order?">Contact Us</a></li>
+                             <li><a href="{{ route('shop.page') }}" title="Specials">Specials</a></li>
+                             <li><a href="{{ route('about-us') }}" title="About us">About Us</a></li>
+
                          </ul>
                      </div>
                      <!-- /.module-body -->
@@ -73,11 +74,11 @@
 
                      <div class="module-body">
                          <ul class='list-unstyled'>
-                             <li class="first"><a title="Your Account" href="#">About us</a></li>
-                             <li><a title="Information" href="#">Customer Service</a></li>
-                             <li><a title="Addresses" href="#">Company</a></li>
-                             <li><a title="Addresses" href="#">Investor Relations</a></li>
-                             <li class="last"><a title="Orders History" href="#">Advanced Search</a></li>
+                             <li class="first"><a title="About us" href="{{ route('about-us') }}">About us</a></li>
+                             <li><a title="Return Policy" href="{{ route('return-policy') }}">Return Policy</a></li>
+                             <li class="last"><a title="Refund Policy" href="{{ route('refund-policy') }}">Refund Policy</a></li>
+
+
                          </ul>
                      </div>
                      <!-- /.module-body -->
@@ -92,11 +93,11 @@
 
                      <div class="module-body">
                          <ul class='list-unstyled'>
-                             <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
+                             <li class="first"><a href="{{route('shop.page')}}" title="Shop With us">Shopping Guide</a></li>
                              <li><a href="{{route('home.blog') }}" title="Blog">Blog</a></li>
-                             <li><a href="#" title="Company">Company</a></li>
-                             <li><a href="#" title="Investor Relations">Investor Relations</a></li>
-                             <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>
+                             <li><a href="{{url('/')}}" title="Company">Home Page</a></li>
+
+                             <li class=" last"><a href="{{ route('bank-details') }}" title="Bank Details">Bank Details</a></li>
                          </ul>
                      </div>
                      <!-- /.module-body -->

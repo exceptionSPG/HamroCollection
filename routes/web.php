@@ -23,6 +23,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\FooterController;
 use App\Http\Controllers\Frontend\HomeBlogController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\User\AllUserController;
@@ -468,5 +469,16 @@ Route::controller(HomeBlogController::class)->group(function () {
 Route::controller(ShopController::class)->group(function () {
     Route::get('/shop', 'ShopPage')->name('shop.page'); //shop.filter
     Route::post('/shop/filter', 'ShopFilter')->name('shop.filter'); //
+
+});
+
+
+
+//Footer Links  Routes 
+Route::controller(FooterController::class)->group(function () {
+    Route::get('/aboutus', 'AboutUs')->name('about-us'); //shop.filter
+    Route::get('/bank/details', 'BankDetails')->name('bank-details'); //
+    Route::get('/return/policy', 'ReturnPolicy')->name('return-policy'); //
+    Route::get('/refund/policy', 'RefundPolicy')->name('refund-policy'); //
 
 });
