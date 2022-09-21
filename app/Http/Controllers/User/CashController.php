@@ -56,7 +56,7 @@ class CashController extends Controller
             // 'cancel_date' => $charge->payment_method,
             // 'return_date' => $charge->payment_method,
             // 'return_reason' => $charge->payment_method,
-
+            'esewa_status' => 2,
             'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);

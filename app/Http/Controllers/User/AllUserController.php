@@ -19,7 +19,7 @@ class AllUserController extends Controller
     //
     public function MyOrders()
     {
-        $orders = Order::where('user_id', Auth::id())->orderBy('id', 'DESC')->get();
+        $orders = Order::where('user_id', Auth::id())->where('esewa_status', '!=', 0)->orderBy('id', 'DESC')->get();
 
         return view('frontend.user.orders', compact('orders'));
     } //end method

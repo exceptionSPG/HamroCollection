@@ -20,7 +20,7 @@ class ReportController extends Controller
     {
         $date = new DateTime($request->date);
         $formatDate = $date->format('d F Y');
-        $orders = Order::where('order_date', $formatDate)->latest()->get();
+        $orders = Order::where('order_date', $formatDate)->where('esewa_status', '!=', 0)->latest()->get();
         $msg = ' Date : ' . $formatDate;
 
         return view('backend.reports.report_show', compact('orders', 'msg'));
@@ -28,14 +28,14 @@ class ReportController extends Controller
 
     public function ReportByMonth(Request $request)
     {
-        $orders = Order::where('order_month', $request->month)->where('order_year', $request->year_name)->latest()->get();
+        $orders = Order::where('order_month', $request->month)->where('order_year', $request->year_name)->where('esewa_status', '!=', 0)->latest()->get();
         $msg = ' Month: ' . $request->month . ' , ' . $request->year_name;
         return view('backend.reports.report_show', compact('orders', 'msg'));
     } //end method 
 
     public function ReportByYear(Request $request)
     {
-        $orders = Order::where('order_year', $request->year)->latest()->get();
+        $orders = Order::where('order_year', $request->year)->where('esewa_status', '!=', 0)->latest()->get();
         $msg = ' Year: ' . $request->year;
         return view('backend.reports.report_show', compact('orders', 'msg'));
     } //end method 

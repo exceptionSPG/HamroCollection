@@ -12,7 +12,7 @@ $monthData = App\Models\Order::where('order_month',$month)->sum('amount');
 $year = date('Y');
 $yearData = App\Models\Order::where('order_year',$year)->sum('amount');
 
-$pendings = App\Models\Order::where('status', 'Pending')->orderBy('id', 'DESC')->get();
+$pendings = App\Models\Order::where('status', 'Pending')->where('esewa_status', '!=', 0)->orderBy('id', 'DESC')->get();
 $pendingCount = count($pendings);
 
 $sumPending = App\Models\Order::where('status', 'Pending')->sum('amount');
