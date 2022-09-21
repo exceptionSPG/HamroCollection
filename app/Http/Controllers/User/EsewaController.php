@@ -127,6 +127,12 @@ class EsewaController extends Controller
         }
     }
 
+    public function Testingtime(Request $request)
+    {
+        $date = Carbon::now();
+        dd($date);
+    }
+
     public function esewaSuccess()
     {
 

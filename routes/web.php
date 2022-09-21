@@ -413,7 +413,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth', 'verified'], 
 
     //esewa payement .order
     Route::controller(EsewaController::class)->group(function () {
-        Route::post('/esewa/order', 'eSewaOrder')->name('esewa.order');
+        Route::post('/esewa/order', 'Testingtime')->name('esewa.order'); //Testingtime eSewaOrder
 
         Route::get('/success', 'esewaSuccess');
         Route::get('/failure', 'esewaFailure');

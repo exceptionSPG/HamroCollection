@@ -106,7 +106,7 @@ $order = (auth()->guard('admin')->user()->orders == 1);
                                         <th style="min-width: 100px"><span class="text-fade">Invoice</span></th>
                                         <th style="min-width: 100px"><span class="text-fade">Amount</span></th>
                                         <th style="min-width: 150px"><span class="text-fade">Payment type</span></th>
-                                        <th style="min-width: 130px"><span class="text-fade">status</span></th>
+                                        <!-- <th style="min-width: 130px"><span class="text-fade">status</span></th> -->
                                         <th style="min-width: 120px">View Details</th>
                                     </tr>
                                 </thead>
@@ -117,7 +117,7 @@ $order = (auth()->guard('admin')->user()->orders == 1);
 
                                         <td class="pl-0 py-8">
                                             <span class="text-fade font-weight-600 d-block font-size-16">
-                                                {{ Carbon\Carbon::parse($item->order_date)->diffForHumans() }}
+                                                {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
                                             </span>
 
                                         </td>
@@ -133,7 +133,7 @@ $order = (auth()->guard('admin')->user()->orders == 1);
 
                                         <td>
                                             <span class="text-fade font-weight-600 d-block font-size-16">
-                                                {{$item->amount}}
+                                                Rs.{{$item->amount}}
                                             </span>
 
                                         </td>
@@ -147,9 +147,9 @@ $order = (auth()->guard('admin')->user()->orders == 1);
                                         </td>
 
 
-                                        <td>
-                                            <!-- <span class="badge badge-primary-light badge-lg">Approved</span> -->
-                                        </td>
+                                        <!-- <td>
+                                            <span class="badge badge-primary-light badge-lg">Approved</span>
+                                        </td> -->
 
 
                                         <td class="text-right">
