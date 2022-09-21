@@ -39,4 +39,6 @@ class ReportController extends Controller
         $msg = ' Year: ' . $request->year;
         return view('backend.reports.report_show', compact('orders', 'msg'));
     } //end method 
+
+    
 }
