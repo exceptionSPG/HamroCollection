@@ -27,9 +27,9 @@ $site = App\Models\SiteSetting::find(1);
         <!-- sidebar menu-->
         <ul class="sidebar-menu" data-widget="tree">
 
-            <li class="{{ ($route == 'dashboard' ) ? 'active':'' }}">
-                <a href="{{ url('/admin/dashboard') }}">
-                    <i data-feather="pie-chart"></i>
+            <li class="{{ ($route == 'dashboard' ) ? 'active':'' }}" style="color: white;">
+                <a href=" {{ url('/admin/dashboard') }}" style="color: white;">
+                    <i data-feather="pie-chart" style="color: white;"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -61,14 +61,14 @@ $site = App\Models\SiteSetting::find(1);
             @if($brand == true)
             <li class="treeview {{ ($prefix == '/brand' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="briefcase"></i>
-                    <span>Brands</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
+                    <i data-feather="briefcase" style="color: white;"></i>
+                    <span style="color: white;">Brands</span>
+                    <span class="pull-right-container" style="color: white;">
+                        <i class="fa fa-angle-right pull-right" style="color: white;"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="{{ ($route == 'all.brand' ) ? 'active':'' }}"><a href="{{ route('all.brand') }}"><i class="ti-more"></i>All Brands</a></li>
+                <ul class="treeview-menu" style="color: white;">
+                    <li class="{{ ($route == 'all.brand' ) ? 'active':'' }}" style="color: white;"><a href="{{ route('all.brand') }}" style="color: white;"><i class="ti-more" style="color: white;"></i>All Brands</a></li>
 
                 </ul>
             </li>
@@ -77,17 +77,17 @@ $site = App\Models\SiteSetting::find(1);
 
 
             @if($category == true)
-            <li class="treeview {{ ($prefix == '/category' ) ? 'active':'' }}">
+            <li class="treeview {{ ($prefix == '/category' ) ? 'active':'' }} " style="color: white;">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Category</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
+                    <i data-feather="mail" style="color: white;"></i> <span style="color: white;">Category</span>
+                    <span class="pull-right-container" style="color: white;">
+                        <i class="fa fa-angle-right pull-right" style="color: white;"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'all.category' ) ? 'active':'' }}"><a href="{{ route('all.category') }}"><i class="ti-more"></i>All Category</a></li>
-                    <li class="{{ ($route == 'all.subcategory' ) ? 'active':'' }}"><a href="{{ route('all.subcategory') }}"><i class="ti-more"></i>All Subcategory</a></li>
-                    <li class="{{ ($route == 'all.subsubcategory' ) ? 'active':'' }}"><a href="{{ route('all.subsubcategory') }}"><i class="ti-more"></i>All Sub->Subcategory</a></li>
+                    <li class="{{ ($route == 'all.category' ) ? 'active':'' }}" style="color: white;"><a href="{{ route('all.category') }}" style="color: white;"><i class="ti-more"></i style="color: white;" style="color: white;">All Category</a></li>
+                    <li class="{{ ($route == 'all.subcategory' ) ? 'active':'' }}" style="color: white;"><a href="{{ route('all.subcategory') }}" style="color: white;"><i class="ti-more" style="color: white;"></i style="color: white;">All Subcategory</a></li>
+                    <li class="{{ ($route == 'all.subsubcategory' ) ? 'active':'' }} " style="color: white;"><a href="{{ route('all.subsubcategory') }}" style="color: white;"><i class="ti-more" style="color: white;"></i style="color: white;">All Sub->Subcategory</a></li>
                 </ul>
             </li>
             @else
@@ -96,15 +96,15 @@ $site = App\Models\SiteSetting::find(1);
             @if($product == true)
             <li class="treeview {{ ($prefix == '/product' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="box"></i>
-                    <span>Products</span>
+                    <i data-feather="box" style="color: white;"></i>
+                    <span style="color: white;">Products</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'add.product' ) ? 'active':'' }}"><a href="{{ route('add.product') }}"><i class="ti-more"></i>Add Products</a></li>
-                    <li class="{{ ($route == 'manage.product' ) ? 'active':'' }}"><a href="{{route('manage.product') }}"><i class="ti-more"></i>Manage Products</a></li>
+                    <li class="{{ ($route == 'add.product' ) ? 'active':'' }}" style="color: white;"><a href="{{ route('add.product') }}" style="color: white;"><i class="ti-more" style="color: white;"></i>Add Products</a></li>
+                    <li class="{{ ($route == 'manage.product' ) ? 'active':'' }}" style="color: white;"><a href="{{route('manage.product') }}" style="color: white;"><i class="ti-more" style="color: white;"> </i>Manage Products</a></li>
 
                 </ul>
             </li>
@@ -115,14 +115,14 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/slider' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="box"></i>
-                    <span>Slider</span>
+                    <i data-feather="box" style="color: white;"></i>
+                    <span style="color: white;">Slider</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'manage.slider' ) ? 'active':'' }}"><a href="{{ route('manage.slider') }}"><i class="ti-more"></i>Manage Slider</a></li>
+                    <li class="{{ ($route == 'manage.slider' ) ? 'active':'' }}"><a href="{{ route('manage.slider') }}" style="color: white;"><i class="ti-more"></i>Manage Slider</a></li>
 
 
                 </ul>
@@ -134,14 +134,14 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/coupon' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="box"></i>
-                    <span>Coupon</span>
+                    <i data-feather="box" style="color: white;"></i>
+                    <span style="color: white;">Coupon</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'manage.coupon' ) ? 'active':'' }}"><a href="{{ route('manage.coupon') }}"><i class="ti-more"></i>Manage Coupon</a></li>
+                    <li class="{{ ($route == 'manage.coupon' ) ? 'active':'' }}"><a href="{{ route('manage.coupon') }}" style="color: white;"><i class="ti-more"></i>Manage Coupon</a></li>
 
 
                 </ul>
@@ -153,14 +153,14 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/shipping' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="box"></i>
-                    <span>Shipping Area</span>
+                    <i data-feather="box" style="color: white;"></i>
+                    <span style="color: white;">Shipping Area</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'manage.province' ) ? 'active':'' }}"><a href="{{ route('manage.province') }}"><i class="ti-more"></i>Manage Province</a></li>
+                    <li class="{{ ($route == 'manage.province' ) ? 'active':'' }}"><a href="{{ route('manage.province') }}" style="color: white;"><i class="ti-more"></i>Manage Province</a></li>
 
 
                 </ul>
@@ -181,50 +181,50 @@ $site = App\Models\SiteSetting::find(1);
 
 
 
-            <li class="header nav-small-cap">User Interface</li>
+            <li class="header nav-small-cap" style="color: white;">User Interface</li>
 
             @if($orders == true)
             <li class="treeview {{ ($prefix == '/orders' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="box"></i>
-                    <span>Orders</span>
+                    <i data-feather="box" style="color: white;"></i>
+                    <span style="color: white;">Orders</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'pending.orders' ) ? 'active':'' }}"><a href="{{ route('pending.orders') }}"><i class="ti-more"></i>Pending Orders</a></li>
+                    <li class="{{ ($route == 'pending.orders' ) ? 'active':'' }}"><a href="{{ route('pending.orders') }}" style="color: white;"><i class="ti-more" style="color: white;"></i>Pending Orders</a></li>
 
                 </ul>
                 <!--  -->
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'confirmed.orders' ) ? 'active':'' }}"><a href="{{ route('confirmed.orders') }}"><i class="ti-more"></i>Confirmed Orders</a></li>
+                    <li class="{{ ($route == 'confirmed.orders' ) ? 'active':'' }}"><a href="{{ route('confirmed.orders') }}" style="color: white;"><i class="ti-more"></i>Confirmed Orders</a></li>
 
                 </ul>
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'processing.orders' ) ? 'active':'' }}"><a href="{{ route('processing.orders') }}"><i class="ti-more"></i>Processing Orders</a></li>
+                    <li class="{{ ($route == 'processing.orders' ) ? 'active':'' }}"><a href="{{ route('processing.orders') }}" style="color: white;"><i class="ti-more"></i>Processing Orders</a></li>
 
                 </ul>
 
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'picked.orders' ) ? 'active':'' }}"><a href="{{ route('picked.orders') }}"><i class="ti-more"></i>Picked Orders</a></li>
+                    <li class="{{ ($route == 'picked.orders' ) ? 'active':'' }}"><a href="{{ route('picked.orders') }}" style="color: white;"><i class="ti-more"></i>Picked Orders</a></li>
 
                 </ul>
                 <!-- delivered -->
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'shipped.orders' ) ? 'active':'' }}"><a href="{{ route('shipped.orders') }}"><i class="ti-more"></i>shipped Orders</a></li>
+                    <li class="{{ ($route == 'shipped.orders' ) ? 'active':'' }}"><a href="{{ route('shipped.orders') }}" style="color: white;"> <i class="ti-more"></i>shipped Orders</a></li>
 
                 </ul>
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'delivered.orders' ) ? 'active':'' }}"><a href="{{ route('delivered.orders') }}"><i class="ti-more"></i>Delivered Orders</a></li>
+                    <li class="{{ ($route == 'delivered.orders' ) ? 'active':'' }}"><a href="{{ route('delivered.orders') }}" style="color: white;"><i class="ti-more"></i>Delivered Orders</a></li>
 
                 </ul>
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'canceled.orders' ) ? 'active':'' }}"><a href="{{ route('canceled.orders') }}"><i class="ti-more"></i>Canceled Orders</a></li>
+                    <li class="{{ ($route == 'canceled.orders' ) ? 'active':'' }}"><a href="{{ route('canceled.orders') }}" style="color: white;"><i class="ti-more"></i>Canceled Orders</a></li>
 
                 </ul>
 
@@ -236,14 +236,14 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/reports' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="grid"></i>
-                    <span>All Reports</span>
+                    <i data-feather="grid" style="color: white;"></i>
+                    <span style="color: white;">All Reports</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'all.reports' ) ? 'active':'' }}"><a href="{{ route('all.reports') }}"><i class="ti-more"></i>All Reports</a></li>
+                    <li class="{{ ($route == 'all.reports' ) ? 'active':'' }}"><a href="{{ route('all.reports') }}" style="color: white;"><i class="ti-more"></i>All Reports</a></li>
 
                 </ul>
 
@@ -262,14 +262,14 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/alluser' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="grid"></i>
-                    <span>All Users</span>
+                    <i data-feather="grid" style="color: white;"></i>
+                    <span style="color: white;">All Users</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'all.users' ) ? 'active':'' }}"><a href="{{ route('all.users') }}"><i class="ti-more"></i>All Users</a></li>
+                    <li class="{{ ($route == 'all.users' ) ? 'active':'' }}"><a href="{{ route('all.users') }}" style="color: white;"><i class="ti-more"></i>All Users</a></li>
 
                 </ul>
 
@@ -284,14 +284,14 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/adminuserrole' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="grid"></i>
-                    <span>Admin User Role</span>
+                    <i data-feather="grid" style="color: white;"></i>
+                    <span style="color: white;"> Admin User Role</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'all.admin-users' ) ? 'active':'' }}"><a href="{{ route('all.admin-users') }}"><i class="ti-more"></i>All Admin Users</a></li>
+                    <li class="{{ ($route == 'all.admin-users' ) ? 'active':'' }}"><a href="{{ route('all.admin-users') }}" style="color: white;"><i class="ti-more"></i>All Admin Users</a></li>
 
                 </ul>
 
@@ -305,23 +305,23 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/blog' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="hard-drive"></i>
-                    <span>Manage Blogs</span>
+                    <i data-feather="hard-drive" style="color: white;"></i>
+                    <span style="color: white;">Manage Blogs</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'blog.category' ) ? 'active':'' }}"><a href="{{ route('blog.category') }}"><i class="ti-more"></i>Blog Category</a></li>
+                    <li class="{{ ($route == 'blog.category' ) ? 'active':'' }}"><a href="{{ route('blog.category') }}" style="color: white;"><i class="ti-more"></i>Blog Category</a></li>
 
                 </ul>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'list.post' ) ? 'active':'' }}"><a href="{{ route('list.post') }}"><i class="ti-more"></i>View Blog List</a></li>
+                    <li class="{{ ($route == 'list.post' ) ? 'active':'' }}"><a href="{{ route('list.post') }}" style="color: white;"><i class="ti-more"></i>View Blog List</a></li>
 
                 </ul>
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'add.post' ) ? 'active':'' }}"><a href="{{ route('add.post') }}"><i class="ti-more"></i>Add Blog Post</a></li>
+                    <li class="{{ ($route == 'add.post' ) ? 'active':'' }}"><a href="{{ route('add.post') }}" style="color: white;"><i class="ti-more"></i>Add Blog Post</a></li>
 
                 </ul>
 
@@ -334,19 +334,19 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/setting' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="grid"></i>
-                    <span>Manage Setting</span>
+                    <i data-feather="grid" style="color: white;"></i>
+                    <span style="color: white;">Manage Setting</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'site.setting' ) ? 'active':'' }}"><a href="{{ route('site.setting') }}"><i class="ti-more"></i>Site Setting</a></li>
+                    <li class="{{ ($route == 'site.setting' ) ? 'active':'' }}"><a href="{{ route('site.setting') }}" style="color: white;"><i class="ti-more"></i>Site Setting</a></li>
 
                 </ul>
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'seo.setting' ) ? 'active':'' }}"><a href="{{ route('seo.setting') }}"><i class="ti-more"></i>SEO Setting</a></li>
+                    <li class="{{ ($route == 'seo.setting' ) ? 'active':'' }}"><a href="{{ route('seo.setting') }}" style="color: white;"><i class="ti-more" style="color: white;"></i>SEO Setting</a></li>
 
                 </ul>
 
@@ -358,24 +358,24 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/return' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="grid"></i>
-                    <span>Return Order</span>
+                    <i data-feather="grid" style="color: white;"></i>
+                    <span style="color: white;">Return Order</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'return.request' ) ? 'active':'' }}"><a href="{{ route('return.request') }}"><i class="ti-more"></i>Return Request</a></li>
+                    <li class="{{ ($route == 'return.request' ) ? 'active':'' }}"><a href="{{ route('return.request') }}" style="color: white;"><i class="ti-more"></i>Return Request</a></li>
 
                 </ul>
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'all.request' ) ? 'active':'' }}"><a href="{{ route('all.request') }}"><i class="ti-more"></i>Approved Return Order</a></li>
+                    <li class="{{ ($route == 'all.request' ) ? 'active':'' }}"><a href="{{ route('all.request') }}" style="color: white;"><i class="ti-more"></i>Approved Return Order</a></li>
 
                 </ul>
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'rejected.request' ) ? 'active':'' }}"><a href="{{ route('rejected.request') }}"><i class="ti-more"></i>Rejected Return Order</a></li>
+                    <li class="{{ ($route == 'rejected.request' ) ? 'active':'' }}"><a href="{{ route('rejected.request') }}" style="color: white;"><i class="ti-more"></i>Rejected Return Order</a></li>
 
                 </ul>
 
@@ -383,7 +383,7 @@ $site = App\Models\SiteSetting::find(1);
 
 
 
-            <li class="header nav-small-cap">EXTRA</li>
+            <li class="header nav-small-cap" style="color: white;">EXTRA</li>
 
 
             @else
@@ -394,23 +394,23 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/review' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="grid"></i>
-                    <span>Review Management</span>
+                    <i data-feather="grid" style="color: white;"></i>
+                    <span style="color: white;">Review Management</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'pending.reviews' ) ? 'active':'' }}"><a href="{{ route('pending.reviews') }}"><i class="ti-more"></i>All Pending Reviews </a></li>
+                    <li class="{{ ($route == 'pending.reviews' ) ? 'active':'' }}"><a href="{{ route('pending.reviews') }}" style="color: white;"><i class="ti-more"></i>All Pending Reviews </a></li>
 
                 </ul>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'approved.reviews' ) ? 'active':'' }}"><a href="{{ route('approved.reviews') }}"><i class="ti-more"></i>All Approved Reviews </a></li>
+                    <li class="{{ ($route == 'approved.reviews' ) ? 'active':'' }}"><a href="{{ route('approved.reviews') }}" style="color: white;"><i class="ti-more"></i>All Approved Reviews </a></li>
 
                 </ul>
 
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'rejected.reviews' ) ? 'active':'' }}"><a href="{{ route('rejected.reviews') }}"><i class="ti-more"></i>All Rejected Reviews </a></li>
+                    <li class="{{ ($route == 'rejected.reviews' ) ? 'active':'' }}"><a href="{{ route('rejected.reviews') }}" style="color: white;"><i class="ti-more"></i>All Rejected Reviews </a></li>
 
                 </ul>
 
@@ -424,14 +424,14 @@ $site = App\Models\SiteSetting::find(1);
 
             <li class="treeview {{ ($prefix == '/stock' ) ? 'active':'' }}">
                 <a href="#">
-                    <i data-feather="grid"></i>
-                    <span>Manage Stock</span>
+                    <i data-feather="grid" style="color: white;"></i>
+                    <span style="color: white;">Manage Stock</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'product.stock' ) ? 'active':'' }}"><a href="{{ route('product.stock') }}"><i class="ti-more"></i>Product Stock </a></li>
+                    <li class="{{ ($route == 'product.stock' ) ? 'active':'' }}"><a href="{{ route('product.stock') }}" style="color: white;"><i class="ti-more"></i>Product Stock </a></li>
 
                 </ul>
 
@@ -443,7 +443,7 @@ $site = App\Models\SiteSetting::find(1);
             <li>
                 <a href="{{ route('admin.logout') }}">
                     <i data-feather="lock"></i>
-                    <span>Log Out</span>
+                    <span style="color: white;"     >Log Out</span>
                 </a>
             </li>
 

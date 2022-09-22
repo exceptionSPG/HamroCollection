@@ -102,7 +102,7 @@ class EsewaController extends Controller
 
 
 
-        $tax_amount = Cart::tax();
+        $tax_amount = 0.13 * $total_amount;
 
         $ta_without_tax = $total_amount - $tax_amount;
 

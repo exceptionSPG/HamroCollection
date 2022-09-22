@@ -16,7 +16,7 @@
                     <div class="blog-post-info text-left">
                         <h3 class="name"><a href="{{ route('post.details',$blog->id)}}">@if(session()->get('language') == 'nepali'){{ $blog->post_title_nep }} @else {{ $blog->post_title_en }} @endif</a></h3>
                         <span class="info">By Admin &nbsp;|&nbsp; {{ Carbon\Carbon::parse($blog->created_at)->diffForHumans() }} </span>
-                        <p class="text">@if(session()->get('language') == 'nepali'){!! Str::limit($blog->post_details_nep,100) !!} @else {!! Str::limit($blog->post_details_nep,100) !!} @endif....</p>
+                        <p class="text">@if(session()->get('language') == 'nepali'){!! Str::limit($blog->post_details_nep,100) !!} @else {!! Str::limit($blog->post_details_en,100) !!} @endif....</p>
                         <a href="{{ route('post.details',$blog->id)}}" class="lnk btn btn-primary">Read more</a>
                     </div>
                     <!-- /.blog-post-info -->

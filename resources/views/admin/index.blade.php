@@ -20,7 +20,7 @@ $order = (auth()->guard('admin')->user()->orders == 1);
 
 @endphp
 
-<div class="container-full">
+<div class="container-full" style="background-color: #DFF6FF;">
 
     <!-- Main content -->
     <section class="content">
@@ -32,8 +32,8 @@ $order = (auth()->guard('admin')->user()->orders == 1);
                             <i class="text-primary mr-0 font-size-24 mdi mdi-account-multiple"></i>
                         </div>
                         <div>
-                            <p class="text-mute mt-20 mb-0 font-size-16">Today's Sale</p>
-                            <h3 class="text-white mb-0 font-weight-500">Rs.{{$today}} </h3>
+                            <p class="text-dark mt-20 mb-0 font-size-16">Today's Sale</p>
+                            <h3 class="text-dark mb-0 font-weight-500">Rs.{{$today}} </h3>
                         </div>
                     </div>
                 </div>
@@ -45,8 +45,8 @@ $order = (auth()->guard('admin')->user()->orders == 1);
                             <i class="text-warning mr-0 font-size-24 mdi mdi-car"></i>
                         </div>
                         <div>
-                            <p class="text-mute mt-20 mb-0 font-size-16">Monthly Sale</p>
-                            <h3 class="text-white mb-0 font-weight-500">Rs.{{$monthData}} </h3>
+                            <p class="text-dark mt-20 mb-0 font-size-16">Monthly Sale</p>
+                            <h3 class="text-dark mb-0 font-weight-500">Rs.{{$monthData}} </h3>
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,8 @@ $order = (auth()->guard('admin')->user()->orders == 1);
                             <i class="text-info mr-0 font-size-24 mdi mdi-sale"></i>
                         </div>
                         <div>
-                            <p class="text-mute mt-20 mb-0 font-size-16">Yearly Sale</p>
-                            <h3 class="text-white mb-0 font-weight-500">Rs.{{$yearData}} </h3>
+                            <p class="text-dark mt-20 mb-0 font-size-16">Yearly Sale</p>
+                            <h3 class="text-dark mb-0 font-weight-500">Rs.{{$yearData}} </h3>
                         </div>
                     </div>
                 </div>
@@ -72,8 +72,8 @@ $order = (auth()->guard('admin')->user()->orders == 1);
                                 <i class="text-danger mr-0 font-size-24 mdi mdi-clock-end"></i>
                             </div>
                             <div>
-                                <p class="text-mute mt-20 mb-0 font-size-16">Pending Orders</p>
-                                <h3 class="text-white mb-0 font-weight-500">{{$pendingCount}} </h3>
+                                <p class="text-dark mt-20 mb-0 font-size-16">Pending Orders</p>
+                                <h3 class="text-dark mb-0 font-weight-500">{{$pendingCount}} </h3>
                             </div>
                         </div>
                     </a>
@@ -102,10 +102,10 @@ $order = (auth()->guard('admin')->user()->orders == 1);
                             <table class="table no-border">
                                 <thead>
                                     <tr class="text-uppercase bg-lightest">
-                                        <th style="min-width: 250px"><span class="text-white">Date</span></th>
-                                        <th style="min-width: 100px"><span class="text-fade">Invoice</span></th>
-                                        <th style="min-width: 100px"><span class="text-fade">Amount</span></th>
-                                        <th style="min-width: 150px"><span class="text-fade">Payment type</span></th>
+                                        <th style="min-width: 250px"><span class="text-dark">Date</span></th>
+                                        <th style="min-width: 100px"><span class="text-dark">Invoice</span></th>
+                                        <th style="min-width: 100px"><span class="text-dark">Amount</span></th>
+                                        <th style="min-width: 150px"><span class="text-dark">Payment type</span></th>
                                         <!-- <th style="min-width: 130px"><span class="text-fade">status</span></th> -->
                                         <th style="min-width: 120px">View Details</th>
                                     </tr>

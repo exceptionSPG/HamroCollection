@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top pl-30">
+    <nav class="navbar navbar-static-top pl-30" style="background-color: #06283D;">
         <!-- Sidebar toggle button-->
         <div>
             <ul class="nav">

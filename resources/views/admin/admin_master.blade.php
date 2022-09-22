@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
+<body class="hold-transition sidebar-mini theme-primary fixed" style="background-color:#06283D;">
 
     <div class="wrapper">
 
@@ -117,7 +117,7 @@
     <script src="{{ asset('backend/js/code.js') }}"></script>
     <script src="{{ asset('backend/js/warn_del.js') }}"></script>
 
-    
+
 
 
 </body>
