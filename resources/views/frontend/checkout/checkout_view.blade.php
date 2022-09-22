@@ -227,7 +227,7 @@ Checkout Page - HamroCollection
                                 <div class="row">
                                     <div class="col-md-4">
 
-                                        <label for="stripe">Khalti</label>
+                                        <label for="stripe">e-Sewa</label>
                                         <input type="radio" name="payment_method" value="khalti">
                                         <img src="{{asset('frontend/assets/images/payments/khalti.png') }}" alt="" style="height: 30px; width: 50px;">
                                     </div>

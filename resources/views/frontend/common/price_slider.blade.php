@@ -9,7 +9,7 @@
              <input type="text" class="price-slider" value="">
          </div>
          <!-- /.price-range-holder -->
-         <a href="#" class="lnk btn btn-primary">Show Now</a>
+         <a href="{{route('shope.page')}}" class="lnk btn btn-primary">Show Now</a>
      </div>
      <!-- /.sidebar-widget-body -->
  </div>

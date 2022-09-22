@@ -85,7 +85,7 @@
                             </div> -->
 
                             <div class="text-center">
-                                <p class="mt-15 mb-0 text-white">Don't have an account? <a href="auth_register.html" class="text-info ml-5">Sign Up</a></p>
+                                <p class="mt-15 mb-0 text-white">Don't have an account? Contact Admin for account.</p>
                             </div>
                         </div>
                     </div>

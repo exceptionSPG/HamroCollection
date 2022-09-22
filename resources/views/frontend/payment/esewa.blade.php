@@ -118,7 +118,7 @@ eSewa Payment - HamroCollection
                                     @csrf
                                     <div class="form-row">
                                         <label for="card-element">
-                                            Credit or debit card
+
                                             <input type="hidden" name="name" value="{{ $data['shipping_name'] }}">
                                             <input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
                                             <input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
@@ -134,7 +134,7 @@ eSewa Payment - HamroCollection
                                         <div id="card-errors" role="alert"></div>
                                     </div>
                                     <br>
-                                    <button class="btn btn-primary">Submit Payment</button>
+                                    <button class="btn btn-primary">Proceed to e-Sewa</button>
                                 </form>
 
 

@@ -48,37 +48,7 @@ SubCategory Product - HamroCollection
                                 <div class="accordion">
 
 
-                                    @foreach($categories as $category)
-                                    <div class="accordion-group">
-
-                                        <div class="accordion-heading"> <a href="#collapse{{ $category->id }}" data-toggle="collapse" class="accordion-toggle collapsed"> @if(session()->get('language') == 'nepali'){{ $category->category_name_nep }} @else {{ $category->category_name_en }} @endif </a> </div>
-                                        <!-- /.accordion-heading -->
-                                        <div class="accordion-body collapse" id="collapse{{ $category->id }}" style="height: 0px;">
-                                            <div class="accordion-inner">
-
-                                                @php
-                                                $subcategories = App\Models\SubCategory::where('category_id', $category->id)->orderBy('subcategory_name_en','ASC')->get();
-
-
-                                                @endphp
-
-
-                                                <ul>
-                                                    @foreach($subcategories as $subcat)
-                                                    <li><a href="#">@if(session()->get('language') == 'nepali'){{ $subcat->subcategory_name_nep }} @else {{ $subcat->subcategory_name_en }} @endif</a></li>
-                                                    @endforeach
-
-                                                </ul>
-                                            </div>
-                                            <!-- /.accordion-inner -->
-                                        </div>
-                                        <!-- /.accordion-body -->
-                                    </div>
-                                    <!-- /.accordion-group -->
-
-
-
-                                    @endforeach
+                                    @include('frontend.common.shopby')
 
                                 </div>
                                 <!-- /.accordion -->
@@ -143,48 +113,7 @@ SubCategory Product - HamroCollection
                         <!-- /.col -->
 
                         <div class="col col-sm-12 col-md-6">
-                            <div class="col col-sm-3 col-md-6 no-padding">
-                                <div class="lbl-cnt"> <span class="lbl">Sort by</span>
-                                    <div class="fld inline">
-                                        <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                            <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
-                                            <ul role="menu" class="dropdown-menu">
-                                                <li role="presentation"><a href="#">position</a></li>
-                                                <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                                                <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                                                <li role="presentation"><a href="#">Product Name:A to Z</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- /.fld -->
-                                </div>
-                                <!-- /.lbl-cnt -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col col-sm-3 col-md-6 no-padding">
-                                <div class="lbl-cnt"> <span class="lbl">Show</span>
-                                    <div class="fld inline">
-                                        <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                            <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1 <span class="caret"></span> </button>
-                                            <ul role="menu" class="dropdown-menu">
-                                                <li role="presentation"><a href="#">1</a></li>
-                                                <li role="presentation"><a href="#">2</a></li>
-                                                <li role="presentation"><a href="#">3</a></li>
-                                                <li role="presentation"><a href="#">4</a></li>
-                                                <li role="presentation"><a href="#">5</a></li>
-                                                <li role="presentation"><a href="#">6</a></li>
-                                                <li role="presentation"><a href="#">7</a></li>
-                                                <li role="presentation"><a href="#">8</a></li>
-                                                <li role="presentation"><a href="#">9</a></li>
-                                                <li role="presentation"><a href="#">10</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- /.fld -->
-                                </div>
-                                <!-- /.lbl-cnt -->
-                            </div>
-                            <!-- /.col -->
+                           <!--  include('frontend.common.sortby') -->
                         </div>
                         <!-- /.col -->
 
