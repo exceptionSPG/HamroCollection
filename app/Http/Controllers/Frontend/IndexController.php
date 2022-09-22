@@ -13,6 +13,7 @@ use App\Models\Slider;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
 use App\Models\User;
+use App\ProductSimilarity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -208,10 +209,23 @@ class IndexController extends Controller
             ->limit(5)
             ->get();
 
+        //Machine Learning wala ko lagi..
+        $products = Product::where('status', '1')->with('category')->get()->toArray();
 
 
-        //dd($users_likes);
-        return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products', 'breadsubcat', 'cat_trending', 'brand_trending', 'users_likes'));
+        // $products        = json_decode(file_get_contents(storage_path('data/products-data.json')));
+        $selectedId      = $id;
+        //$selectedProduct = $products[0];
+
+        $productSimilarity = new ProductSimilarity($products);
+        $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
+        $sorted_products          = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
+
+        $top_recommended_items = array_slice($sorted_products, 0, 5, true);
+
+
+        // dd($sorted_products);
+        return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products', 'breadsubcat', 'cat_trending', 'brand_trending', 'users_likes', 'top_recommended_items'));
     } //end method TagWiseProduct
 
     public function TagWiseProduct($tags)
