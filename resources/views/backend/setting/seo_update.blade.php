@@ -2,7 +2,7 @@
 @section('admin')
 
 
-<div class="container-full">
+<div class="container-full" style="background-color: #DFF6FF;">
 
     <!-- Main content -->
     <section class="content">

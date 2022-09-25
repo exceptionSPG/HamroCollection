@@ -4,7 +4,7 @@
 
 <!-- Content Wrapper. Contains page content -->
 
-<div class="container-full">
+<div class="container-full" style="background-color: #DFF6FF;">
     <!-- Content Header (Page header) -->
 
 

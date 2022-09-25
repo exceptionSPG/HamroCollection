@@ -2,7 +2,7 @@
 @section('admin')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<div class="container-full">
+<div class="container-full" style="background-color: #DFF6FF;">
 
     <!-- Main content -->
     <section class="content">
