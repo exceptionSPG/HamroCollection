@@ -45,11 +45,11 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#" data-toggle="control-sidebar" title="Setting" class="waves-effect waves-light">
                         <i class="ti-settings"></i>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </div>
