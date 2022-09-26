@@ -188,7 +188,7 @@
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <div class="stock-box">
-                                                        @if($product->product_qty>0)
+                                                        @if($product->product_qty>10)
                                                         <span class="badge badge-success badge-pill" id="available" style="background-color: green; color: white">Available</span>
 
 
@@ -317,7 +317,7 @@
                                                 <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
 
                                                 <div class="col-sm-7">
-                                                    <button class="btn btn-primary" onclick="addToCart()" {{ $product->product_qty>0 ? '':'disabled' }}><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button><br>
+                                                    <button class="btn btn-primary" onclick="addToCart()" {{ $product->product_qty>10 ? '':'disabled' }}><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button><br>
                                                     @if($product->product_qty>10)
                                                     @else
                                                     <span class="text-danger">Product is <b> not available for now</b>. You can buy once Product is available.Add to wishlist for now.</span>
@@ -550,15 +550,15 @@
                             </div><!-- /.row -->
                         </div><!-- /.product-tabs -->
 
-                        <!-- ===========================Hamro recommendation Content bases=================== UPSELL PRODUCTS ============================================== -->
-                        <section class="section featured-product wow fadeInUp">
-                            <h3 class="section-title">Similar products</h3>
-                            <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-                                @forelse($cat_trending as $item)
 
-                                @php
-                                $product = App\Models\Product::findOrFail($item->product_id);
-                                @endphp
+
+
+
+                        <!-- ===========================machine learning output=================== ============================================== -->
+                        <section class="section featured-product wow fadeInUp">
+                            <h3 class="section-title">Similar Products:</h3>
+                            <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
+                                @forelse($top_recommended_items as $product)
 
 
                                 <div class="item item-carousel">
@@ -567,15 +567,15 @@
                                         <div class="product">
 
                                             <div class="product-image">
-                                                <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
+                                                <div class="image"> <a href="{{ url('product/details/'.$product['id'].'/'.$product['product_slug_en'] ) }}"><img src="{{ asset($product['product_thumbnail']) }}" alt=""></a> </div>
                                                 <!-- /.image -->
 
                                                 @php
-                                                $amount = $product->selling_price - $product->discount_price;
-                                                $discount = ($amount/$product->selling_price)*100;
+                                                $amount = $product['selling_price'] - $product['discount_price'];
+                                                $discount = ($amount/$product['selling_price'])*100;
                                                 @endphp
                                                 <div>
-                                                    @if($product->discount_price == NULL)
+                                                    @if($product['discount_price'] == NULL)
                                                     <div class="tag new"><span>new</span></div>
                                                     @else
                                                     <div class="tag hot"><span>{{ round($discount) }}%</span></div>
@@ -588,14 +588,11 @@
                                             <!-- /.product-image -->
 
                                             <div class="product-info text-left">
-                                                <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'nepali'){{ $product->product_name_nep }} @else {{ $product->product_name_en }} @endif</a></h3>
-
-
-
+                                                <h3 class="name"><a href="{{ url('product/details/'.$product['id'].'/'.$product['product_slug_en'] ) }}">@if(session()->get('language') == 'nepali'){{ $product['product_name_nep'] }} @else {{ $product['product_name_en'] }} @endif</a></h3>
                                                 @php
 
-                                                $reviewCount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
-                                                $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
+                                                $reviewCount = App\Models\Review::where('product_id',$product['id'])->where('status',1)->latest()->get();
+                                                $average = App\Models\Review::where('product_id',$product['id'])->where('status',1)->avg('rating');
                                                 @endphp
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -638,40 +635,35 @@
                                                     </div>
                                                 </div><!-- /.rating-reviews -->
 
+                                                <div class="description">Similarity: {{ round($product['similarity'] * 100, 1) }}%</div>
 
-
-
-                                                <div class="description"></div>
-
-                                                <div class="product-price">@if($product->discount_price == NULL)
-                                                    <span class="price">Rs. {{ $product->selling_price }}</span>
+                                                <div class="product-price">@if($product['discount_price'] == NULL)
+                                                    <span class="price">Rs. {{ $product['selling_price'] }}</span>
                                                     @else
 
                                                     <span class="price">
 
-                                                        Rs. {{ $product->discount_price }}
+                                                        Rs. {{ $product['discount_price'] }}
 
-                                                    </span> <span class="price-before-discount">Rs. {{ $product->selling_price }}</span>
+                                                    </span> <span class="price-before-discount">Rs. {{ $product['selling_price'] }}</span>
                                                     @endif
                                                 </div>
                                                 <!-- /.product-price -->
 
                                             </div>
-                                            <!-- /.product-info -->
+                                            <!-- /.product-info  -->
                                             <div class="cart clearfix animate-effect">
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
 
-                                                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
+                                                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product['id'] }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
                                                             <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                         </li>
 
 
 
-                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)"> <i class="fa fa-heart"></i> </button>
-
-
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product['id'] }}" onclick="addToWishlist(this.id)"> <i class="fa fa-heart"></i> </button>
                                                     </ul>
                                                 </div>
                                                 <!-- /.action -->
@@ -682,9 +674,9 @@
 
                                     </div>
                                     <!-- /.products -->
+
                                 </div>
                                 <!-- /.item -->
-
 
                                 @empty
                                 <h3 class="text-danger">No Recommendation for this product yet.</h3>
@@ -693,147 +685,17 @@
 
 
                             </div><!-- /.home-owl-carousel -->
+
                         </section><!-- /.section -->
+                        <!-- ============================================== Machine learning output============================================== -->
+                        <!-- ===========================Hamro recommendation Content bases=================== UPSELL PRODUCTS ============================================== -->
+
                         <!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
                         <hr><br>
 
 
                         <!-- ===========================Hamro recommendation Collaborative garne hai yeha bases=================== UPSELL PRODUCTS ============================================== -->
-                        <section class="section featured-product wow fadeInUp">
-                            <h3 class="section-title">Trending items from Same Brand:</h3>
-                            <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-                                @forelse($brand_trending as $item)
 
-                                @php
-                                $product = App\Models\Product::findOrFail($item->product_id);
-                                @endphp
-
-                                <div class="item item-carousel">
-
-                                    <div class="products">
-                                        <div class="product">
-
-                                            <div class="product-image">
-                                                <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
-                                                <!-- /.image -->
-
-                                                @php
-                                                $amount = $product->selling_price - $product->discount_price;
-                                                $discount = ($amount/$product->selling_price)*100;
-                                                @endphp
-                                                <div>
-                                                    @if($product->discount_price == NULL)
-                                                    <div class="tag new"><span>new</span></div>
-                                                    @else
-                                                    <div class="tag hot"><span>{{ round($discount) }}%</span></div>
-                                                    @endif
-                                                </div>
-
-
-
-                                            </div>
-                                            <!-- /.product-image -->
-
-                                            <div class="product-info text-left">
-                                                <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">@if(session()->get('language') == 'nepali'){{ $product->product_name_nep }} @else {{ $product->product_name_en }} @endif</a></h3>
-                                                @php
-
-                                                $reviewCount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
-                                                $average = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
-                                                @endphp
-                                                <div class="row">
-                                                    <div class="col-md-6">
-
-                                                        @if($average == 0)
-                                                        No Rating Yet
-                                                        @elseif($average == 1 || $average < 2) <span class="fa fa-star checked"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            @elseif($average == 2 || $average < 3) <span class="fa fa-star checked"></span>
-                                                                <span class="fa fa-star checked"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                @elseif($average == 3 || $average < 4) <span class="fa fa-star checked"></span>
-                                                                    <span class="fa fa-star checked"></span>
-                                                                    <span class="fa fa-star checked"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-
-                                                                    @elseif($average == 4 || $average < 5) <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star"></span>
-                                                                        @elseif($average == 5 || $average > 5) <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        @endif
-
-
-
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <a href="#" class="lnk">({{ count($reviewCount )}} Reviews)</a>
-                                                    </div>
-                                                </div><!-- /.rating-reviews -->
-
-                                                <div class="description"></div>
-
-                                                <div class="product-price">@if($product->discount_price == NULL)
-                                                    <span class="price">Rs. {{ $product->selling_price }}</span>
-                                                    @else
-
-                                                    <span class="price">
-
-                                                        Rs. {{ $product->discount_price }}
-
-                                                    </span> <span class="price-before-discount">Rs. {{ $product->selling_price }}</span>
-                                                    @endif
-                                                </div>
-                                                <!-- /.product-price -->
-
-                                            </div>
-                                            <!-- /.product-info -->
-                                            <div class="cart clearfix animate-effect">
-                                                <div class="action">
-                                                    <ul class="list-unstyled">
-                                                        <li class="add-cart-button btn-group">
-
-                                                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
-                                                            <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                                        </li>
-
-
-
-                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)"> <i class="fa fa-heart"></i> </button>
-                                                    </ul>
-                                                </div>
-                                                <!-- /.action -->
-                                            </div>
-                                            <!-- /.cart -->
-                                        </div>
-                                        <!-- /.product -->
-
-                                    </div>
-                                    <!-- /.products -->
-
-                                </div>
-                                <!-- /.item -->
-
-                                @empty
-                                <h3 class="text-danger">No Recommendation for this product yet.</h3>
-
-                                @endforelse
-
-
-                            </div><!-- /.home-owl-carousel -->
-
-                        </section><!-- /.section -->
                         <!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
 
 
@@ -976,140 +838,6 @@
 
 
 
-                        <!-- ===========================machine learning output=================== ============================================== -->
-                        <section class="section featured-product wow fadeInUp">
-                            <h3 class="section-title">Who Bought This also Bought:</h3>
-                            <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-                                @forelse($top_recommended_items as $product)
-
-
-                                <div class="item item-carousel">
-
-                                    <div class="products">
-                                        <div class="product">
-
-                                            <div class="product-image">
-                                                <div class="image"> <a href="{{ url('product/details/'.$product['id'].'/'.$product['product_slug_en'] ) }}"><img src="{{ asset($product['product_thumbnail']) }}" alt=""></a> </div>
-                                                <!-- /.image -->
-
-                                                @php
-                                                $amount = $product['selling_price'] - $product['discount_price'];
-                                                $discount = ($amount/$product['selling_price'])*100;
-                                                @endphp
-                                                <div>
-                                                    @if($product['discount_price'] == NULL)
-                                                    <div class="tag new"><span>new</span></div>
-                                                    @else
-                                                    <div class="tag hot"><span>{{ round($discount) }}%</span></div>
-                                                    @endif
-                                                </div>
-
-
-
-                                            </div>
-                                            <!-- /.product-image -->
-
-                                            <div class="product-info text-left">
-                                                <h3 class="name"><a href="{{ url('product/details/'.$product['id'].'/'.$product['product_slug_en'] ) }}">@if(session()->get('language') == 'nepali'){{ $product['product_name_nep'] }} @else {{ $product['product_name_en'] }} @endif</a></h3>
-                                                @php
-
-                                                $reviewCount = App\Models\Review::where('product_id',$product['id'])->where('status',1)->latest()->get();
-                                                $average = App\Models\Review::where('product_id',$product['id'])->where('status',1)->avg('rating');
-                                                @endphp
-                                                <div class="row">
-                                                    <div class="col-md-6">
-
-                                                        @if($average == 0)
-                                                        No Rating Yet
-                                                        @elseif($average == 1 || $average < 2) <span class="fa fa-star checked"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            @elseif($average == 2 || $average < 3) <span class="fa fa-star checked"></span>
-                                                                <span class="fa fa-star checked"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                @elseif($average == 3 || $average < 4) <span class="fa fa-star checked"></span>
-                                                                    <span class="fa fa-star checked"></span>
-                                                                    <span class="fa fa-star checked"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-
-                                                                    @elseif($average == 4 || $average < 5) <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star"></span>
-                                                                        @elseif($average == 5 || $average > 5) <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        @endif
-
-
-
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <a href="#" class="lnk">({{ count($reviewCount )}} Reviews)</a>
-                                                    </div>
-                                                </div><!-- /.rating-reviews -->
-
-                                                <div class="description">Similarity: {{ round($product['similarity'] * 100, 1) }}%</div>
-
-                                                <div class="product-price">@if($product['discount_price'] == NULL)
-                                                    <span class="price">Rs. {{ $product['selling_price'] }}</span>
-                                                    @else
-
-                                                    <span class="price">
-
-                                                        Rs. {{ $product['discount_price'] }}
-
-                                                    </span> <span class="price-before-discount">Rs. {{ $product['selling_price'] }}</span>
-                                                    @endif
-                                                </div>
-                                                <!-- /.product-price -->
-
-                                            </div>
-                                            <!-- /.product-info  -->
-                                            <div class="cart clearfix animate-effect">
-                                                <div class="action">
-                                                    <ul class="list-unstyled">
-                                                        <li class="add-cart-button btn-group">
-
-                                                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product['id'] }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
-                                                            <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                                        </li>
-
-
-
-                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product['id'] }}" onclick="addToWishlist(this.id)"> <i class="fa fa-heart"></i> </button>
-                                                    </ul>
-                                                </div>
-                                                <!-- /.action -->
-                                            </div>
-                                            <!-- /.cart -->
-                                        </div>
-                                        <!-- /.product -->
-
-                                    </div>
-                                    <!-- /.products -->
-
-                                </div>
-                                <!-- /.item -->
-
-                                @empty
-                                <h3 class="text-danger">No Recommendation for this product yet.</h3>
-
-                                @endforelse
-
-
-                            </div><!-- /.home-owl-carousel -->
-
-                        </section><!-- /.section -->
-                        <!-- ============================================== Machine learning output============================================== -->
 
                     </div><!-- /.col -->
                     <div class="clearfix"></div>
