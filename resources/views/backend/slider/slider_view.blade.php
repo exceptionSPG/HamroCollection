@@ -140,7 +140,7 @@
                                 <div class="form-group">
                                     <h5>Slider Image: <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="file" name="slider_image" class="form-control">
+                                        <input type="file" name="slider_image" class="form-control" accept="image/png, image/jpeg">
                                         @error('slider_image')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror

@@ -308,7 +308,8 @@
 
 
                                                             </div> -->
-                                                            <input type="number" class="form-control" id="quantity" value="1" min="1">
+                                                            <input type="number" style="width:100%;" class="form-control" id="quantity" step="1" value="1" min="1" max="5" name="quantity" onkeypress="return isNumberKey(event)">
+                                                            <!-- <input type="number" class="form-control" id="quantity" value="1" min="1"> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1113,31 +1114,6 @@
                     </div><!-- /.col -->
                     <div class="clearfix"></div>
                 </div><!-- /.row -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <!-- ==== ================== BRANDS CAROUSEL ============================================== -->
 
                 <!-- == = BRANDS CAROUSEL : END = -->
@@ -1146,10 +1122,18 @@
 
     </div>
 </div>
-
-
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6319c600efb7fb62"></script>
-
+<script>
+    function isNumberKey(e) {
+        if (e.keyCode === 5) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#quantity").val() + currentChar; //It's a string concatenation, not an addition
+            if (parseInt(nextValue, 10) <= 5) return true;
+        }
+        return false;
+    }
+</script>
 
 @endsection

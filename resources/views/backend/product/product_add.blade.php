@@ -165,12 +165,14 @@
 
                                         </div><!-- end of col-md-4 -->
 
+                                        <!-- Quantity validation -->
                                         <div class="col-md-4">
                                             <!-- start of col md 4 -->
                                             <div class="form-group">
                                                 <h5>Product Quantity <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_qty" class="form-control" required="">
+                                                    <!-- <input type="text" name="product_qty" class="form-control" required=""> -->
+                                                    <input type="number" style="width:100%;" class="form-control" id="quantity" step="1" value="1" min="1" max="1000" name="quantity" onkeypress="return isNumberKey(event)">
                                                     @error('product_qty')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -284,7 +286,7 @@
                                             <div class="form-group">
                                                 <h5>Product Selling Price <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="selling_price" class="form-control" required="">
+                                                    <input type="number" style="width:100%;" class="form-control" id="selling_price" step="1" min="1" max="100000" name="selling_price" onkeypress="return isNumberKey1(event)">
                                                     @error('selling_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -303,7 +305,7 @@
                                             <div class="form-group">
                                                 <h5>Product Discount Price <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="discount_price" class="form-control">
+                                                    <input type="number" style="width:100%;" class="form-control" id="discount_price" step="1" min="1" max="100000" value="1" name="discount_price" onkeypress="return isNumberKey1(event)">
                                                     @error('discount_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -319,14 +321,13 @@
                                             <div class="form-group">
                                                 <h5>Main Thumbnail <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="file" name="product_thumbnail" class="form-control" onchange="mainThamUrl(this)" required="">
+                                                    <input type="file" name="product_thumbnail" class="form-control" onchange="mainThamUrl(this)" accept="image/png, image/jpeg" required="">
                                                     @error('product_thumbnail')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                     <img src="" id="mainThmb">
                                                 </div>
                                             </div>
-
                                         </div><!-- end of col-md-4 -->
 
 
@@ -335,7 +336,7 @@
                                             <div class="form-group">
                                                 <h5>Multiple image <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="file" name="multi_image[]" class="form-control" multiple="" id="multiImg" required="">
+                                                    <input type="file" name="multi_image[]" class="form-control" multiple="" id="multiImg" accept="image/png, image/jpeg" required="">
                                                     @error('multi_image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -561,6 +562,46 @@
             }
         });
     });
+</script>
+<script>
+    function isNumberKey(e) {
+        if (e.keyCode === 5) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#quantity").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 1000) return true;
+        }
+
+        return false;
+    }
+</script>
+<script>
+    function isNumberKey1(e) {
+        if (e.keyCode === 99999) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#selling_price").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 999999) return true;
+        }
+
+        return false;
+
+    }
+</script>
+<script>
+    function isNumberKey1(e) {
+        if (e.keyCode === 99999) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#discount_price").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 999999) return true;
+        }
+
+        return false;
+    }
 </script>
 
 

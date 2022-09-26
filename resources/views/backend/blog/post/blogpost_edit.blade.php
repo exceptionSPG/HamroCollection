@@ -99,7 +99,7 @@
                                             <div class="form-group">
                                                 <h5>Post Image: <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="file" name="post_image" class="form-control" onchange="mainThamUrl(this)">
+                                                    <input type="file" name="post_image" class="form-control" onchange="mainThamUrl(this)" accept="image/png, image/jpeg">
                                                     @error('post_image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror

@@ -82,8 +82,6 @@
                                         <td>
                                             <a href="#addBookDialog" class="open-AddBookDialog btn btn-primary sm" type="button" data-toggle="modal" id="{{ $item->id }}" onclick="productId(this.id)" title="Edit Data"><i class="fa fa-pencil"></i></a>
 
-
-
                                         </td>
 
                                     </tr>
@@ -139,12 +137,11 @@
                     <input type="hidden" name="itemId" id="itemId" value="" />
                     <div class="modal-body">
                         <label for="">Product Quantity</label>
-                        <input type="number" name="quantity" class="form-control" required="">
+                        <!-- <input type="number" name="quantity" class="form-control" required=""> -->
+                        <input type="number" style="width:100%;" class="form-control" id="quantity" step="1" value="1" min="1" max="1000" name="quantity" onkeypress="return isNumberKey(event)">
 
                     </div>
                     <button type="submit" style="margin-left: 17px;" class="btn btn-danger">Update</button>
-
-
                 </form>
 
 
@@ -166,6 +163,19 @@
 
 
     } //end productView with modal
+</script>
+<script>
+    function isNumberKey(e) {
+        if (e.keyCode === 5) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#quantity").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 1000) return true;
+        }
+
+        return false;
+    }
 </script>
 
 

@@ -218,11 +218,11 @@ class IndexController extends Controller
         //$selectedProduct = $products[0];
 
         $productSimilarity = new ProductSimilarity($products);
+        // $mal = $productSimilarity->setFeatureWeight(10);
         $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
         $sorted_products          = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
 
         $top_recommended_items = array_slice($sorted_products, 0, 5, true);
-
 
         // dd($sorted_products);
         return view('frontend.product.product_details', compact('product', 'multiImg', 'product_color_en', 'product_color_nep', 'product_size_en', 'product_size_nep', 'related_products', 'breadsubcat', 'cat_trending', 'brand_trending', 'users_likes', 'top_recommended_items'));

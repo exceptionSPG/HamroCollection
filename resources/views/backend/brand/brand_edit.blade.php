@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <h5>Brand Image: <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="file" name="brand_image" class="form-control">
+                                        <input type="file" name="brand_image" class="form-control" accept="image/png, image/jpeg">
 
                                     </div>
                                 </div>

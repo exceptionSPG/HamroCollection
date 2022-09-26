@@ -36,12 +36,6 @@ MyCart Page - HamroCollection
                                 </tr>
                             </thead>
                             <tbody id="cartpage">
-
-
-
-
-
-
                             </tbody>
                         </table>
                     </div>

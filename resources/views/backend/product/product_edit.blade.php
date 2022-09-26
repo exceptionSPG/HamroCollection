@@ -177,7 +177,8 @@
                                             <div class="form-group">
                                                 <h5>Product Quantity <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_qty" class="form-control" required="" value="{{ $product->product_qty }}">
+                                                    <!-- <input type="text" name="product_qty" class="form-control" required="" value="{{ $product->product_qty }}"> -->
+                                                    <input type="number" style="width:100%;" class="form-control" id="quantity" step="1" value="{{ $product->product_qty }}" min="1" max="1000" name="quantity" onkeypress="return isNumberKey(event)">
                                                     @error('product_qty')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -300,7 +301,8 @@
                                             <div class="form-group">
                                                 <h5>Product Selling Price <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="selling_price" class="form-control" required="" value="{{ $product->selling_price }}">
+                                                    <!-- <input type="text" name="selling_price" class="form-control" required="" value="{{ $product->selling_price }}"> -->
+                                                    <input type="number" style="width:100%;" class="form-control" id="selling_price" step="1" min="1" max="100000" value="{{ $product->selling_price }}" name="selling_price" onkeypress="return isNumberKey1(event)">
                                                     @error('selling_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -313,7 +315,9 @@
                                             <div class="form-group">
                                                 <h5>Product Discount Price <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="discount_price" class="form-control" value="{{ $product->discount_price }}">
+                                                    <!-- <input type="text" name="discount_price" class="form-control" value="{{ $product->discount_price }}"> -->
+                                                    <input type="number" style="width:100%;" class="form-control" id="discount_price" step="1" max="100000" value="{{ $product->discount_price }}" name="discount_price" onkeypress="return isNumberKey2(event)">
+
                                                     @error('discount_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -473,13 +477,13 @@
                             @foreach($multi_images as $img)
                             <div class="col-md-3">
                                 <div class="card">
-                                    <img src="{{ asset($img->photo_name) }}" style="width: 280px;height: 130px;">
+                                    <img src="{{ asset($img->photo_name) }}" style="width: 280px;height: 130px; ">
                                     <div class="card-body">
                                         <a href="{{ route('product.multiimg.delete',$img->id) }}" class="btn btn-sm btn-danger" id="delete" title="Delete Image"><i class="fa fa-trash"></i></a>
 
                                         <div class="form-group">
                                             <label class="form-control-label">Change Image <span class="tx-danger">*</span></label>
-                                            <input type="file" class="form-control" name="multi_image[{{ $img->id }}]" id="multiImg" required="">
+                                            <input type="file" class="form-control" name="multi_image[{{ $img->id }}]" accept="image/png, image/jpeg" id="multiImg" required="">
                                             <div class="row" id="preview_img">
 
                                             </div>
@@ -662,6 +666,43 @@
         });
     });
 </script>
+<script>
+    function isNumberKey(e) {
+        if (e.keyCode === 5) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#quantity").val() + currentChar; //It's a string concatenation, not an addition
 
+            if (parseInt(nextValue, 10) <= 1000) return true;
+        }
 
+        return false;
+    }
+</script>
+<script>
+    function isNumberKey1(e) {
+        if (e.keyCode === 99999) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#selling_price").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 999999) return true;
+        }
+
+        return false;
+    }
+</script>
+<script>
+    function isNumberKey2(e) {
+        if (e.keyCode === 99999) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#discount_price").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 999999) return true;
+        }
+
+        return false;
+    }
+</script>
 @endsection

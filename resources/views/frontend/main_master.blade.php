@@ -119,8 +119,6 @@ $seo = App\Models\SEOSetting::find(1);
     </script>
 
 
-
-
     <!-- Add to cart product Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -139,7 +137,6 @@ $seo = App\Models\SEOSetting::find(1);
 
                             <div class="card" style="width: 18rem;">
                                 <img src=" " class="card-img-top" style="height: 200px;width: 200px;" alt="..." id="pimage">
-
                             </div>
 
                         </div>
@@ -189,7 +186,9 @@ $seo = App\Models\SEOSetting::find(1);
 
                             <div class="form-group">
                                 <label for="quantity">Quantity:</label>
-                                <input type="number" class="form-control" id="quantity" value="1" min="1">
+
+                                <!-- <input type="number" class="form-control" id="quantity" value="1" min="1"> -->
+                                <input type="number" style="width:100%;" class="form-control" id="quantity" step="1" value="1" min="1" max="5" name="quantity" onkeypress="return isNumberKey(event)">
                             </div>
 
                             <input type="hidden" id="product_id">
@@ -348,21 +347,9 @@ $seo = App\Models\SEOSetting::find(1);
                         })
 
                     }
-
-
-
                     //End of Message
-
-
-
-
-
-
-
                 },
             })
-
-
         } //end method addToCart
     </script>
     <!-- END  to cart product Modal Script -->
@@ -935,6 +922,22 @@ $seo = App\Models\SEOSetting::find(1);
             form.submit();
         }
     </script>
+    <script>
+        function isNumberKey(e) {
+            if (e.keyCode === 5) return true;
+            var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+            if (!isNaN(currentChar)) {
+                var nextValue = $("#quantity").val() + currentChar; //It's a string concatenation, not an addition
+
+                if (parseInt(nextValue, 10) <= 5) return true;
+            }
+
+            return false;
+        }
+    </script>
+
+
+
 
 
 </body>

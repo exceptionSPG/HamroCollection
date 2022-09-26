@@ -28,11 +28,8 @@
                                         <th>Name</th>
                                         <th>eMail</th>
                                         <th>Access</th>
-
                                         <th>Action</th>
-
                                     </tr>
-
                                 </thead>
                                 <tbody>
                                     <!--coupon_name	coupon_discount	coupon_validity	status -->
@@ -130,10 +127,6 @@
 
 
                                         </td>
-
-
-                                        <td width=30%>
-
                                         <td width="25%">
                                             <a href="{{ route('edit.admin.user',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
 

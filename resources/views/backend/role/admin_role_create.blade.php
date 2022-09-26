@@ -51,7 +51,8 @@
                                             <div class="form-group">
                                                 <h5>Admin UserPhone: <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="phone" class="form-control" required="">
+                                                    <!-- <input type="text" name="phone" class="form-control" required=""> -->
+                                                    <input type="tel" id="phone" name="phone" placeholder="9xxxxxxxxx" pattern="[9][0-9]{9}" style="width:100%;" class="form-control" onkeypress="return isNumberKey(event)">
                                                 </div>
                                             </div>
                                         </div> <!--  end col-md-6 -->
@@ -73,7 +74,7 @@
                                             <div class="form-group">
                                                 <h5>Admin Profile Image: <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="file" id="image" name="profile_photo_path" class="form-control">
+                                                    <input type="file" id="image" name="profile_photo_path" class="form-control" accept="image/png, image/jpeg">
                                                 </div>
                                             </div>
 
@@ -225,5 +226,18 @@
             reader.readAsDataURL(e.target.files['0']);
         });
     });
+</script>
+<script>
+    function isNumberKey(e) {
+        if (e.keyCode === 9999999999) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#phone").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 9999999999) return true;
+        }
+
+        return false;
+    }
 </script>
 @endsection

@@ -110,7 +110,9 @@ Login/Registration - HamroCollection
 
                         <div class="form-group">
                             <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
-                            <input type="text" id="phone" name="phone" class="form-control unicase-form-control text-input">
+                            <!-- <input type="text" id="phone" name="phone" class="form-control unicase-form-control text-input"> -->
+                            <input type="tel" id="phone" name="phone" placeholder="9xxxxxxxxx" pattern="[9][0-9]{9}" style="width:100%;" class="form-control" onkeypress="return isNumberKey(event)">
+
                             @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong> {{ $message }} </strong>
@@ -151,3 +153,16 @@ Login/Registration - HamroCollection
 </div><!-- /.body-content -->
 
 @endsection
+<script>
+    function isNumberKey(e) {
+        if (e.keyCode === 9999999999) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#phone").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 9999999999) return true;
+        }
+
+        return false;
+    }
+</script>

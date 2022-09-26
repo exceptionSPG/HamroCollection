@@ -28,7 +28,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <!-- <th>Action</th> -->
 
                                     </tr>
 
@@ -52,12 +52,11 @@
                                             <span class="badge badge-pill badge-danger">{{ Carbon\Carbon::parse($item->last_seen)->diffForHumans() }}</span>
 
                                             @endif
-
                                         </td>
 
-                                        <td><a href="{{ route('brand.edit',$item->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                        <!-- <td><a href="{{ route('brand.edit',$item->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-pencil"></i></a>
                                             <a href="{{ route('brand.delete',$item->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
-                                        </td>
+                                        </td> -->
 
                                     </tr>
                                     @endforeach

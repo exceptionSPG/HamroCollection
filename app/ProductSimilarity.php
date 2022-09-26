@@ -12,7 +12,7 @@ class ProductSimilarity
     protected $featureWeight  = 1;
     protected $priceWeight    = 1;
     protected $categoryWeight = 1;
-    protected $priceHighRange = 1000;
+    protected $priceHighRange = 10000;
 
     public function __construct(array $products)
     {
