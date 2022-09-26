@@ -59,12 +59,15 @@ Checkout Page - HamroCollection
 
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Shipping Phone: <span>*</span></b></label>
-                                                    <input type="number" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="shipping_phone" value="{{ Auth::user()->phone }}" required="" placeholder="Phone">
+
+
+                                                    <input type="tel" id="phone" name="shipping_phone" placeholder="9xxxxxxxxx" pattern="[9][0-9]{9}" value="{{ Auth::user()->phone }}" style="width:100%;" class="form-control" onkeypress="return isNumberKey6(event)">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Post Code: <span>*</span></b></label>
-                                                    <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="post_code" required="" placeholder="Postal Code">
+                                                    <input type="tel" id="postal_code" name="post_code" style="width:100%;" class="form-control" onkeypress="return isNumberKey7(event)">
+                                                    <!-- <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="post_code" required="" placeholder="Postal Code"> -->
                                                 </div>
 
 
@@ -325,5 +328,31 @@ Checkout Page - HamroCollection
             }
         });
     });
+</script>
+
+<script>
+    function isNumberKey6(e) {
+        if (e.keyCode === 9999999999) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#phone").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 9999999999) return true;
+        }
+
+        return false;
+    }
+
+    function isNumberKey7(e) {
+        if (e.keyCode === 99999) return true;
+        var currentChar = parseInt(String.fromCharCode(e.keyCode), 10);
+        if (!isNaN(currentChar)) {
+            var nextValue = $("#postal_code").val() + currentChar; //It's a string concatenation, not an addition
+
+            if (parseInt(nextValue, 10) <= 99999) return true;
+        }
+
+        return false;
+    }
 </script>
 @endsection

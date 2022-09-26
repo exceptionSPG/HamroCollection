@@ -50,7 +50,7 @@
                                             <div class="form-group">
                                                 <h5>Profile Image: <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="file" id="image" name="profile_photo_path" class="form-control">
+                                                    <input type="file" id="image" accept="image/png, image/jpeg" name="profile_photo_path" class="form-control">
                                                 </div>
                                             </div>
 

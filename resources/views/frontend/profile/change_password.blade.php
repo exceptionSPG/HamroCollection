@@ -1,4 +1,7 @@
 @extends('frontend.main_master')
+@section('title')
+Password Update - HamroCollection
+@endsection
 @section('content')
 
 <div class="body-content">

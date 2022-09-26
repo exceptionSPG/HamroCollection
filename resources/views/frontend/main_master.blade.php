@@ -272,7 +272,7 @@ $seo = App\Models\SEOSetting::find(1);
                     }) //end size
 
                     //stock  stockMsg
-                    if (data.product.product_qty > 0) {
+                    if (data.product.product_qty > 10) {
                         $('#available').text('');
                         $('#stockout').text('');
                         $('#available').text('available');
@@ -597,11 +597,19 @@ $seo = App\Models\SEOSetting::find(1);
             </td>
 
 
-           <td class="col-md-2">
+            <td class="col-md-2">
            ${value.qty > 1
             ? `<button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)" >-</button> `
             : `<button type="submit" class="btn btn-danger btn-sm" disabled >-</button> `
             }
+        <input type="text" value="${value.qty}" min="1" max="5" disabled="" style="width:25px;" >
+        ${value.qty < 5
+            ? `<button type="submit" class="btn btn-primary btn-sm" id="${value.rowId}" onclick="CartIncrement(this.id)" >+</button> `
+            : `<button type="submit" class="btn btn-primary btn-sm" disabled >+</button> `
+            }
+         
+        </td>
+
         <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px;" > 
 
         <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" onclick="CartIncrement(this.id)">+</button>  

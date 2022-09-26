@@ -32,7 +32,8 @@
                                 <div class="form-group">
                                     <h5>Select Date: <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="date" name="date" class="form-control">
+                                        <input type="date" name="date" max="{{ Carbon\Carbon::now()->format('Y-m-d') }}" class="form-control">
+
 
                                         @error('date')
                                         <span class="text-danger">{{ $message }}</span>
@@ -109,10 +110,10 @@
                                             <option value="2020">2020</option>
                                             <option value="2021">2021</option>
                                             <option value="2022">2022</option>
-                                            <option value="2023">2023</option>
+                                            <!-- <option value="2023">2023</option>
                                             <option value="2024">2024</option>
                                             <option value="2025">2025</option>
-                                            <option value="2026">2026</option>
+                                            <option value="2026">2026</option> -->
 
                                         </select>
 
@@ -163,10 +164,10 @@
                                             <option value="2020">2020</option>
                                             <option value="2021">2021</option>
                                             <option value="2022">2022</option>
-                                            <option value="2023">2023</option>
+                                            <!-- <option value="2023">2023</option>
                                             <option value="2024">2024</option>
                                             <option value="2025">2025</option>
-                                            <option value="2026">2026</option>
+                                            <option value="2026">2026</option> -->
 
                                         </select>
 

@@ -318,7 +318,7 @@
 
                                                 <div class="col-sm-7">
                                                     <button class="btn btn-primary" onclick="addToCart()" {{ $product->product_qty>0 ? '':'disabled' }}><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button><br>
-                                                    @if($product->product_qty>0)
+                                                    @if($product->product_qty>10)
                                                     @else
                                                     <span class="text-danger">Product is <b> not available for now</b>. You can buy once Product is available.Add to wishlist for now.</span>
                                                     @endif

@@ -288,7 +288,7 @@
 
                         <div class="modal-body">
                             <label for="">Invoice Code</label>
-                            <input type="text" name="code" class="form-control" required="" placeholder="e.g HC1234567">
+                            <input type="text" pattern="[H][C][0-9]{8}" name="code" class="form-control" required="" placeholder="e.g HC1234567">
 
                         </div>
                         <button type="submit" style="margin-left: 17px;" class="btn btn-danger">Track Now</button>

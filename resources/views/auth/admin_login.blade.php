@@ -42,7 +42,12 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-transparent text-white"><i class="ti-user"></i></span>
                                         </div>
-                                        <input type="email" name="email" id="email" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="email">
+                                        <input type="email" name="email" require="" id="email" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="email">
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong> {{ $message }} </strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -50,7 +55,12 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text  bg-transparent text-white"><i class="ti-lock"></i></span>
                                         </div>
-                                        <input id="password" type="password" name="password" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="Password">
+                                        <input id="password" type="password" require="" name="password" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="Password">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong> {{ $message }} </strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
