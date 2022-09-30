@@ -28,7 +28,7 @@ class ShopController extends Controller
             $brandIds = Brand::select('id')->whereIn('brand_slug_en', $slugs)->pluck('id')->toArray();
             $products = $products->whereIn('brand_id', $brandIds)->paginate(3);
         } else {
-            $products = Product::where('status', 1)->orderBy('id', 'DESC')->paginate(3);
+            $products = Product::where('status', 1)->orderBy('id', 'DESC')->paginate(6);
         }
 
         $categories = Category::orderBy('category_name_en', 'ASC')->get();

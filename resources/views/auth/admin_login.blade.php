@@ -33,6 +33,12 @@
                             <p class="text-white-50">Sign in to start your session</p>
                         </div>
                         <div class="p-30 rounded30 box-shadowed b-2 b-dashed">
+                            @if (session('status'))
+                            <div class="mb-4 font-medium text-sm text-green-600">
+                                {{ session('status') }}
+                            </div>
+                            @endif
+
 
                             <form method="POST" action="{{ isset($guard) ? url($guard. '/login') : route('login') }}">
                                 @csrf
@@ -42,7 +48,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-transparent text-white"><i class="ti-user"></i></span>
                                         </div>
-                                        <input type="email" name="email" require="" id="email" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="email">
+                                        <input type="email" name="email" required="" id="email" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="email">
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong> {{ $message }} </strong>
@@ -55,7 +61,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text  bg-transparent text-white"><i class="ti-lock"></i></span>
                                         </div>
-                                        <input id="password" type="password" require="" name="password" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="Password">
+                                        <input id="password" type="password" required="" name="password" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="Password">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong> {{ $message }} </strong>

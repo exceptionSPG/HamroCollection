@@ -73,7 +73,7 @@ class ProductSimilarity
                 continue;
             }
             $product = $products[array_keys($products)[0]];
-            $product['similarity'] = $similarity;
+            $product['similarity'] = $similarity - 0.02;
             $sortedProducts[] = $product;
         }
         return $sortedProducts;

@@ -223,10 +223,10 @@ $site = App\Models\SiteSetting::find(1);
 
                 </ul>
 
-                <ul class="treeview-menu">
+                <!-- <ul class="treeview-menu">
                     <li class="{{ ($route == 'canceled.orders' ) ? 'active':'' }}"><a href="{{ route('canceled.orders') }}" style="color: white;"><i class="ti-more"></i>Canceled Orders</a></li>
 
-                </ul>
+                </ul> -->
 
             </li>
             @else

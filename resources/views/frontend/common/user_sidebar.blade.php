@@ -17,7 +17,7 @@ $route = Route::current()->getName();
 
         <a href="{{ route('return.orders.list') }}" class="btn btn-primary btn-sm btn-block {{ ($route == 'return.orders.list' ) ? 'active':'' }}">Return Orders</a>
 
-        <a href="{{ route('cancel.orders.list') }}" class="btn btn-primary btn-sm btn-block {{ ($route == 'cancel.orders.list' ) ? 'active':'' }}">Cancel Orders</a>
+        <!-- <a href="{{ route('cancel.orders.list') }}" class="btn btn-primary btn-sm btn-block {{ ($route == 'cancel.orders.list' ) ? 'active':'' }}">Cancel Orders</a> -->
 
         <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block {{ ($route == 'user.logout' ) ? 'active':'' }}">Logout</a>
 
